@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Forecheng
+title: Forecheng's Site
 subtitle: 学习总结 思考感悟
 description: 学习总结 思考感悟
 author: forecheng
@@ -28,7 +28,7 @@ i18n_dir: :lang
 skip_render: README.md
 
 # Writing
-new_post_name: :title.md # File name of new posts
+new_post_name: Retrofit入门介绍.md
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
