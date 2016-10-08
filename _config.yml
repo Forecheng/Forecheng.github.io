@@ -67,6 +67,10 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: yilia
 
+# 自动生成sitemap
+baidusitemap:
+path: baidusitemap.xml
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
