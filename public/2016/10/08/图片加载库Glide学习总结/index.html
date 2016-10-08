@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>图片加载库Glide学习总结 | Forecheng&#39;s Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近的项目需要加载图片，小白就上网寻找这方面的资料，项目的架构为MVP+Retrofit，典型的网络数据请求,看了比较多的资料，于是决定使用Glide,因为数据的呈现方式都是使用ListView,用了才知道该库很牛,于是对接触到的知识点稍微归纳一下，整理学习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图片加载库Glide学习总结">
+<meta property="og:url" content="http://www.forecheng.com/2016/10/08/图片加载库Glide学习总结/index.html">
+<meta property="og:site_name" content="Forecheng's Site">
+<meta property="og:description" content="最近的项目需要加载图片，小白就上网寻找这方面的资料，项目的架构为MVP+Retrofit，典型的网络数据请求,看了比较多的资料，于是决定使用Glide,因为数据的呈现方式都是使用ListView,用了才知道该库很牛,于是对接触到的知识点稍微归纳一下，整理学习。">
+<meta property="og:updated_time" content="2016-10-08T03:35:07.515Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图片加载库Glide学习总结">
+<meta name="twitter:description" content="最近的项目需要加载图片，小白就上网寻找这方面的资料，项目的架构为MVP+Retrofit，典型的网络数据请求,看了比较多的资料，于是决定使用Glide,因为数据的呈现方式都是使用ListView,用了才知道该库很牛,于是对接触到的知识点稍微归纳一下，整理学习。">
+  
+    <link rel="alternative" href="/atom.xml" title="Forecheng&#39;s Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="//F_blue.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/superAndroid.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">forecheng</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">一步一个脚印</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/archives">所有文章</a></li>
+	        
+				<li><a href="/archives">学习总结</a></li>
+	        
+				<li><a href="/archives">生活记录</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Forecheng" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+		        
+					<a class="douban" target="_blank" href="https://www.douban.com/people/103674211/" title="douban">douban</a>
+		        
+					<a class="mail" target="_blank" href="mailto:lpctjut@163.com" title="mail">mail</a>
+		        
+					<a class="facebook" target="_blank" href="https://www.facebook.com/lpctjut" title="facebook">facebook</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">forecheng</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/superAndroid.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">forecheng</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">一步一个脚印</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/archives">学习总结</a></li>
+		        
+					<li><a href="/archives">生活记录</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Forecheng" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+			        
+						<a class="douban" target="_blank" href="https://www.douban.com/people/103674211/" title="douban">douban</a>
+			        
+						<a class="mail" target="_blank" href="mailto:lpctjut@163.com" title="mail">mail</a>
+			        
+						<a class="facebook" target="_blank" href="https://www.facebook.com/lpctjut" title="facebook">facebook</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-图片加载库Glide学习总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      图片加载库Glide学习总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近的项目需要加载图片，小白就上网寻找这方面的资料，项目的架构为<code>MVP+Retrofit</code>，典型的网络数据请求,看了比较多的资料，于是决定使用Glide,因为数据的呈现方式都是使用ListView,用了才知道该库很牛,于是对接触到的知识点稍微归纳一下，整理学习。<br><a id="more"></a><br>图片加载一直是一个比较棘手的事情，俗话说就是<code>“坑”</code>比较多，于是就google了一下这方面的库，有很多图片库，例如Picasso, Universal-Image-Loader,Fresco,Glide等，这些库都是很火的，使用量很大的图片库， 他们各有优点，不能评说那一个不好，根据项目的需求适当选择。</p>
+<h2 id="1-几个库的简单比较"><a href="#1-几个库的简单比较" class="headerlink" title="1. 几个库的简单比较"></a>1. 几个库的简单比较</h2><ul>
+<li><strong>Picasso：</strong>是Square出品的图片库，当然是很厉害的，该公司还有响当当的<code>Okhttp</code>和<code>Retrofit</code>，都是很牛逼的网络请求库,搭配使用效果可能更好一些，之所以这么说是因为Picasso可以将网络请求到的数据缓存交给Okhttp来处理。</li>
+<li><strong>Universal-Image-Loader：</strong>一个强大的图片加载库，包含的配置比较多，使用很广泛，很老牌。</li>
+<li><strong>Fresco：</strong>是Facebook出品的，也超强大。从知乎问答下看到该库最大的优点是5.0以下（最低2.3）的bitmap加载，在5.0以下，会将图片放到一个特别的内存存储区，称为：<code>Ashmem区</code>，在图片不显示的时候也会自动清除内存（这个是必须的），使得App更加流畅，减少图片内存占用引发的内存不足（OOM）。</li>
+<li><strong>Glide：</strong>谷歌推荐使用的图片加载库，Google一些图片应用就使用该库进行图片加载，用起来很流畅，可以说是在Picasso上的进一步扩展，比如支持Gif动态图，在使用时可以传入更多的上下文等等，他们两者最大的区别在于默认的设置不同，比如默认的图片格式不同，尺寸大小也不同等，在下面的链接文章中有具体的对比分析。</li>
+<li><strong>总结：</strong>Glide是Picasso的进一步扩展，Picasso能做的Glide也可以做，无非就是配置的不同。</li>
+</ul>
+<p>网上关于<code>Picasso</code>和<code>Glide</code>性能进行比较的文章挺多，不过遗憾的是，大多数都是抄来抄去的，比较清晰的是这篇：<a href="http://blog.csdn.net/sam_zhang1984/article/details/48524893" target="_blank" rel="external">Google推荐的图片加载库Glide介绍</a>，<code>Picasso</code>和<code>Glide</code>的使用极其相似，但也有不少细节上的区别，看了这篇文章可以大致了解一二。</p>
+<p>现在整理一下<code>Glide</code>的使用：</p>
+<h2 id="2-配置Glide"><a href="#2-配置Glide" class="headerlink" title="2. 配置Glide"></a>2. 配置Glide</h2><p>在Module根目录下的build.gradle中进行库依赖：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">def def latestVersion = <span class="string">'3.7.0'</span></div><div class="line">dependencies &#123;</div><div class="line">	compile <span class="string">'com.github.bumptech.glide:glide:$latestVersion'</span></div><div class="line">    compile <span class="string">'com.android.support:support-v4:19.1.0'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Glide需要依赖Support Library v4。<br>然后同步一下代码build successful,就可以使用Glide了。</p>
+<h2 id="3-使用Glide"><a href="#3-使用Glide" class="headerlink" title="3. 使用Glide"></a>3. 使用Glide</h2><p>使用下面一段代码就能实现图片加载，看起来极其简单方便：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//图片的url</span></div><div class="line"><span class="keyword">private</span> String image_url = <span class="string">"https://www.image.com/myimage?id=1"</span>;</div><div class="line"><span class="keyword">private</span> ImageView imageView = (ImageView)<span class="keyword">super</span>.findViewById(R.id.image);</div><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure></p>
+<p>用这段代码就可以将url所表示的图片装到ImageView显示出来，是不是很爽呢？<br>with里面的参数相比Picasso不仅仅接受上下文Context对象，还可以是<code>Activity</code>，<code>Fragment</code>，<code>FragmentActivity</code>等，这样可以更好的让加载图片的请求与生命周期动态管理起来。Glide不仅仅支持加载网络图片，还支持以下几种加载方式：</p>
+<ul>
+<li>加载资源文件：<code>DrawableTypeRequest&lt;Integer&gt; load(Integer resourceId)</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Glide.with(context).load(R.drawable.my_image).into(imageview);</div></pre></td></tr></table></figure>
+<ul>
+<li>加载本地文件：<code>DrawableTypeRequest&lt;File&gt; load(File file)</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">File file = <span class="keyword">new</span> File(<span class="string">"sdcard/myimage/"</span>,<span class="string">"image.jpg"</span>);</div><div class="line">Glide.with(context).load(file).into(imageView);</div></pre></td></tr></table></figure>
+<ul>
+<li>加载Uri：<code>DrawableTypeRequest&lt;Uri&gt; load(Uri uri)</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">File file = <span class="keyword">new</span> File(Environment.getExternalStorageDirectory() + File.separator +  <span class="string">"image"</span>, <span class="string">"image.jpg"</span>);</div><div class="line">Uri uri = Uri.fromFile(file);</div><div class="line">Glide.with(context).load(uri).into(imageView);</div></pre></td></tr></table></figure>
+<ul>
+<li>String加载：<code>DrawableTypeRequest&lt;String&gt; load(String string)</code></li>
+</ul>
+<h3 id="3-1-设置占位图片"><a href="#3-1-设置占位图片" class="headerlink" title="3.1 设置占位图片"></a>3.1 设置占位图片</h3><h4 id="1-placehold"><a href="#1-placehold" class="headerlink" title="1. placehold"></a>1. placehold</h4><p>图片加载并不是很实时的，加载成功的时间是不确定的，在加载时，可以设置一个图片显示在ImageView上进行一些<code>正在加载...</code>提示等等。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .placehold(R.drawable.loading)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
+<h4 id="2-error"><a href="#2-error" class="headerlink" title="2. error"></a>2. error</h4><p>在加载网络图片时，如果突然网络断掉，肯定加载不到正确的图片，这时可以设置一个错误图片到ImageView,提示用户加载失败。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .error(R.drawable.loaderror)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
+<p>当然，也可以给Glide设置监听，当图片加载失败时，可以知道为什么加载失败了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置加载图片错误时的监听</span></div><div class="line">RequestListener&lt;String,GlideDrawable&gt; loadErrorListener = <span class="keyword">new</span> RequestListener&lt;String,GlideDrawable&gt;()&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onException</span><span class="params">(Exception e,String model,Target&lt;GlideDrawable&gt; target,<span class="keyword">boolean</span> isFirstResource)</span></span>&#123;</div><div class="line">    	<span class="comment">//加载异常时回调</span></div><div class="line">        Log.e(TAG,<span class="string">"exception:"</span> + e.toString);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onResourceReady</span><span class="params">(GlideDrawable resource,String model,Target&lt;GlideDrawable&gt; target,<span class="keyword">boolean</span> isFromMemoryCache,<span class="keyword">boolean</span> isFirstResource)</span></span>&#123;</div><div class="line">    	<span class="comment">//加载成功时的回调</span></div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .listener(loadErrorListener)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
+<h3 id="3-2-图片的调整"><a href="#3-2-图片的调整" class="headerlink" title="3.2 图片的调整"></a>3.2 图片的调整</h3><p>Glide加载图片大小根据ImageView尺寸自动调整的，在缓存的时候也是按照图片大小进行缓存，每一种尺寸都会保留一份缓存。<br>并且可以调用override(int width,int height)在图片显示到ImageView之前改变图片大小，width和height的单位都是<code>px</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .override(<span class="number">64</span>,<span class="number">64</span>)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
+<p><strong>缩放</strong>：Glide提供了两种图形转换的标准选项：<code>centerCrop()</code>和<code>fitCenter</code>；</p>
+<ul>
+<li>centerCrop()</li>
+</ul>
+<p>这个可以对图像进行裁剪，当图片比ImageView大的时候，会将超出ImageView的部分裁剪掉，尽可能让ImageView完全填充，但图像可能不会全部显示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .centerCrop()</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
+<ul>
+<li>fitCenter()</li>
+</ul>
+<p>它会自适应ImageView的大小，并且会完整的显示在ImageView中，但是ImageView可能不会被完全填充</p>
+<p><strong>设置缩略图支持</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .thumbnail(<span class="number">0.1f</span>)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
+<p><strong>设置动态转换</strong><br>在图片显示之前，可以通过<code>transformation</code>对其做一些处理，已达到想要的图片效果，为此，需要创建一个类，该类实现了<code>Transformation接口</code>，如果只是对图片进行转换，则可以直接使用Glide封装好的<code>BitmapTransformation抽象类</code>，图像的转换只需要在<code>transform</code>里实现，并重写<code>getId()方法</code>，该方法返回此次转换的唯一标识，要确保唯一性。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlideRoundTransform</span> <span class="keyword">extends</span> <span class="title">BitmapTransformation</span></span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> Bitmap <span class="title">transform</span><span class="params">(BitmapPool pool,Bitmap toTransform,<span class="keyword">int</span> outWidth,<span class="keyword">int</span> outHeight)</span></span>&#123;</div><div class="line">    	<span class="comment">//转换处理</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span></span>&#123;</div><div class="line">    	<span class="keyword">return</span> getClass().getName + Math.random();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .transform(<span class="keyword">new</span> GlideRoundTransform())</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
+<p>当图片需要多个转换时，将每种的转换类对象传入到transform()即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .transform(<span class="keyword">new</span> GlideRoundTransform(<span class="keyword">this</span>),<span class="keyword">new</span> GlideOtherTransform(<span class="keyword">this</span>))</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
+<h3 id="3-3-加载的动画"><a href="#3-3-加载的动画" class="headerlink" title="3.3 加载的动画"></a>3.3 加载的动画</h3><p>为了使图片平滑的加载到ImageView，可以设置加载的动画效果，最新的api已经默认实现了一个渐入渐出的动画效果，默认时间300ms，也可以使用<code>crossFade</code>，它接受无参或者一个int型的参数，用来指定动画执行的时间。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .crossFade(<span class="number">2000</span>)    <span class="comment">//2s</span></div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
+<p>如果渐入渐出的动画效果不满意，可以自定义动画，使用<code>animate()</code>即可，它接受动画的资源id和动画类对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">	.animate(R.anim.myAnim)</div><div class="line">    <span class="comment">//.animate(new MyAnimation())</span></div><div class="line">	.into(imageView);</div></pre></td></tr></table></figure>
+<p>如果不想使用任何动画，直接将图片显示出来，则使用<code>dontAnimate()</code>方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .dontAnimate()    </div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
+<h3 id="3-4-加载Gif动态图"><a href="#3-4-加载Gif动态图" class="headerlink" title="3.4 加载Gif动态图"></a>3.4 加载Gif动态图</h3><p>加载Gif动态图是Glide的一个亮点，也是将gif动态图的url传入load即可加载，Glide还提供了Gif相关的两个方法：<code>asBitmap()</code>和<code>asGif()</code>;</p>
+<ul>
+<li>asBitmap()：将gif图的第一帧显示出来</li>
+<li>asGif()：严格显示成gif，当传入的Url不是gif的url时，则按错误处理，可以检查load参数是否为gif。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(imageUrl)</div><div class="line">    .asBitmap()</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
+<h3 id="3-5-加载优先级"><a href="#3-5-加载优先级" class="headerlink" title="3.5 加载优先级"></a>3.5 加载优先级</h3><p>设置图片加载的顺序，有以下几种优先级：</p>
+<ul>
+<li>Priority.LOW</li>
+<li>Priority.NORMAL</li>
+<li>Priority.HIGH</li>
+<li>Priority.IMMEDIATE</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">.load(image_url)</div><div class="line">   .priority(Priority.NORMAL)    </div><div class="line">   .into(imageView);</div></pre></td></tr></table></figure>
+<h3 id="3-6-加载目标Target"><a href="#3-6-加载目标Target" class="headerlink" title="3.6 加载目标Target"></a>3.6 加载目标Target</h3><p>Target就是Glide获取资源后作用的目标，一般的ImageView就是目标。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">SimpleTarget target = <span class="keyword">new</span> SimpleTarget&lt;Drawable&gt;()&#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResourceReady</span><span class="params">(Drawable resource, GlideAnimation&lt;? <span class="keyword">super</span> Drawable&gt; glideAnimation)</span> </span>&#123;</div><div class="line">                textView.setBackground(resource);</div><div class="line">            &#125;</div><div class="line">&#125;;</div><div class="line"> Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .priority(Priority.NORMAL)    </div><div class="line">    .into(target);</div></pre></td></tr></table></figure>
+<p>这段代码是将TextView作为Target，并将加载到的图片设置为TextView的背景，SimpleTarget接收泛型数据，可以将其更改为其他想要的类型。也可以指定加载的宽度和高度，单位也是<code>px</code>。</p>
+<h3 id="3-7-缓存策略"><a href="#3-7-缓存策略" class="headerlink" title="3.7 缓存策略"></a>3.7 缓存策略</h3><p>几种缓存策略：</p>
+<ul>
+<li>DiskCacheStrategy.ALL：缓存源资源和转换后的资源</li>
+<li>DiskCacheStrategy.NONE：什么都不缓存</li>
+<li>DiskCacheStrategy.SOURCE：只缓存源资源</li>
+<li>DiskCacheStrategy.RESULT：只缓存转换后的资源</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(imageUrl)</div><div class="line">    .diskCacheStrategy(DiskCacheStrategy.ALL)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
+<p>跳过内存缓存：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(<span class="keyword">this</span>)</div><div class="line">	.load(imageUrl)</div><div class="line">    .skipMemory(<span class="keyword">true</span>)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
+<h3 id="3-8-缓存的动态清理"><a href="#3-8-缓存的动态清理" class="headerlink" title="3.8 缓存的动态清理"></a>3.8 缓存的动态清理</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Glide.get(<span class="keyword">this</span>).clearDiskCache();      <span class="comment">//清理磁盘缓存，需要在子线程中执行</span></div><div class="line">Glide.get(<span class="keyword">this</span>).clearMemory();			<span class="comment">//清理内存缓存，可以在UI线程中执行</span></div></pre></td></tr></table></figure>
+<h2 id="4-结合列表视图的使用"><a href="#4-结合列表视图的使用" class="headerlink" title="4. 结合列表视图的使用"></a>4. 结合列表视图的使用</h2><p>Glide在滑动加载图片时表现突出，这也是Glide的优势之一，在项目中很可能是在ListView或者RecyclerView中显示加载的图片：</p>
+<ol>
+<li>在使用ListView进行加载时，可以在Adapter的getView中进行使用</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> postion,View convertView,ViewGroup parent)</span></span>&#123;</div><div class="line">	ViewHolder holder;</div><div class="line">	<span class="keyword">if</span>(convertView == <span class="keyword">null</span>)&#123;</div><div class="line">    	holder = <span class="keyword">new</span> ViewHolder();</div><div class="line">        <span class="comment">//.....</span></div><div class="line">    &#125;	</div><div class="line">    UserInfo infos = (UserInfo)getItem(postion);</div><div class="line">    String imageUrl = infos.getImageUrl();</div><div class="line">    Glide.with(convertView.getContext()).load(imageUrl).into(holder.imageView);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>在RecyclerView中使用，在 Adapter的onBindViewHolder方法中使用：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(<span class="keyword">final</span> MyHolder holder, <span class="keyword">int</span> position)</span></span>&#123;</div><div class="line">	Glide.with(holder.imageView.getContext())</div><div class="line">    	.load(args[position])</div><div class="line">        .into(holder.imageView);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Glide缓存处理进阶可以参考这篇文章：<a href="http://www.cnblogs.com/whoislcj/p/5565012.html" target="_blank" rel="external">Android图片缓存之Glide进阶</a></p>
+<p>以上就是学习Glide时的知识点整理，后面再接触到新的知识点时再进行补充。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/08/图片加载库Glide学习总结/" class="archive-article-date">
+  	<time datetime="2016-10-08T03:13:31.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-08</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Glide/">Glide</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图片加载库/">图片加载库</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/30/Retrofit入门介绍-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Retrofit入门介绍</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 forecheng
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/"
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/图片加载库/" style="font-size: 10px;">图片加载库</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.androidweekly.cn/">Android开发技术周报</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">Github</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://about.me/lpctjut/">About me</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Android应用开发者&lt;br&gt;浙江-杭州&lt;br&gt;&lt;br&gt;&lt;br&gt;我们虽平凡，&lt;br&gt;但不平庸，&lt;br&gt;做一个能不停告诉自己前进的人，&lt;br&gt;一步一个脚印。&lt;br&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
