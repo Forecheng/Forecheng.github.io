@@ -45,7 +45,9 @@ highlight:
 
 # Category & Tag
 default_category: uncategorized
-category_map:
+category_map: 
+		学习总结: study
+		生活记录: record
 tag_map:
 
 # Date / Time format

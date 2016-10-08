@@ -5,6 +5,7 @@ tags:
 	- Android
 	- Retrofit
 	- Http
+toc: true
 ---
 
 **在这次的项目中，由于服务端采用Restful原则提供接口，所以在手机客户端调用接口时，考虑使用现在很流行的Retrofit网络请求框架，很多情况下，和Retrofit搭配使用的是RxJava，他们堪称"黄金组合"，功能强大。**
