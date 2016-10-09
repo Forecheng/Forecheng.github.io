@@ -1,0 +1,73 @@
+# Header
+
+menu:
+  所有文章: /archives
+  学习总结: /categories/
+  生活记录: /categories/
+
+# SubNav
+subnav:
+  github: "https://github.com/Forecheng"
+  weibo: "http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1"
+  #rss: "#"
+  #zhihu: "#"
+  douban: "https://www.douban.com/people/103674211/"
+  mail: "mailto:lpctjut@163.com"
+  facebook: "https://www.facebook.com/lpctjut"
+  #google: "#"
+  #twitter: "#"
+  linkedin: "http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic"
+
+rss: /atom.xml
+
+# 是否需要修改 root 路径
+# 如果您的网站存放在子目录中，例如 http://yoursite.com/blog，
+# 请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/。
+root: 
+
+# Content
+excerpt_link: more
+fancybox: true
+mathjax: false
+
+# 是否开启动画效果
+animate: true
+
+# 是否在新窗口打开链接
+open_in_new: false
+
+# Miscellaneous
+google_analytics: ''
+favicon: '/F_blue.png'
+
+#你的头像url
+avatar: '/superAndroid.jpg'
+share: true
+tagcloud: true
+
+
+#是否开启分享
+share_jia: true
+share_addthis: false
+
+#是否开启多说评论，填写你在多说申请的项目名称 duoshuo: duoshuo-key
+#若使用disqus，请在博客config文件中填写disqus_shortname，并关闭多说评论
+duoshuo: false
+
+# 如不需要，将该项置为false
+# 比如
+#smart_menu:
+#  friends: false
+
+smart_menu:
+  innerArchive: '所有文章'
+  tagcloud: '标签'
+  friends: '友链'
+  aboutme: '关于我'
+
+friends:
+  Android开发技术周报: http://www.androidweekly.cn/
+  Github: https://github.com/
+  About me: https://about.me/lpctjut/
+
+aboutme: Android应用开发者<br>浙江-杭州<br><br><br>我们虽平凡，<br>但不平庸，<br>做一个能不停告诉自己前进的人，<br>一步一个脚印。<br>
