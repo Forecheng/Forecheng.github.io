@@ -5,6 +5,7 @@ tags:
 	- Android
 	- Retrofit
 	- Http
+categories: 学习总结
 toc: true
 ---
 

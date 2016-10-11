@@ -6,7 +6,7 @@
   position: relative;
   border: 1px solid #ddd;
   background: #fff;
-  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
   &.show{
     visibility: visible;
     -webkit-animation: cd-bounce-1 0.6s;
@@ -352,31 +352,47 @@
   }
 }
 
-/*toc*/
-.toc-article{
-  background #eee
-  margin 0 0 0 0.2em
-  padding 1em
-  border-radius 5px
-  -webkit-border-radius 5px
-  strong{
-	padding 0.3em 0
+@media (min-width: 1100px) { 
+ #toc{
+   /* display: none; */
+   z-index: 999;
+    background-color: #fff;
+   padding: 0 1em;
+    border:1px solid #ddd;
+    position: fixed;
+    top: 100px;
+    right: -180px;
+     transition: right .5s ease-in;
+	width: 150px;
+    h2{
+      margin-bottom:10px;
+	}
+    ol{
+      padding-left: 0!important;
+   }
+    line-height: 1.3em;
+   font-size: 0.8em;
+    float: right;
+   .toc{
+     padding: 0;
+     li{
+       list-style-type: none;
+       margin: .5em 0 .5em;
+        ol{
+          margin: .5em 0 .5em 1em;
+        }
+      }
+    }
   }
-}  
-#toc{
-  line-height 1.5em
-  font-size 1em
-  float right
-  ol{
-	margin-left: 0
-  }	
-  .toc{
-	padding 0
-	li{
-	  list-style-type none
-	}  
-  }    
-  .toc-child{
-	padding-left 1.5em
+  .article2{
+    margin-right: 211px;
+    transition: margin-right .5s ease-in;
   }
+}
+
+.toc-item span {
+display: table-cell;
+}
+span.toc-text {
+padding-left: 3px;
 }

@@ -5,6 +5,7 @@ tags:
 	- Android
 	- Glide
 	- 图片加载库
+categories: 学习总结
 toc: true
 ---
 

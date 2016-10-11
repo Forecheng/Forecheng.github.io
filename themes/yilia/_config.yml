@@ -2,8 +2,8 @@
 
 menu:
   所有文章: /archives
-  学习总结: /categories/
-  生活记录: /categories/
+  学习总结: /categories/study
+  生活记录: /categories/record
 
 # SubNav
 subnav:
@@ -70,4 +70,4 @@ friends:
   Github: https://github.com/
   About me: https://about.me/lpctjut/
 
-aboutme: Android应用开发者<br>浙江-杭州<br><br><br>我们虽平凡，<br>但不平庸，<br>做一个能不停告诉自己前进的人，<br>一步一个脚印。<br>
+aboutme: Android应用开发者<br>浙江-杭州<br><br><br>我们虽平凡，<br>但不平庸，<br>做一个能不停告诉自己前进的人，<br>一步一个脚印。<br><br><br>Keep on Learning

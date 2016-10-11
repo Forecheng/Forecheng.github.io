@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://www.forecheng.com/2016/10/08/图片加载库Glide学习总结/index.html">
 <meta property="og:site_name" content="Forecheng's Site">
 <meta property="og:description" content="最近的项目需要加载图片，小白就上网寻找这方面的资料，项目的架构为MVP+Retrofit，典型的网络数据请求,看了比较多的资料，于是决定使用Glide,因为数据的呈现方式都是使用ListView,用了才知道该库很牛,于是对接触到的知识点稍微">
-<meta property="og:updated_time" content="2016-10-10T05:40:54.555Z">
+<meta property="og:updated_time" content="2016-10-11T10:08:48.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图片加载库Glide学习总结">
 <meta name="twitter:description" content="最近的项目需要加载图片，小白就上网寻找这方面的资料，项目的架构为MVP+Retrofit，典型的网络数据请求,看了比较多的资料，于是决定使用Glide,因为数据的呈现方式都是使用ListView,用了才知道该库很牛,于是对接触到的知识点稍微">
@@ -52,9 +52,9 @@
 			
 				<li><a href="/archives">所有文章</a></li>
 	        
-				<li><a href="/categories/">学习总结</a></li>
+				<li><a href="/categories/study">学习总结</a></li>
 	        
-				<li><a href="/categories/">生活记录</a></li>
+				<li><a href="/categories/record">生活记录</a></li>
 	        
 			</ul>
 		</nav>
@@ -127,9 +127,9 @@
 				
 					<li><a href="/archives">所有文章</a></li>
 		        
-					<li><a href="/categories/">学习总结</a></li>
+					<li><a href="/categories/study">学习总结</a></li>
 		        
-					<li><a href="/categories/">生活记录</a></li>
+					<li><a href="/categories/record">生活记录</a></li>
 		        
 				</ul>
 			</nav>
@@ -178,6 +178,7 @@
 		<strong class="toc-title">文章目录</strong>
 		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-几个库的简单比较"><span class="toc-text">1. 几个库的简单比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-配置Glide"><span class="toc-text">2. 配置Glide</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-使用Glide"><span class="toc-text">3. 使用Glide</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-设置占位图片"><span class="toc-text">3.1 设置占位图片</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-placehold"><span class="toc-text">1. placehold</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-error"><span class="toc-text">2. error</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-图片的调整"><span class="toc-text">3.2 图片的调整</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-加载的动画"><span class="toc-text">3.3 加载的动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-加载Gif动态图"><span class="toc-text">3.4 加载Gif动态图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-加载优先级"><span class="toc-text">3.5 加载优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-加载目标Target"><span class="toc-text">3.6 加载目标Target</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-缓存策略"><span class="toc-text">3.7 缓存策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-缓存的动态清理"><span class="toc-text">3.8 缓存的动态清理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-结合列表视图的使用"><span class="toc-text">4. 结合列表视图的使用</span></a></li></ol>
 	</div>
+	
 	
         <p>最近的项目需要加载图片，小白就上网寻找这方面的资料，项目的架构为<code>MVP+Retrofit</code>，典型的网络数据请求,看了比较多的资料，于是决定使用Glide,因为数据的呈现方式都是使用ListView,用了才知道该库很牛,于是对接触到的知识点稍微<a id="more"></a>归纳一下，整理学习。</p>
 <p>图片加载一直是一个比较棘手的事情，俗话说就是<code>“坑”</code>比较多，于是就google了一下这方面的库，有很多图片库，例如Picasso, Universal-Image-Loader,Fresco,Glide等，这些库都是很火的，使用量很大的图片库， 他们各有优点，不能评说那一个不好，根据项目的需求适当选择。</p>
@@ -294,6 +295,11 @@
 	</div>
 
       
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/study/">学习总结</a>
+	</div>
+
 
       <div class="clearfix"></div>
     </div>
@@ -439,7 +445,7 @@
     
     	<section class="tools-section tools-section-me">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">Android应用开发者&lt;br&gt;浙江-杭州&lt;br&gt;&lt;br&gt;&lt;br&gt;我们虽平凡，&lt;br&gt;但不平庸，&lt;br&gt;做一个能不停告诉自己前进的人，&lt;br&gt;一步一个脚印。&lt;br&gt;</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">Android应用开发者&lt;br&gt;浙江-杭州&lt;br&gt;&lt;br&gt;&lt;br&gt;我们虽平凡，&lt;br&gt;但不平庸，&lt;br&gt;做一个能不停告诉自己前进的人，&lt;br&gt;一步一个脚印。&lt;br&gt;&lt;br&gt;&lt;br&gt;Keep on Learning</div>
   	  	
     	</section>
     
