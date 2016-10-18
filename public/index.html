@@ -24,6 +24,7 @@
   <script src="/style.js"></script>
   
 
+
 </head>
 
 <body>
@@ -156,6 +157,63 @@
       <div class="body-wrap">
         
   
+    <article id="post-Retrofit上传图片" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/18/Retrofit上传图片/">使用Retrofit进行图片的上传</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>目标</strong>：使用Retrofit将本地图片上传至服务器指定的文件夹中。<br><strong>服务端接口</strong>：入参，使用表单的形式。<br>
+        <p class="article-more-link">
+          <a  href="/2016/10/18/Retrofit上传图片/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/18/Retrofit上传图片/" class="archive-article-date">
+  	<time datetime="2016-10-18T14:31:37.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-18</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/study/">学习总结</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Retrofit-OkHttp缓存数据" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -174,8 +232,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。</p>
-<h3 id="为什么使用缓存？"><a href="#为什么使用缓存？" class="headerlink" title="为什么使用缓存？"></a>为什么使用缓存？</h3>
+        <p><code>Retrofit</code>本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于<code>Okhttp</code> ，因此数据缓存也需要在<code>Okhttp</code>上处理。<code>Okhttp</code>的版本不同，其缓存方式也不同。<br>
         <p class="article-more-link">
           <a  href="/2016/10/12/Retrofit-OkHttp缓存数据/#more">more >></a>
         </p>
@@ -457,12 +514,13 @@
       	</div>
     </div>
   </div>
+  
 </footer>
     </div>
     <script>
 	var yiliaConfig = {
 		fancybox: true,
-		mathjax: false,
+		mathjax: true,
 		animate: true,
 		isHome: true,
 		isPost: false,
@@ -477,6 +535,27 @@
 <script src="/./main.js"></script>
 
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
 
 <script>
 (function(){
@@ -486,6 +565,20 @@
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
+
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1f6199cbd2aac445ac86938aa7f24b3c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
     
 <div class="tools-col">
   <ul class="btn-wrap">

@@ -6,19 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Retrofit+OkHttp缓存数据 | Forecheng&#39;s Site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。
-为什么使用缓存？">
+  <meta name="description" content="Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。Okhttp的版本不同，其缓存方式也不同。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Retrofit+OkHttp缓存数据">
 <meta property="og:url" content="http://www.forecheng.com/2016/10/12/Retrofit-OkHttp缓存数据/index.html">
 <meta property="og:site_name" content="Forecheng's Site">
-<meta property="og:description" content="Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。
-为什么使用缓存？">
-<meta property="og:updated_time" content="2016-10-16T14:23:24.243Z">
+<meta property="og:description" content="Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。Okhttp的版本不同，其缓存方式也不同。">
+<meta property="og:updated_time" content="2016-10-17T14:27:29.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Retrofit+OkHttp缓存数据">
-<meta name="twitter:description" content="Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。
-为什么使用缓存？">
+<meta name="twitter:description" content="Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。Okhttp的版本不同，其缓存方式也不同。">
   
     <link rel="alternative" href="/atom.xml" title="Forecheng&#39;s Site" type="application/atom+xml">
   
@@ -27,6 +24,7 @@
   
   <script src="/style.js"></script>
   
+
 
 </head>
 
@@ -179,13 +177,17 @@
 	  
 	<div id="toc" class="toc-article">
 		<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么使用缓存？"><span class="toc-text">为什么使用缓存？</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-为什么使用缓存？"><span class="toc-text">1. 为什么使用缓存？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-自定义拦截器"><span class="toc-text">2. 自定义拦截器</span></a></li></ol>
 	</div>
 	
 	
-        <p>Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。</p>
-<h3 id="为什么使用缓存？"><a href="#为什么使用缓存？" class="headerlink" title="为什么使用缓存？"></a>为什么使用缓存？</h3><a id="more"></a>
-<p>减少服务器负荷，降低网络延迟提升用户体验，复杂的缓存处理会根据用户当前的网络情况采取不同的缓存策略，在网络好的时候缓存时间段，数据更新快，在网络差的时候，提高缓存使用的时间，缓存策略不仅仅与网络好坏有关，也与应用本身的用途、业务需求、接口有关，比如应用的数据变更不多，则对缓存使用就比较多，有的应用要保证数据的实时性，比如股票信息，这时就不考虑缓存，如果是天气信息，则可以根据情况设定短的缓存时间，因此应用是否需要缓存，要根据不同的情况作分析，给出不同的方案。</p>
+        <p><code>Retrofit</code>本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于<code>Okhttp</code> ，因此数据缓存也需要在<code>Okhttp</code>上处理。<code>Okhttp</code>的版本不同，其缓存方式也不同。<br><a id="more"></a></p>
+<h3 id="1-为什么使用缓存？"><a href="#1-为什么使用缓存？" class="headerlink" title="1. 为什么使用缓存？"></a>1. 为什么使用缓存？</h3><p>减少服务器负荷，降低网络延迟提升用户体验，复杂的缓存处理会根据用户当前的网络情况采取不同的缓存策略，在网络好的时候缓存时间段，数据更新快，在网络差的时候，提高缓存使用的时间，缓存策略不仅仅与网络好坏有关，也与应用本身的用途、业务需求、接口有关，比如应用的数据变更不多，则对缓存使用就比较多，有的应用要保证数据的实时性，比如股票信息，这时就不考虑缓存，如果是天气信息，则可以根据情况设定短的缓存时间，因此应用是否需要缓存，要根据不同的情况作分析，给出不同的方案。<br>在开发App时，在有网络时请求调用MobileApi接口，请求新的数据，在断网情况下，可以给用户进行断网提示，但有些需求需要在断网时也显示数据，这时就可以使用缓存。由于<code>Retrofit</code> 本身没有缓存处理，则需要自定义拦截器来实现缓存功能。</p>
+<h3 id="2-自定义拦截器"><a href="#2-自定义拦截器" class="headerlink" title="2. 自定义拦截器"></a>2. 自定义拦截器</h3><p>版本：<code>Retrofit: 2.1.0</code> +<code>Okhttp 3.3.0</code>：<br>有网时请求数据，并缓存数据，无网时读取缓存。要使用到CacheControl类，该类主要负责缓存策略的控制，主要有以下策略：</p>
+<ul>
+<li>FORCE_CACHE ：只走缓存</li>
+<li>FORCE_NETWORK ：只走网路</li>
+</ul>
 
       
     </div>
@@ -214,6 +216,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2016/10/18/Retrofit上传图片/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          使用Retrofit进行图片的上传
+        
+      </div>
+    </a>
   
   
     <a href="/2016/10/10/Github文件夹为灰色解决办法/" id="article-nav-older" class="article-nav-link-wrap">
@@ -284,12 +295,13 @@
       	</div>
     </div>
   </div>
+  
 </footer>
     </div>
     <script>
 	var yiliaConfig = {
 		fancybox: true,
-		mathjax: false,
+		mathjax: true,
 		animate: true,
 		isHome: false,
 		isPost: true,
@@ -304,6 +316,27 @@
 <script src="/./main.js"></script>
 
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
 
 <script>
 (function(){
@@ -313,6 +346,20 @@
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
+
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1f6199cbd2aac445ac86938aa7f24b3c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
     
 <div class="tools-col">
   <ul class="btn-wrap">

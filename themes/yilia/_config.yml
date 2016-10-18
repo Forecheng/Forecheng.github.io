@@ -28,7 +28,7 @@ root:
 # Content
 excerpt_link: more
 fancybox: true
-mathjax: false
+mathjax: true
 
 # 是否开启动画效果
 animate: true
@@ -37,7 +37,7 @@ animate: true
 open_in_new: false
 
 # Miscellaneous
-google_analytics: ''
+baidu_tongji: true
 favicon: '/site_f.png'
 
 #你的头像url

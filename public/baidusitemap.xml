@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>http://www.forecheng.com/2016/10/18/Retrofit%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</loc>
+    <lastmod>2016-10-18T14:48:27.809Z</lastmod>
+    <data>
+        <display>
+        <title>使用Retrofit进行图片的上传</title>
+        <pubTime>2016-10-18T14:31:37.000Z</pubTime>
+        
+        <tag>Retrofit</tag>
+         
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="学习总结" url="http://www.forecheng.com/categories/study/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.forecheng.com/2016/10/12/Retrofit-OkHttp%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE/</loc>
-    <lastmod>2016-10-16T14:23:24.243Z</lastmod>
+    <lastmod>2016-10-17T14:27:29.823Z</lastmod>
     <data>
         <display>
         <title>Retrofit+OkHttp缓存数据</title>
@@ -59,9 +81,9 @@
         <title>Retrofit入门介绍</title>
         <pubTime>2016-09-30T06:13:59.000Z</pubTime>
         
-        <tag>Android</tag>
-         
         <tag>Retrofit</tag>
+         
+        <tag>Android</tag>
          
         <tag>Http</tag>
          

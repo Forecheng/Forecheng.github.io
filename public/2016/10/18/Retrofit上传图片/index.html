@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>使用Retrofit进行图片的上传 | Forecheng&#39;s Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="目标：使用Retrofit将本地图片上传至服务器指定的文件夹中。服务端接口：入参，使用表单的形式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Retrofit进行图片的上传">
+<meta property="og:url" content="http://www.forecheng.com/2016/10/18/Retrofit上传图片/index.html">
+<meta property="og:site_name" content="Forecheng's Site">
+<meta property="og:description" content="目标：使用Retrofit将本地图片上传至服务器指定的文件夹中。服务端接口：入参，使用表单的形式。">
+<meta property="og:updated_time" content="2016-10-18T14:48:27.809Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Retrofit进行图片的上传">
+<meta name="twitter:description" content="目标：使用Retrofit将本地图片上传至服务器指定的文件夹中。服务端接口：入参，使用表单的形式。">
+  
+    <link rel="alternative" href="/atom.xml" title="Forecheng&#39;s Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/site_f.png">
+  
+  <script src="/style.js"></script>
+  
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/superAndroid.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">forecheng</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">一步一个脚印</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/archives">所有文章</a></li>
+	        
+				<li><a href="/categories/study">学习总结</a></li>
+	        
+				<li><a href="/categories/record">生活记录</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Forecheng" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+		        
+					<a class="douban" target="_blank" href="https://www.douban.com/people/103674211/" title="douban">douban</a>
+		        
+					<a class="mail" target="_blank" href="mailto:lpctjut@163.com" title="mail">mail</a>
+		        
+					<a class="facebook" target="_blank" href="https://www.facebook.com/lpctjut" title="facebook">facebook</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">forecheng</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/superAndroid.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">forecheng</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">一步一个脚印</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/study">学习总结</a></li>
+		        
+					<li><a href="/categories/record">生活记录</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Forecheng" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+			        
+						<a class="douban" target="_blank" href="https://www.douban.com/people/103674211/" title="douban">douban</a>
+			        
+						<a class="mail" target="_blank" href="mailto:lpctjut@163.com" title="mail">mail</a>
+			        
+						<a class="facebook" target="_blank" href="https://www.facebook.com/lpctjut" title="facebook">facebook</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Retrofit上传图片" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用Retrofit进行图片的上传
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+	  
+	<div id="toc" class="toc-article">
+		<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#上传图片Api"><span class="toc-text">上传图片Api</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上传图片Service"><span class="toc-text">上传图片Service</span></a></li></ol>
+	</div>
+	
+	
+        <p><strong>目标</strong>：使用Retrofit将本地图片上传至服务器指定的文件夹中。<br><strong>服务端接口</strong>：入参，使用表单的形式。<br><a id="more"></a></p>
+<table>
+<thead>
+<tr>
+<th>表单字段名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“file”</td>
+<td>File</td>
+<td>上传图片的File对象</td>
+</tr>
+<tr>
+<td>“filename”</td>
+<td>String</td>
+<td>上传图片的文件名称</td>
+</tr>
+</tbody>
+</table>
+<p>请求地址：<a href="http://208.208.91.150:8080/VIID-V5/image/updateimage" target="_blank" rel="external">http://208.208.91.150:8080/VIID-V5/image/updateimage</a></p>
+<h3 id="上传图片Api"><a href="#上传图片Api" class="headerlink" title="上传图片Api"></a>上传图片Api</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UploadPicApi</span></span>&#123;</div><div class="line">	<span class="meta">@Multipart</span></div><div class="line">    <span class="meta">@POST</span>(<span class="string">"image/updateimage"</span>)</div><div class="line">    <span class="function">Call&lt;ErrorBean&gt; <span class="title">uploadPic</span></span></div><div class="line">    <span class="params">(</span></div><div class="line">    	@Header(<span class="string">"Authorization"</span>)String authorization,</div><div class="line">        @Part MultipartBody.Part image,</div><div class="line">        @<span class="title">Part</span><span class="params">(<span class="string">"filename"</span>)</span> RequestBody filename</div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接口中的参数可以参考这篇文章：<a href="http://www.forecheng.com/2016/09/30/Retrofit%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D-1/">Retrofit入门介绍 – 参数注解</a></p>
+<h3 id="上传图片Service"><a href="#上传图片Service" class="headerlink" title="上传图片Service"></a>上传图片Service</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UploadPicService</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> UploadPicApi api;</div><div class="line">    </div><div class="line">    <span class="comment">//上传图片结果的回调</span></div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IUploadPicListener</span></span>&#123;</div><div class="line">    	<span class="function"><span class="keyword">void</span> <span class="title">uploadSuccess</span><span class="params">()</span></span>;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">uploadFailed</span><span class="params">(String errorMsg)</span></span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 包装图片上传接口</div><div class="line">     * </div><div class="line">     * <span class="doctag">@param</span> token 登录返回的access_token</div><div class="line">     * <span class="doctag">@param</span> path 图片路径</div><div class="line">     * <span class="doctag">@param</span> fileName 图片名称</div><div class="line">     * <span class="doctag">@param</span> listener 结果回调</div><div class="line">     * */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">uploadPic</span><span class="params">(String token, String path, String fileName, <span class="keyword">final</span> IUploadPicListener listener)</span></span>&#123;</div><div class="line">    	api = RetrofitClient.getClient().create(UploadPicApi.class);</div><div class="line">        <span class="comment">//生成文件对象</span></div><div class="line">        File file = <span class="keyword">new</span> File(path + fileName);</div><div class="line">        <span class="comment">//指定内容类型为"image/png"</span></div><div class="line">        RequestBody photoRequestBody = RequestBody.create(MediaType.parse(<span class="string">"image/png"</span>), file);</div><div class="line">        <span class="comment">//MultipartBody.Part 被用来发送真实的文件名</span></div><div class="line">        MultipartBody.Part photo = MultipartBody.Part.createFormData(<span class="string">"file"</span>, fileName, photoRequestBody);</div><div class="line">        <span class="comment">//由于服务端要求，文件名不能包含后缀，因此去掉后缀</span></div><div class="line">        String name = getFileNameNoEx(fileName);</div><div class="line">       	<span class="comment">//调用上传接口</span></div><div class="line">        api.uploadPic(token,photo,RequestBody.create(MediaType.parse(<span class="string">"text"</span>),name)).enqueue(<span class="keyword">new</span> Callback&lt;ErrorBean&gt;()&#123;</div><div class="line">        	 <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Call&lt;ErrorBean&gt; call, Response&lt;ErrorBean&gt; response)</span> </span>&#123;</div><div class="line"></div><div class="line">                <span class="keyword">if</span> (<span class="keyword">null</span> == response)&#123;</div><div class="line">                    onFailure(<span class="keyword">null</span>,<span class="keyword">new</span> Throwable(<span class="string">"upload picture failed:响应为空"</span>));</div><div class="line">                    <span class="keyword">return</span>;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="keyword">if</span> (<span class="keyword">null</span> == response.body())&#123;</div><div class="line">                    onFailure(<span class="keyword">null</span>,<span class="keyword">new</span> Throwable(<span class="string">"upload picture failed:响应消息体为空"</span>));</div><div class="line">                    <span class="keyword">return</span>;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="comment">//错误码 == 0 表示上传成功，其他均为失败</span></div><div class="line">                <span class="keyword">if</span> (response.body().getErrorCode() == <span class="number">0</span>)&#123;</div><div class="line">                    listener.uploadSuccess();</div><div class="line">                &#125;<span class="keyword">else</span>&#123;</div><div class="line">                    listener.uploadFailed(<span class="string">"错误码:"</span> +response.body().getErrorCode() + <span class="string">"\n错误描述:"</span>+response.body().getErrorMsg());</div><div class="line">                &#125;</div><div class="line">                LogUtil.d(<span class="string">"-----&gt; upload picture successful !"</span>);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(Call&lt;ErrorBean&gt; call, Throwable t)</span> </span>&#123;</div><div class="line">                listener.uploadFailed(t.toString());</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">//去掉文件后缀</span></div><div class="line">    <span class="comment">//参数：完成的文件名称 ， ***.jpg</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getFileNameNoEx</span><span class="params">(String fileName)</span></span>&#123;</div><div class="line">    	<span class="keyword">if</span>((fileName != <span class="keyword">null</span>) &amp;&amp; (fileName.length() &gt; <span class="number">0</span>))&#123;</div><div class="line">        	<span class="keyword">int</span> dot = fileName.lastIndexOf(<span class="string">"."</span>);</div><div class="line">            <span class="keyword">if</span>((dot &gt; -<span class="number">1</span>) &amp;&amp; (dot &lt; (fileName.length())))&#123;</div><div class="line">            	<span class="keyword">return</span> fileName.subString(<span class="number">0</span>, dot);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> fileName;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用这个接口就可以完成单张图片的上传了。<br>如果需要上传多个图片，就在接口中声明多个<code>Part</code>参数，也可以使用<code>PartMap</code>。<br>多张图片上传可以参考这篇文章：<a href="http://chuansong.me/n/557773851468" target="_blank" rel="external">Android Retrofit 实现文字（参数）和多张图片一起上传</a><br>在编写接口时，需要与服务端配合，保持一致，主要是请求消息头的构造，构造错误的话，那么上传基本是失败的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Multipart</span></div><div class="line"><span class="meta">@POST</span>(<span class="string">"image/updateimage"</span>)</div><div class="line"><span class="function">Call&lt;ErrorBean&gt; <span class="title">uploadMultiPic</span><span class="params">(@Part(<span class="string">"data"</span>)</span> String text, @PartMap Map&lt;String,RequestBody&gt; params)</span>;</div></pre></td></tr></table></figure></p>
+<p>关键代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uploadMultiPic</span><span class="params">()</span></span>&#123;</div><div class="line">String image1 = <span class="string">"/sdcard/myimage/"</span> + <span class="string">"happy.png"</span>;</div><div class="line">String image2 = <span class="string">"/sdcard/myimage/"</span> + <span class="string">"xixi.png"</span>;</div><div class="line">List&lt;String&gt; pathList = <span class="keyword">new</span> ArrayList&lt;&gt;();    <span class="comment">//文件路径集合</span></div><div class="line">pathList.add(image1);</div><div class="line">pathList.add(image2);</div><div class="line">Map&lt;String,RequestBody&gt; requestBodyMap = <span class="keyword">new</span> Hash&lt;&gt;();</div><div class="line"><span class="keyword">if</span>(pathList.size() &gt; <span class="number">0</span>)&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; pathList.size();i++)&#123;</div><div class="line">		File file = <span class="keyword">new</span> File(pathList.get(i));</div><div class="line">		requestBodyMap.put(<span class="string">"file"</span>+i + <span class="string">"\";"</span>filename=\<span class="string">""</span>+file.getName(),RequestBody.create(MediaType.parse(<span class="string">"image/png"</span>),file);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//调用上传接口</span></div><div class="line">api.uploadMultiPic(<span class="string">"some pictures"</span>,requestBodyMap)&#123;</div><div class="line">   	<span class="comment">//TODO：回调处理</span></div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/18/Retrofit上传图片/" class="archive-article-date">
+  	<time datetime="2016-10-18T14:31:37.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-18</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/study/">学习总结</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/10/12/Retrofit-OkHttp缓存数据/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Retrofit+OkHttp缓存数据</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Retrofit上传图片" data-title="使用Retrofit进行图片的上传" data-url="http://www.forecheng.com/2016/10/18/Retrofit上传图片/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"forecheng"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 forecheng
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+  
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/"
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1f6199cbd2aac445ac86938aa7f24b3c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Cache/" style="font-size: 10px;">Cache</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/Retrofit/" style="font-size: 20px;">Retrofit</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/图片加载库/" style="font-size: 10px;">图片加载库</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.androidweekly.cn/">Android开发技术周报</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">Github</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yuebinyun.github.io/">Ban大神</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://about.me/lpctjut/">About me</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Android应用开发者&lt;br&gt;浙江-杭州&lt;br&gt;&lt;br&gt;&lt;br&gt;我们虽平凡，&lt;br&gt;但不平庸，&lt;br&gt;做一个能不停告诉自己前进的人，&lt;br&gt;一步一个脚印。&lt;br&gt;&lt;br&gt;&lt;br&gt;Keep on Learning</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
