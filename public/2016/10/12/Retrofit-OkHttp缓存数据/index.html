@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://www.forecheng.com/2016/10/12/Retrofit-OkHttp缓存数据/index.html">
 <meta property="og:site_name" content="Forecheng's Site">
 <meta property="og:description" content="Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。Okhttp的版本不同，其缓存方式也不同。">
-<meta property="og:updated_time" content="2016-10-17T14:27:29.823Z">
+<meta property="og:updated_time" content="2016-10-19T15:18:57.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Retrofit+OkHttp缓存数据">
 <meta name="twitter:description" content="Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。Okhttp的版本不同，其缓存方式也不同。">
@@ -90,11 +90,7 @@
 		        
 					<a class="weibo" target="_blank" href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
 		        
-					<a class="douban" target="_blank" href="https://www.douban.com/people/103674211/" title="douban">douban</a>
-		        
 					<a class="mail" target="_blank" href="mailto:lpctjut@163.com" title="mail">mail</a>
-		        
-					<a class="facebook" target="_blank" href="https://www.facebook.com/lpctjut" title="facebook">facebook</a>
 		        
 					<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
 		        
@@ -141,11 +137,7 @@
 			        
 						<a class="weibo" target="_blank" href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
 			        
-						<a class="douban" target="_blank" href="https://www.douban.com/people/103674211/" title="douban">douban</a>
-			        
 						<a class="mail" target="_blank" href="mailto:lpctjut@163.com" title="mail">mail</a>
-			        
-						<a class="facebook" target="_blank" href="https://www.facebook.com/lpctjut" title="facebook">facebook</a>
 			        
 						<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
 			        
@@ -177,17 +169,39 @@
 	  
 	<div id="toc" class="toc-article">
 		<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-为什么使用缓存？"><span class="toc-text">1. 为什么使用缓存？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-自定义拦截器"><span class="toc-text">2. 自定义拦截器</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-为什么使用缓存？"><span class="toc-text">1. 为什么使用缓存？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-定义拦截器"><span class="toc-text">2. 定义拦截器</span></a></li></ol>
 	</div>
 	
 	
         <p><code>Retrofit</code>本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于<code>Okhttp</code> ，因此数据缓存也需要在<code>Okhttp</code>上处理。<code>Okhttp</code>的版本不同，其缓存方式也不同。<br><a id="more"></a></p>
-<h3 id="1-为什么使用缓存？"><a href="#1-为什么使用缓存？" class="headerlink" title="1. 为什么使用缓存？"></a>1. 为什么使用缓存？</h3><p>减少服务器负荷，降低网络延迟提升用户体验，复杂的缓存处理会根据用户当前的网络情况采取不同的缓存策略，在网络好的时候缓存时间段，数据更新快，在网络差的时候，提高缓存使用的时间，缓存策略不仅仅与网络好坏有关，也与应用本身的用途、业务需求、接口有关，比如应用的数据变更不多，则对缓存使用就比较多，有的应用要保证数据的实时性，比如股票信息，这时就不考虑缓存，如果是天气信息，则可以根据情况设定短的缓存时间，因此应用是否需要缓存，要根据不同的情况作分析，给出不同的方案。<br>在开发App时，在有网络时请求调用MobileApi接口，请求新的数据，在断网情况下，可以给用户进行断网提示，但有些需求需要在断网时也显示数据，这时就可以使用缓存。由于<code>Retrofit</code> 本身没有缓存处理，则需要自定义拦截器来实现缓存功能。</p>
-<h3 id="2-自定义拦截器"><a href="#2-自定义拦截器" class="headerlink" title="2. 自定义拦截器"></a>2. 自定义拦截器</h3><p>版本：<code>Retrofit: 2.1.0</code> +<code>Okhttp 3.3.0</code>：<br>有网时请求数据，并缓存数据，无网时读取缓存。要使用到CacheControl类，该类主要负责缓存策略的控制，主要有以下策略：</p>
+<h3 id="1-为什么使用缓存？"><a href="#1-为什么使用缓存？" class="headerlink" title="1. 为什么使用缓存？"></a>1. 为什么使用缓存？</h3><p>减少服务器负荷，降低网络延迟提升用户体验，复杂的缓存处理会根据用户当前的网络情况采取不同的策略，在网络好的时候缓存时间短，数据更新快，在网络差的时候，提高缓存使用的时间，缓存策略不仅仅与网络好坏有关，也与应用本身的用途、业务需求、接口有关，比如应用的数据变更不多，则对缓存使用就比较多，有的应用要保证数据的实时性，比如股票信息，这时就不考虑缓存，如果是天气信息，则可以根据情况设定短的缓存时间，因此应用是否需要缓存，要根据不同的情况作分析，给出不同的方案。<br>在开发App时，在有网络时调用MobileApi接口，请求新的数据，在断网情况下，可以给用户进行断网提示，但有些需求需要在断网时也显示数据，这时就可以使用缓存。由于<code>Retrofit</code> 本身没有缓存处理，则需要自定义拦截器来实现缓存功能。</p>
+<h3 id="2-定义拦截器"><a href="#2-定义拦截器" class="headerlink" title="2. 定义拦截器"></a>2. 定义拦截器</h3><p>版本：<code>Retrofit: 2.1.0</code> +<code>Okhttp 3.3.0</code>：<br>首先，判断是否有网，有网时请求数据，并保存到缓存中，无网时读取缓存。要使用到CacheControl类，该类主要负责缓存策略的控制，主要有以下策略：</p>
 <ul>
 <li>FORCE_CACHE ：只走缓存</li>
 <li>FORCE_NETWORK ：只走网路</li>
 </ul>
+<p><strong>定义拦截器：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//拦截器：</span></div><div class="line">   Interceptor interceptor = <span class="keyword">new</span> Interceptor() &#123;</div><div class="line">       <span class="meta">@Override</span></div><div class="line">       <span class="keyword">public</span> okhttp3.<span class="function">Response <span class="title">intercept</span><span class="params">(Chain chain)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">       	<span class="comment">// 对请求进行拦截：无网络是强制读取缓存</span></div><div class="line">           Request request = chain.request();</div><div class="line">           <span class="keyword">if</span> (!NetworkUtil.hasNetwork(getApplicationContext()))&#123;</div><div class="line">               request = request.newBuilder().cacheControl(CacheControl.FORCE_CACHE)</div><div class="line">                       .build();</div><div class="line">           &#125;</div><div class="line">		<span class="comment">//对响应进行拦截</span></div><div class="line">           <span class="comment">//有网络时，移除header，设置缓存超时时间为1小时</span></div><div class="line">           okhttp3.Response response = chain.proceed(request);</div><div class="line">           <span class="keyword">if</span> (NetworkUtil.hasNetwork(getApplicationContext()))&#123;</div><div class="line">               <span class="keyword">int</span> maxAge = <span class="number">60</span> * <span class="number">60</span>;  			 <span class="comment">//1小时</span></div><div class="line">               response.newBuilder()</div><div class="line">                       .removeHeader(<span class="string">"Pragma"</span>)</div><div class="line">                       .header(<span class="string">"Cache-Control"</span>,<span class="string">"public,max-age="</span>+maxAge)</div><div class="line">                       .build();</div><div class="line">           &#125;<span class="keyword">else</span> &#123;</div><div class="line">           	<span class="comment">//无网络时，缓存时间为1周</span></div><div class="line">               <span class="keyword">int</span> maxScale = <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">7</span>;  <span class="comment">// 1周</span></div><div class="line">               response.newBuilder().removeHeader(<span class="string">"Pragma"</span>)</div><div class="line">                       .header(<span class="string">"Cache-Control"</span>,<span class="string">"public, only-if-cached, max-stale="</span>+maxScale)</div><div class="line">                       .build();</div><div class="line">           &#125;</div><div class="line"></div><div class="line">           <span class="keyword">return</span> response;</div><div class="line">       &#125;</div><div class="line">   &#125;; </div><div class="line">   </div><div class="line">   <span class="comment">//判断是否连接网络</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">hasNetwork</span><span class="params">(Context context)</span></span>&#123;</div><div class="line">   	<span class="keyword">if</span>(context != <span class="keyword">null</span>)&#123;</div><div class="line">           ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);</div><div class="line">           <span class="keyword">if</span> (cm != <span class="keyword">null</span>)&#123;</div><div class="line">               NetworkInfo info = cm.getActiveNetworkInfo();</div><div class="line">               <span class="keyword">if</span> (info != <span class="keyword">null</span>)&#123;</div><div class="line">                   <span class="keyword">return</span> info.isAvailable();</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p><strong>给Okhttp设置拦截器：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//缓存目录</span></div><div class="line">   File cacheFile = <span class="keyword">new</span> File(context.getExternalCacheDir(),<span class="string">"mycache"</span>);</div><div class="line">   <span class="comment">//缓存大小为20M</span></div><div class="line">   Cache cache = <span class="keyword">new</span> Cache(cacheFile, <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">20</span>);</div><div class="line">   <span class="comment">//创建OkhttpClient，添加拦截器和缓存</span></div><div class="line">   OkHttpClient client = <span class="keyword">new</span> OkHttpClient().newBuilder()</div><div class="line">               .addInterceptor(interceptor).cache(cache).build();</div><div class="line">   <span class="comment">//生成Retrofit，并将OkHttpClient对象写入</span></div><div class="line">   Retrofit mRetrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">   				.baseUrl(BaseUrl)</div><div class="line">                   .addConverterFactory(GsonConverterFactory.create())</div><div class="line">                   .client(client)</div><div class="line">                   .build();</div></pre></td></tr></table></figure></p>
+<p>缓存基本实现，运行程序后，会在SdCard中的<code>/Android/data/应用包名/cache/mycache</code>目录下看到缓存文件，当应用卸载后，<code>/Android/data/应用包名/</code>这个目录所有文件被删除，不会留下垃圾信息。在<code>设置----&gt;应用 ----&gt;应用详情里面</code>进行<code>清除缓存</code>也会清理缓存文件，对应上面所说目录。<br>在拦截器中的两个字段<code>max-age</code>和<code>max-stale</code>不是很理解，资料较少，有以下比较：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">max-age</td>
+<td style="text-align:center">强制响应缓存者，根据该值，校验新鲜性。即使用自身的Age值，与请求时间做比较，如果超出max-age，则强制去服务端校验，以确保返回一个新鲜的响应</td>
+</tr>
+<tr>
+<td style="text-align:center">max-stale</td>
+<td style="text-align:center">允许缓存者，发送一个过期不超过指定时间的旧缓存</td>
+</tr>
+</tbody>
+</table>
+<p>即使看了这个比较，对此理解也不是很深刻，如果有那位看到，可以留言讨论下。</p>
 
       
     </div>
@@ -270,7 +284,7 @@
 	(function() {
 		var ds = document.createElement('script');
 		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.src = '/lpc_embed.js';
 		ds.charset = 'UTF-8';
 		(document.getElementsByTagName('head')[0] 
 		 || document.getElementsByTagName('body')[0]).appendChild(ds);
@@ -293,9 +307,13 @@
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
+		
+		<div align="center">本站访问次数：<a href="http://www.amazingcounters.com"><img border="0" src="					         						http://cc.amazingcounters.com/counter.php?i=3208359&c=9625390" alt="AmazingCounters.com"></a>
+		</div>
     </div>
   </div>
   
+
 </footer>
     </div>
     <script>
@@ -385,7 +403,7 @@ var _hmt = _hmt || [];
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Cache/" style="font-size: 10px;">Cache</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/Retrofit/" style="font-size: 20px;">Retrofit</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/图片加载库/" style="font-size: 10px;">图片加载库</a>
+    				<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Cache/" style="font-size: 10px;">Cache</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/Retrofit/" style="font-size: 20px;">Retrofit</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/图片加载库/" style="font-size: 10px;">图片加载库</a> <a href="/tags/流媒体/" style="font-size: 10px;">流媒体</a>
     			</div>
     	</section>
     

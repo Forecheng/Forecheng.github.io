@@ -28,7 +28,7 @@ i18n_dir: :lang
 skip_render: README.md
 
 # Writing
-new_post_name: 使用Retrofit进行图片的上传-1.md
+new_post_name: 了解流媒体-1.md
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
@@ -40,8 +40,8 @@ future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: false
-  tab_replace:
+  auto_detect: true
+  tab_replace: 
 
 # Category & Tag
 default_category: uncategorized
