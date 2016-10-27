@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>将自己的库发布到maven | Forecheng&#39;s Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是maven?官网网站：Apache Maven Project">
+<meta property="og:type" content="article">
+<meta property="og:title" content="将自己的库发布到maven">
+<meta property="og:url" content="http://www.forecheng.com/2016/10/27/将自己的库发布到maven/index.html">
+<meta property="og:site_name" content="Forecheng's Site">
+<meta property="og:description" content="什么是maven?官网网站：Apache Maven Project">
+<meta property="og:updated_time" content="2016-10-27T15:03:38.734Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="将自己的库发布到maven">
+<meta name="twitter:description" content="什么是maven?官网网站：Apache Maven Project">
+  
+    <link rel="alternative" href="/atom.xml" title="Forecheng&#39;s Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/site_f.png">
+  
+  <script src="/style.js"></script>
+  
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/superAndroid.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">forecheng</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">一步一个脚印</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/archives">所有文章</a></li>
+	        
+				<li><a href="/categories/study">学习总结</a></li>
+	        
+				<li><a href="/categories/record">生活记录</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Forecheng" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="mailto:lpctjut@163.com" title="mail">mail</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">forecheng</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/superAndroid.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">forecheng</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">一步一个脚印</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/study">学习总结</a></li>
+		        
+					<li><a href="/categories/record">生活记录</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Forecheng" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="mailto:lpctjut@163.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-将自己的库发布到maven" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      将自己的库发布到maven
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+	  
+	<div id="toc" class="toc-article">
+		<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是maven"><span class="toc-text">什么是maven?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发布library到maven"><span class="toc-text">发布library到maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#依赖上传的库"><span class="toc-text">依赖上传的库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#仓库类型"><span class="toc-text">仓库类型</span></a></li></ol>
+	</div>
+	
+	
+        <h3 id="什么是maven"><a href="#什么是maven" class="headerlink" title="什么是maven?"></a>什么是maven?</h3><p>官网网站：<a href="http://maven.apache.org/" target="_blank" rel="external">Apache Maven Project</a><br><a id="more"></a></p>
+<blockquote>
+<p>Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information.</p>
+<p>Apache Maven是一个软件项目管理和理解工具。基于项目对象模型（POM）的概念，Maven可以管理一个项目的构建，从主要的信息模块报告和收集资料。</p>
+</blockquote>
+<p>maven是一个项目管理工具，它包含了一个项目对象模型（Project Object Model），一组标准集合，一个项目生命周期，一个依赖管理系统，maven可以很方便的管理项目报告，生成站点，管理JAR文件等。</p>
+<h3 id="发布library到maven"><a href="#发布library到maven" class="headerlink" title="发布library到maven"></a>发布library到maven</h3><p>maven作为一个中心仓库，在Android开发中，可以将自己写的lib发布到maven，并使用Sonatype Nexus进行管理。<br>仓库信息：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Repository ID: airimos</div><div class="line">Repository Name: airimos</div><div class="line">Repository Type: hosted</div><div class="line">Repository Policy: Release</div><div class="line">Repository Format: maven2</div><div class="line">Contained in groups:</div></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">distributionManagement</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">repository</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>airimos<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.airimos.com/nexus/content/repositories/airimos<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">distributionManagement</span>&gt;</span></div></pre></td></tr></table></figure>
+<ol>
+<li>使用Android studio，在自己库的src同级目录下的<code>build.gradle</code>中进行一些配置：</li>
+</ol>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line">apply <span class="string">plugin:</span> <span class="string">'com.android.library'</span></div><div class="line">apply <span class="string">plugin:</span> <span class="string">'maven'</span></div><div class="line"></div><div class="line">android &#123;</div><div class="line">    compileSdkVersion <span class="number">23</span></div><div class="line">    buildToolsVersion <span class="string">"23.0.2"</span></div><div class="line"></div><div class="line">    defaultConfig &#123;</div><div class="line">        minSdkVersion <span class="number">14</span></div><div class="line">        targetSdkVersion <span class="number">23</span></div><div class="line">        versionCode <span class="number">1</span></div><div class="line">        versionName <span class="string">"1.0"</span></div><div class="line">    &#125;</div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">            minifyEnabled <span class="literal">false</span></div><div class="line">            proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">    compile fileTree(<span class="string">dir:</span> <span class="string">'libs'</span>, <span class="string">include:</span> [<span class="string">'*.jar'</span>])</div><div class="line">    testCompile <span class="string">'junit:junit:4.12'</span></div><div class="line">    compile <span class="string">'com.android.support:appcompat-v7:23.1.1'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">tasks.withType(JavaCompile)&#123;</div><div class="line">    options.encoding = <span class="string">"UTF-8"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">Properties properties = <span class="keyword">new</span> Properties()</div><div class="line">properties.load(project.rootProject.file(<span class="string">'local.properties'</span>).newDataInputStream())</div><div class="line"></div><div class="line"><span class="keyword">def</span> isReleaseBuild() &#123;</div><div class="line">    <span class="keyword">return</span> VERSION_NAME.contains(<span class="string">"SNAPSHOT"</span>) == <span class="literal">false</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">def</span> getRepositoryUsername() &#123;</div><div class="line">    <span class="keyword">return</span> hasProperty(<span class="string">"NEXUS_USERNAME"</span>) ? properties.getProperty("NEXUS_USERNAME") : <span class="string">""</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">def</span> getRepositoryPassword() &#123;</div><div class="line">    <span class="keyword">return</span> hasProperty(<span class="string">"NEXUS_PASSWORD"</span>) ? properties.getProperty("NEXUS_PASSWORD") : <span class="string">""</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">afterEvaluate &#123; project -&gt;</div><div class="line">    uploadArchives &#123;</div><div class="line">        repositories &#123;</div><div class="line">            mavenDeployer &#123;</div><div class="line"></div><div class="line">                pom.groupId = properties.getProperty(<span class="string">"GROUP"</span>)</div><div class="line">                pom.artifactId = properties.getProperty(<span class="string">"POM_ARTIFACT_ID"</span>)</div><div class="line">                pom.version = properties.getProperty(<span class="string">"VERSION_NAME"</span>)</div><div class="line">                repository(<span class="string">url:</span> properties.getProperty(<span class="string">"RELEASE_REPOSITORY_URL"</span>)) &#123;</div><div class="line">                    authentication(<span class="string">userName:</span> properties.getProperty(<span class="string">"NEXUS_USERNAME"</span>), <span class="string">password:</span> properties.getProperty(<span class="string">"NEXUS_PASSWORD"</span>))</div><div class="line">                &#125;</div><div class="line">                snapshotRepository(<span class="string">url:</span> properties.getProperty(<span class="string">"SNAPSHOT_REPOSITORY_URL"</span>)) &#123;</div><div class="line">                    authentication(<span class="string">userName:</span> properties.getProperty(<span class="string">"NEXUS_USERNAME"</span>), <span class="string">password:</span> properties.getProperty(<span class="string">"NEXUS_PASSWORD"</span>))</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    task sourcesJar(<span class="string">type:</span> Jar) &#123;</div><div class="line">        from android.sourceSets.main.java.srcDirs</div><div class="line">        classifier = <span class="string">'sources'</span></div><div class="line">        from android.sourceSets.main.java.sourceFiles</div><div class="line">    &#125;</div><div class="line">    task javadoc(<span class="string">type:</span> Javadoc) &#123;</div><div class="line">        source = android.sourceSets.main.java.srcDirs</div><div class="line">        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))</div><div class="line">    &#125;</div><div class="line">    task javadocJar(<span class="string">type:</span> Jar, <span class="string">dependsOn:</span> javadoc) &#123;</div><div class="line">        classifier = <span class="string">'javadoc'</span></div><div class="line">        from javadoc.destinationDir</div><div class="line">    &#125;</div><div class="line">    javadoc &#123;</div><div class="line">        options &#123;</div><div class="line">            encoding <span class="string">"UTF-8"</span></div><div class="line">            charSet <span class="string">'UTF-8'</span></div><div class="line">            author <span class="literal">true</span></div><div class="line">            version <span class="literal">true</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    artifacts &#123;</div><div class="line">        archives javadocJar</div><div class="line">        archives sourcesJar</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>配置项目根目录下的<code>local.properties</code>文件</li>
+</ol>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sdk.dir=D\:\\Android\\Sdk</div><div class="line">GROUP=com.uniview.usbcameralib</div><div class="line">VERSION_NAME=<span class="number">1.0</span><span class="number">.0</span></div><div class="line">POM_ARTIFACT_ID=usbcameralib</div><div class="line">RELEASE_REPOSITORY_URL=http\:<span class="comment">//maven.airimos.com/nexus/content/repositories/airimos</span></div><div class="line">SNAPSHOT_REPOSITORY_URL=http\:<span class="comment">//maven.airimos.com/nexus/content/repositories/airimosSnap</span></div><div class="line">NEXUS_USERNAME=username</div><div class="line">NEXUS_PASSWORD=password</div></pre></td></tr></table></figure>
+<p>这些配置的信息，会在第一步添加的代码读取到。</p>
+<ul>
+<li><code>GROUP：</code>将lib发布到maven的哪个仓库组中，这里的仓库名字为airimos，会发布到airimos下的com/uniview/usbcameralib中。</li>
+<li><code>VERSION_NAME：</code> 库的版本号</li>
+<li><code>POM_ARTIFACT_ID：</code> 库的名称</li>
+<li><code>RELEASE_REPOSITORY_URL：</code>正式仓库地址</li>
+<li><code>SNAPSHOT_REPOSITORY_URL：</code> 不稳定仓库地址</li>
+<li><code>NEXUS_USERNAME ：</code>Sonatype Nexus的用户名</li>
+<li><code>NEXUS_PASSWORD：</code>Sonatype Nexus的密码</li>
+</ul>
+<ol>
+<li>在Android studio右侧的<code>Gradle projects</code>中，双击 uploadArchives上传到maven服务器，将会进行构建，显示<code>BUILD SUCCESSFUL</code>则表示成功。</li>
+<li>以后每次对库进行更新后，将库的版本号增加，在使用的项目中重新下载就好。</li>
+</ol>
+<h3 id="依赖上传的库"><a href="#依赖上传的库" class="headerlink" title="依赖上传的库"></a>依赖上传的库</h3><ol>
+<li>在新建的项目中使用库，在项目的根目录下的<code>build.gradle</code>配置：</li>
+</ol>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">        jcenter()</div><div class="line">        <span class="comment">//配置maven仓库地址</span></div><div class="line">        maven &#123; url <span class="string">'http://maven.airimos.com/nexus/content/repositories/airimos/'</span> &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>在src同级目录下的<code>build.gradle</code>进行依赖：</li>
+</ol>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">    compile fileTree(<span class="string">dir:</span> <span class="string">'libs'</span>, <span class="string">include:</span> [<span class="string">'*.jar'</span>])</div><div class="line">    testCompile <span class="string">'junit:junit:4.12'</span></div><div class="line">    compile <span class="string">'com.android.support:appcompat-v7:23.1.1'</span></div><div class="line">    <span class="comment">//依赖该库</span></div><div class="line">    compile <span class="string">'com.uniview.usbcameralib:usbcameralib:1.0.0'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="仓库类型"><a href="#仓库类型" class="headerlink" title="仓库类型"></a>仓库类型</h3><p>maven中的仓库分为两种：<code>snapshot快照仓库</code>和<code>release 发布仓库</code>。<code>snapshot快照仓库</code>用于保存开发过程中的不稳定版本，<code>release正式仓库</code>用来保存稳定的发行版本，当定义一个组件或者模块为快照版本时，只需要在pom文件中在该模块的版本号后加上<code>-SNAPSHOT（要大写）</code>即可。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>maven2会根据模块的版本号中是否带有<code>-SNAPSHOT</code>来判断是快照版本还是正式版本，如果是快照版本在部署时会自动发布到快照版本库中，而使用快照版本的模块，在不更改版本号的情况下，直接编译打包时，maven会自动从镜像服务器上下载最新的快照版本；如果是正式版本，那么在部署时会自动发布到正式版本库中，而使用正式版本的模块，在不更改版本号的情况下，编译打包时如果本地已经存在该版本的模块，则不会主动去镜像服务器上下载。<br>因此在开发阶段，可以将共用库的版本设置为快照版本，而依赖组件则引用快照版本进行开发，在共用库的快照版本更新后，也不需要修改pom文件的版本号来下载新的版本，直接执行相关编译、打包命令即可重新下载最新的快照库，方便开发。开发完毕后，就可将该库发布到release正式版本库中。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/27/将自己的库发布到maven/" class="archive-article-date">
+  	<time datetime="2016-10-27T14:39:43.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-27</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/study/">学习总结</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/10/23/了解流媒体/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">了解流媒体</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="将自己的库发布到maven" data-title="将自己的库发布到maven" data-url="http://www.forecheng.com/2016/10/27/将自己的库发布到maven/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"forecheng"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = '/lpc_embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 forecheng
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+		
+		<div align="center">本站访问次数：<a href="http://www.amazingcounters.com"><img border="0" src="					         						http://cc.amazingcounters.com/counter.php?i=3208359&c=9625390" alt="AmazingCounters.com"></a>
+		</div>
+    </div>
+  </div>
+  
+
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/"
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1f6199cbd2aac445ac86938aa7f24b3c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Cache/" style="font-size: 10px;">Cache</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/Retrofit/" style="font-size: 20px;">Retrofit</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/图片加载库/" style="font-size: 10px;">图片加载库</a> <a href="/tags/流媒体/" style="font-size: 10px;">流媒体</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.androidweekly.cn/">Android开发技术周报</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">Github</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yuebinyun.github.io/">Ban大神</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://about.me/lpctjut/">About me</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Android应用开发者&lt;br&gt;浙江-杭州&lt;br&gt;&lt;br&gt;&lt;br&gt;我们虽平凡，&lt;br&gt;但不平庸，&lt;br&gt;做一个能不停告诉自己前进的人，&lt;br&gt;一步一个脚印。&lt;br&gt;&lt;br&gt;&lt;br&gt;Keep on Learning</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
