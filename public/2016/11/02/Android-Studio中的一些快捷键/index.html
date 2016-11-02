@@ -4,17 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives: 2016 | Forecheng&#39;s Site</title>
+  <title>Android Studio中的一些快捷键 | Forecheng&#39;s Site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="学习总结 思考感悟">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Forecheng's Site">
-<meta property="og:url" content="http://www.forecheng.com/archives/2016/index.html">
+  <meta name="description" content="Log 打印生成类的TAG：logt1private static final String TAG = &quot;MainActivity&quot;;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Studio中的一些快捷键">
+<meta property="og:url" content="http://www.forecheng.com/2016/11/02/Android-Studio中的一些快捷键/index.html">
 <meta property="og:site_name" content="Forecheng's Site">
-<meta property="og:description" content="学习总结 思考感悟">
+<meta property="og:description" content="Log 打印生成类的TAG：logt1private static final String TAG = &quot;MainActivity&quot;;">
+<meta property="og:updated_time" content="2016-11-02T13:53:48.854Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Forecheng's Site">
-<meta name="twitter:description" content="学习总结 思考感悟">
+<meta name="twitter:title" content="Android Studio中的一些快捷键">
+<meta name="twitter:description" content="Log 打印生成类的TAG：logt1private static final String TAG = &quot;MainActivity&quot;;">
   
     <link rel="alternative" href="/atom.xml" title="Forecheng&#39;s Site" type="application/atom+xml">
   
@@ -147,355 +148,117 @@
 </nav>
 
       <div class="body-wrap">
+        <article id="post-Android-Studio中的一些快捷键" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/02/Android-Studio中的一些快捷键/" class="archive-article-date">
-  	<time datetime="2016-11-02T13:01:40.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/02/Android-Studio中的一些快捷键/">Android Studio中的一些快捷键</a>
+    <h1 class="article-title" itemprop="name">
+      Android Studio中的一些快捷键
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+	  
+        <h3 id="Log-打印"><a href="#Log-打印" class="headerlink" title="Log 打印"></a>Log 打印</h3><p>生成类的TAG：<strong><code>logt</code></strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"MainActivity"</span>;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>在方法中打印日志：<strong><code>logd</code></strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Log.d(TAG, <span class="string">"onCreate: "</span>);</div></pre></td></tr></table></figure></p>
+<p>在方法中打印方法名和参数信息：<strong><code>logm</code></strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Log.d(TAG, <span class="string">"onCreate() called with: "</span> + <span class="string">"savedInstanceState = ["</span> + savedInstanceState + <span class="string">"]"</span>);</div></pre></td></tr></table></figure></p>
+<h3 id="代码的移动"><a href="#代码的移动" class="headerlink" title="代码的移动"></a>代码的移动</h3><p>代码提示：<strong><code>ctrl + alt + 空格</code></strong><br>代码行上移/下移：<strong><code>ctrl + shift + up/down</code></strong><br>复制代码行到下一行：<strong><code>ctrl + D</code></strong><br>剪切一行代码：<strong><code>ctrl + X</code></strong><br>删除一行代码：<strong><code>ctrl + Y</code></strong><br>光标在方法上移动：<strong><code>alt + up/down</code></strong></p>
+<h3 id="代码查看"><a href="#代码查看" class="headerlink" title="代码查看"></a>代码查看</h3><p>打开一个类：<strong><code>ctrl + N</code></strong><br>打开一个文件：<strong><code>ctrl + shift + N</code></strong><br>查看类的声明：<strong><code>ctrl + B</code></strong><br>查看父类：<strong><code>ctrl + U</code></strong><br>查看方法的调用：<strong><code>ctrl + alt + H</code></strong><br>在类中查看方法的实现：<strong><code>ctrl + shift + I</code></strong><br>查看类的继承结构：<strong><code>ctrl + H</code></strong><br>工程面板的显示与隐藏：<strong><code>alt + 数字1</code></strong><br>查看一个类中的所有方法：<strong><code>ctrl + F12</code></strong><br>查看父类中的方法并选择复写：<strong><code>ctrl + O</code></strong></p>
+<p>代码块生成：<strong><code>ctrl + J</code></strong><br>查找：<strong><code>ctrl + F</code></strong><br>替换：<strong><code>ctrl + R</code></strong><br>打开最近的模板：<strong><code>ctrl + E</code></strong></p>
+<p>根据自身使用习惯，也可以在<em>Android Studio</em>的 <strong><code>File --&gt; Settings ---&gt; keymap</code></strong> 中改变默认的快捷键，来提高开发效率。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/02/Android-Studio中的一些快捷键/" class="archive-article-date">
+  	<time datetime="2016-11-02T13:01:40.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-02</time>
+</a>
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li></ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 	<i class="icon-price-tags"></i>
 	<a class="article-category-link" href="/categories/study/">学习总结</a>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/27/将自己的库发布到maven/" class="archive-article-date">
-  	<time datetime="2016-10-27T14:39:43.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/27/将自己的库发布到maven/">将自己的库发布到maven</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/10/27/将自己的库发布到maven/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">将自己的库发布到maven</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-          
-	<div class="article-category tagcloud">
-	<i class="icon-price-tags"></i>
-	<a class="article-category-link" href="/categories/study/">学习总结</a>
-	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/23/了解流媒体/" class="archive-article-date">
-  	<time datetime="2016-10-23T11:20:44.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/23/了解流媒体/">了解流媒体</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流媒体/">流媒体</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<i class="icon-price-tags"></i>
-	<a class="article-category-link" href="/categories/study/">学习总结</a>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/18/Retrofit上传图片/" class="archive-article-date">
-  	<time datetime="2016-10-18T14:31:37.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/18/Retrofit上传图片/">使用Retrofit进行图片的上传</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<i class="icon-price-tags"></i>
-	<a class="article-category-link" href="/categories/study/">学习总结</a>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/12/Retrofit-OkHttp缓存数据/" class="archive-article-date">
-  	<time datetime="2016-10-12T13:21:43.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/12/Retrofit-OkHttp缓存数据/">Retrofit+OkHttp缓存数据</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cache/">Cache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<i class="icon-price-tags"></i>
-	<a class="article-category-link" href="/categories/study/">学习总结</a>
-	</div>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android-Studio中的一些快捷键" data-title="Android Studio中的一些快捷键" data-url="http://www.forecheng.com/2016/11/02/Android-Studio中的一些快捷键/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"forecheng"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = '/lpc_embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/10/Github文件夹为灰色解决办法/" class="archive-article-date">
-  	<time datetime="2016-10-10T00:43:07.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/10/Github文件夹为灰色解决办法/">Github文件夹为灰色解决办法</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/">Github</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<i class="icon-price-tags"></i>
-	<a class="article-category-link" href="/categories/study/">学习总结</a>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/08/图片加载库Glide学习总结/" class="archive-article-date">
-  	<time datetime="2016-10-08T03:13:31.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/08/图片加载库Glide学习总结/">图片加载库Glide学习总结</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Glide/">Glide</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图片加载库/">图片加载库</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<i class="icon-price-tags"></i>
-	<a class="article-category-link" href="/categories/study/">学习总结</a>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/09/30/Retrofit入门介绍-1/" class="archive-article-date">
-  	<time datetime="2016-09-30T06:13:59.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/30/Retrofit入门介绍-1/">Retrofit入门介绍</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Http/">Http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<i class="icon-price-tags"></i>
-	<a class="article-category-link" href="/categories/study/">学习总结</a>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/09/28/hello-world/" class="archive-article-date">
-  	<time datetime="2016-09-28T02:10:10.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/28/hello-world/">hexo start</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<i class="icon-price-tags"></i>
-	<a class="article-category-link" href="/categories/record/">生活记录</a>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
       </div>
@@ -523,8 +286,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
