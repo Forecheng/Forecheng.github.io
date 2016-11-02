@@ -134,6 +134,26 @@
     
     
   <url>
+    <loc>http://www.forecheng.com/2016/09/28/hello-world/</loc>
+    <lastmod>2016-10-11T13:36:59.219Z</lastmod>
+    <data>
+        <display>
+        <title>hexo start</title>
+        <pubTime>2016-09-28T02:10:10.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活记录" url="http://www.forecheng.com/categories/record/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.forecheng.com/2016/09/30/Retrofit%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D-1/</loc>
     <lastmod>2016-10-11T13:36:59.219Z</lastmod>
     <data>
@@ -151,26 +171,6 @@
            
              
               <breadCrumb title="学习总结" url="http://www.forecheng.com/categories/study/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.forecheng.com/2016/09/28/hello-world/</loc>
-    <lastmod>2016-10-11T13:36:59.219Z</lastmod>
-    <data>
-        <display>
-        <title>hexo start</title>
-        <pubTime>2016-09-28T02:10:10.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-         
-           
-             
-              <breadCrumb title="生活记录" url="http://www.forecheng.com/categories/record/"/>
           
         </display>
     </data>
