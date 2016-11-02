@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Retrofit+OkHttp缓存数据 | Forecheng&#39;s Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。Okhttp的版本不同，其缓存方式也不同。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Retrofit+OkHttp缓存数据">
+<meta property="og:url" content="http://www.forecheng.com/2016/10/12/Retrofit-OkHttp缓存数据/index.html">
+<meta property="og:site_name" content="Forecheng's Site">
+<meta property="og:description" content="Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。Okhttp的版本不同，其缓存方式也不同。">
+<meta property="og:updated_time" content="2016-10-19T15:18:57.078Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Retrofit+OkHttp缓存数据">
+<meta name="twitter:description" content="Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。Okhttp的版本不同，其缓存方式也不同。">
+  
+    <link rel="alternative" href="/atom.xml" title="Forecheng&#39;s Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/site_f.png">
+  
+  <script src="/style.js"></script>
+  
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/superAndroid.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">forecheng</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">一步一个脚印</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/archives">所有文章</a></li>
+	        
+				<li><a href="/categories/study">学习总结</a></li>
+	        
+				<li><a href="/categories/record">生活记录</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Forecheng" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="mailto:lpctjut@163.com" title="mail">mail</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">forecheng</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/superAndroid.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">forecheng</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">一步一个脚印</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/study">学习总结</a></li>
+		        
+					<li><a href="/categories/record">生活记录</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Forecheng" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="mailto:lpctjut@163.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Retrofit-OkHttp缓存数据" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Retrofit+OkHttp缓存数据
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+	  
+	<div id="toc" class="toc-article">
+		<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-为什么使用缓存？"><span class="toc-text">1. 为什么使用缓存？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-定义拦截器"><span class="toc-text">2. 定义拦截器</span></a></li></ol>
+	</div>
+	
+	
+        <p><code>Retrofit</code>本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于<code>Okhttp</code> ，因此数据缓存也需要在<code>Okhttp</code>上处理。<code>Okhttp</code>的版本不同，其缓存方式也不同。<br><a id="more"></a></p>
+<h3 id="1-为什么使用缓存？"><a href="#1-为什么使用缓存？" class="headerlink" title="1. 为什么使用缓存？"></a>1. 为什么使用缓存？</h3><p>减少服务器负荷，降低网络延迟提升用户体验，复杂的缓存处理会根据用户当前的网络情况采取不同的策略，在网络好的时候缓存时间短，数据更新快，在网络差的时候，提高缓存使用的时间，缓存策略不仅仅与网络好坏有关，也与应用本身的用途、业务需求、接口有关，比如应用的数据变更不多，则对缓存使用就比较多，有的应用要保证数据的实时性，比如股票信息，这时就不考虑缓存，如果是天气信息，则可以根据情况设定短的缓存时间，因此应用是否需要缓存，要根据不同的情况作分析，给出不同的方案。<br>在开发App时，在有网络时调用MobileApi接口，请求新的数据，在断网情况下，可以给用户进行断网提示，但有些需求需要在断网时也显示数据，这时就可以使用缓存。由于<code>Retrofit</code> 本身没有缓存处理，则需要自定义拦截器来实现缓存功能。</p>
+<h3 id="2-定义拦截器"><a href="#2-定义拦截器" class="headerlink" title="2. 定义拦截器"></a>2. 定义拦截器</h3><p>版本：<code>Retrofit: 2.1.0</code> +<code>Okhttp 3.3.0</code>：<br>首先，判断是否有网，有网时请求数据，并保存到缓存中，无网时读取缓存。要使用到CacheControl类，该类主要负责缓存策略的控制，主要有以下策略：</p>
+<ul>
+<li>FORCE_CACHE ：只走缓存</li>
+<li>FORCE_NETWORK ：只走网路</li>
+</ul>
+<p><strong>定义拦截器：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//拦截器：</span></div><div class="line">   Interceptor interceptor = <span class="keyword">new</span> Interceptor() &#123;</div><div class="line">       <span class="meta">@Override</span></div><div class="line">       <span class="keyword">public</span> okhttp3.<span class="function">Response <span class="title">intercept</span><span class="params">(Chain chain)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">       	<span class="comment">// 对请求进行拦截：无网络是强制读取缓存</span></div><div class="line">           Request request = chain.request();</div><div class="line">           <span class="keyword">if</span> (!NetworkUtil.hasNetwork(getApplicationContext()))&#123;</div><div class="line">               request = request.newBuilder().cacheControl(CacheControl.FORCE_CACHE)</div><div class="line">                       .build();</div><div class="line">           &#125;</div><div class="line">		<span class="comment">//对响应进行拦截</span></div><div class="line">           <span class="comment">//有网络时，移除header，设置缓存超时时间为1小时</span></div><div class="line">           okhttp3.Response response = chain.proceed(request);</div><div class="line">           <span class="keyword">if</span> (NetworkUtil.hasNetwork(getApplicationContext()))&#123;</div><div class="line">               <span class="keyword">int</span> maxAge = <span class="number">60</span> * <span class="number">60</span>;  			 <span class="comment">//1小时</span></div><div class="line">               response.newBuilder()</div><div class="line">                       .removeHeader(<span class="string">"Pragma"</span>)</div><div class="line">                       .header(<span class="string">"Cache-Control"</span>,<span class="string">"public,max-age="</span>+maxAge)</div><div class="line">                       .build();</div><div class="line">           &#125;<span class="keyword">else</span> &#123;</div><div class="line">           	<span class="comment">//无网络时，缓存时间为1周</span></div><div class="line">               <span class="keyword">int</span> maxScale = <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">7</span>;  <span class="comment">// 1周</span></div><div class="line">               response.newBuilder().removeHeader(<span class="string">"Pragma"</span>)</div><div class="line">                       .header(<span class="string">"Cache-Control"</span>,<span class="string">"public, only-if-cached, max-stale="</span>+maxScale)</div><div class="line">                       .build();</div><div class="line">           &#125;</div><div class="line"></div><div class="line">           <span class="keyword">return</span> response;</div><div class="line">       &#125;</div><div class="line">   &#125;; </div><div class="line">   </div><div class="line">   <span class="comment">//判断是否连接网络</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">hasNetwork</span><span class="params">(Context context)</span></span>&#123;</div><div class="line">   	<span class="keyword">if</span>(context != <span class="keyword">null</span>)&#123;</div><div class="line">           ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);</div><div class="line">           <span class="keyword">if</span> (cm != <span class="keyword">null</span>)&#123;</div><div class="line">               NetworkInfo info = cm.getActiveNetworkInfo();</div><div class="line">               <span class="keyword">if</span> (info != <span class="keyword">null</span>)&#123;</div><div class="line">                   <span class="keyword">return</span> info.isAvailable();</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p><strong>给Okhttp设置拦截器：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//缓存目录</span></div><div class="line">   File cacheFile = <span class="keyword">new</span> File(context.getExternalCacheDir(),<span class="string">"mycache"</span>);</div><div class="line">   <span class="comment">//缓存大小为20M</span></div><div class="line">   Cache cache = <span class="keyword">new</span> Cache(cacheFile, <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">20</span>);</div><div class="line">   <span class="comment">//创建OkhttpClient，添加拦截器和缓存</span></div><div class="line">   OkHttpClient client = <span class="keyword">new</span> OkHttpClient().newBuilder()</div><div class="line">               .addInterceptor(interceptor).cache(cache).build();</div><div class="line">   <span class="comment">//生成Retrofit，并将OkHttpClient对象写入</span></div><div class="line">   Retrofit mRetrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">   				.baseUrl(BaseUrl)</div><div class="line">                   .addConverterFactory(GsonConverterFactory.create())</div><div class="line">                   .client(client)</div><div class="line">                   .build();</div></pre></td></tr></table></figure></p>
+<p>缓存基本实现，运行程序后，会在SdCard中的<code>/Android/data/应用包名/cache/mycache</code>目录下看到缓存文件，当应用卸载后，<code>/Android/data/应用包名/</code>这个目录所有文件被删除，不会留下垃圾信息。在<code>设置----&gt;应用 ----&gt;应用详情里面</code>进行<code>清除缓存</code>也会清理缓存文件，对应上面所说目录。<br>在拦截器中的两个字段<code>max-age</code>和<code>max-stale</code>不是很理解，资料较少，有以下比较：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">max-age</td>
+<td style="text-align:center">强制响应缓存者，根据该值，校验新鲜性。即使用自身的Age值，与请求时间做比较，如果超出max-age，则强制去服务端校验，以确保返回一个新鲜的响应</td>
+</tr>
+<tr>
+<td style="text-align:center">max-stale</td>
+<td style="text-align:center">允许缓存者，发送一个过期不超过指定时间的旧缓存</td>
+</tr>
+</tbody>
+</table>
+<p>即使看了这个比较，对此理解也不是很深刻，如果有那位看到，可以留言讨论下。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/12/Retrofit-OkHttp缓存数据/" class="archive-article-date">
+  	<time datetime="2016-10-12T13:21:43.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-12</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cache/">Cache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/study/">学习总结</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/10/18/Retrofit上传图片/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          使用Retrofit进行图片的上传
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/10/Github文件夹为灰色解决办法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Github文件夹为灰色解决办法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Retrofit-OkHttp缓存数据" data-title="Retrofit+OkHttp缓存数据" data-url="http://www.forecheng.com/2016/10/12/Retrofit-OkHttp缓存数据/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"forecheng"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = '/lpc_embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 forecheng
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+		
+		<div align="center">本站访问次数：<a href="http://www.amazingcounters.com"><img border="0" src="					         						http://cc.amazingcounters.com/counter.php?i=3208359&c=9625390" alt="AmazingCounters.com"></a>
+		</div>
+    </div>
+  </div>
+  
+
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/"
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1f6199cbd2aac445ac86938aa7f24b3c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Cache/" style="font-size: 10px;">Cache</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/Retrofit/" style="font-size: 20px;">Retrofit</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/图片加载库/" style="font-size: 10px;">图片加载库</a> <a href="/tags/流媒体/" style="font-size: 10px;">流媒体</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.androidweekly.cn/">Android开发技术周报</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">Github</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yuebinyun.github.io/">Ban大神</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://about.me/lpctjut/">About me</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Android应用开发者&lt;br&gt;浙江-杭州&lt;br&gt;&lt;br&gt;&lt;br&gt;我们虽平凡，&lt;br&gt;但不平庸，&lt;br&gt;做一个能不停告诉自己前进的人，&lt;br&gt;一步一个脚印。&lt;br&gt;&lt;br&gt;&lt;br&gt;Keep on Learning</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
