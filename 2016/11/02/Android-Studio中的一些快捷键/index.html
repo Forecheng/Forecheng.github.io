@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://www.forecheng.com/2016/11/02/Android-Studio中的一些快捷键/index.html">
 <meta property="og:site_name" content="Forecheng's Site">
 <meta property="og:description" content="Log 打印生成类的TAG：logt1private static final String TAG = &quot;MainActivity&quot;;">
-<meta property="og:updated_time" content="2016-11-02T13:53:48.854Z">
+<meta property="og:updated_time" content="2016-11-08T13:22:28.016Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Studio中的一些快捷键">
 <meta name="twitter:description" content="Log 打印生成类的TAG：logt1private static final String TAG = &quot;MainActivity&quot;;">
@@ -171,10 +171,34 @@
 <a id="more"></a>
 <p>在方法中打印日志：<strong><code>logd</code></strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Log.d(TAG, <span class="string">"onCreate: "</span>);</div></pre></td></tr></table></figure></p>
 <p>在方法中打印方法名和参数信息：<strong><code>logm</code></strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Log.d(TAG, <span class="string">"onCreate() called with: "</span> + <span class="string">"savedInstanceState = ["</span> + savedInstanceState + <span class="string">"]"</span>);</div></pre></td></tr></table></figure></p>
+<p>还有<code>loge</code>、<code>logi</code>、<code>logr</code>、<code>logw</code>。</p>
 <h3 id="代码的移动"><a href="#代码的移动" class="headerlink" title="代码的移动"></a>代码的移动</h3><p>代码提示：<strong><code>ctrl + alt + 空格</code></strong><br>代码行上移/下移：<strong><code>ctrl + shift + up/down</code></strong><br>复制代码行到下一行：<strong><code>ctrl + D</code></strong><br>剪切一行代码：<strong><code>ctrl + X</code></strong><br>删除一行代码：<strong><code>ctrl + Y</code></strong><br>光标在方法上移动：<strong><code>alt + up/down</code></strong></p>
 <h3 id="代码查看"><a href="#代码查看" class="headerlink" title="代码查看"></a>代码查看</h3><p>打开一个类：<strong><code>ctrl + N</code></strong><br>打开一个文件：<strong><code>ctrl + shift + N</code></strong><br>查看类的声明：<strong><code>ctrl + B</code></strong><br>查看父类：<strong><code>ctrl + U</code></strong><br>查看方法的调用：<strong><code>ctrl + alt + H</code></strong><br>在类中查看方法的实现：<strong><code>ctrl + shift + I</code></strong><br>查看类的继承结构：<strong><code>ctrl + H</code></strong><br>工程面板的显示与隐藏：<strong><code>alt + 数字1</code></strong><br>查看一个类中的所有方法：<strong><code>ctrl + F12</code></strong><br>查看父类中的方法并选择复写：<strong><code>ctrl + O</code></strong></p>
 <p>代码块生成：<strong><code>ctrl + J</code></strong><br>查找：<strong><code>ctrl + F</code></strong><br>替换：<strong><code>ctrl + R</code></strong><br>打开最近的模板：<strong><code>ctrl + E</code></strong></p>
 <p>根据自身使用习惯，也可以在<em>Android Studio</em>的 <strong><code>File --&gt; Settings ---&gt; keymap</code></strong> 中改变默认的快捷键，来提高开发效率。</p>
+<h3 id="快捷代码块"><a href="#快捷代码块" class="headerlink" title="快捷代码块"></a>快捷代码块</h3><ol>
+<li><p><strong><code>fori</code></strong> 和 <strong><code>foreach</code></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ; i++) &#123;</div><div class="line">           </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>.null</code></strong> 和 <strong><code>.nn</code></strong>：在变量名后面使用，快捷检测是否为null。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Bundle bundle = getIntent().getExtras();</div><div class="line"><span class="keyword">if</span> (bundle == <span class="keyword">null</span>) &#123;</div><div class="line">           </div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="keyword">if</span> (bundle != <span class="keyword">null</span>) &#123;</div><div class="line">           </div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>const</code></strong> 随机生成一个符合android style的final int，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span>  = <span class="number">181</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>key</code></strong> 生成一个以<strong>KEY_</strong> 开头的final String</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_ = <span class="string">""</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>fbc</code></strong> 快捷生成<strong>findViewById</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">() findViewById(R.id.);</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>visible</code></strong> 和 <strong><code>gone</code></strong> :</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Button myBut =  <span class="keyword">new</span> Button(<span class="keyword">this</span>);</div><div class="line">.setVisibility(View.GONE);</div><div class="line">.setVisibility(View.VISIBLE);</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>starter</code></strong> 和 <strong><code>newInstance</code></strong> :</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        Intent starter = <span class="keyword">new</span> Intent(context, 			   			Main2Activity.class);</div><div class="line">        starter.putExtra();</div><div class="line">        context.startActivity(starter);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">//------------------------------//</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Fragment <span class="title">newInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        </div><div class="line">        Bundle args = <span class="keyword">new</span> Bundle();</div><div class="line">        </div><div class="line">        Fragment fragment = <span class="keyword">new</span> Fragment();</div><div class="line">        fragment.setArguments(args);</div><div class="line">        <span class="keyword">return</span> fragment;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
     </div>
@@ -339,6 +363,8 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
+
+
 
 
 
