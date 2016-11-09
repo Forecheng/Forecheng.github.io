@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Android后台定时任务分析 | Forecheng&#39;s Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说到后台定时任务，首先想到的是用service + Timer来实现，在service中启动定时器，在定时器中执行任务，但这种方式存在一个问题，就是定时任务间隔时间较长时，后台service很容易被Android 系统kill掉，主要是因为Android自带的内存清理，内存不足时就会被kill，这样我们的任务肯定不能定时执行，达不到想要的结果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android后台定时任务分析">
+<meta property="og:url" content="http://www.forecheng.com/2016/11/09/Android后台定时任务分析/index.html">
+<meta property="og:site_name" content="Forecheng's Site">
+<meta property="og:description" content="说到后台定时任务，首先想到的是用service + Timer来实现，在service中启动定时器，在定时器中执行任务，但这种方式存在一个问题，就是定时任务间隔时间较长时，后台service很容易被Android 系统kill掉，主要是因为Android自带的内存清理，内存不足时就会被kill，这样我们的任务肯定不能定时执行，达不到想要的结果。">
+<meta property="og:image" content="http://www.forecheng.com/images/notification.png">
+<meta property="og:updated_time" content="2016-11-09T15:29:44.649Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android后台定时任务分析">
+<meta name="twitter:description" content="说到后台定时任务，首先想到的是用service + Timer来实现，在service中启动定时器，在定时器中执行任务，但这种方式存在一个问题，就是定时任务间隔时间较长时，后台service很容易被Android 系统kill掉，主要是因为Android自带的内存清理，内存不足时就会被kill，这样我们的任务肯定不能定时执行，达不到想要的结果。">
+<meta name="twitter:image" content="http://www.forecheng.com/images/notification.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Forecheng&#39;s Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/site_f.png">
+  
+  <script src="/style.js"></script>
+  
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/superAndroid.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">forecheng</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">一步一个脚印</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/archives">所有文章</a></li>
+	        
+				<li><a href="/categories/study">学习总结</a></li>
+	        
+				<li><a href="/categories/record">生活记录</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Forecheng" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="mailto:lpctjut@163.com" title="mail">mail</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">forecheng</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/superAndroid.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">forecheng</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">一步一个脚印</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/study">学习总结</a></li>
+		        
+					<li><a href="/categories/record">生活记录</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Forecheng" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="mailto:lpctjut@163.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Android后台定时任务分析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android后台定时任务分析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+	  
+	<div id="toc" class="toc-article">
+		<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Timer执行定时任务"><span class="toc-text">使用Timer执行定时任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AlarmManager"><span class="toc-text">AlarmManager</span></a></li></ol>
+	</div>
+	
+	
+        <p>说到后台定时任务，首先想到的是用service + Timer来实现，在service中启动定时器，在定时器中执行任务，但这种方式存在一个问题，就是定时任务间隔时间较长时，后台service很容易被Android 系统kill掉，主要是因为Android自带的内存清理，内存不足时就会被kill，这样我们的任务肯定不能定时执行，达不到想要的结果。<br><a id="more"></a><br>为了解决这种问题，可以使用 <strong><code>前台服务</code></strong>，这种服务一直保持运行状态，不会由于内存不足被回收，它与service的最大区别在于，它会一直显示在系统的状态栏，和notification的效果很相似。</p>
+<h3 id="使用Timer执行定时任务"><a href="#使用Timer执行定时任务" class="headerlink" title="使用Timer执行定时任务"></a>使用Timer执行定时任务</h3><p>一个很简单的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Description:</div><div class="line"> * Created by L02465 on 2016.11.09.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ONGOING_ID = <span class="number">1</span>;</div><div class="line">    <span class="keyword">private</span> Timer mTimer;</div><div class="line">    <span class="meta">@Nullable</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;</div><div class="line"></div><div class="line">        startTimer();</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onStartCommand(intent, flags, startId);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startTimer</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (mTimer == <span class="keyword">null</span>) &#123;</div><div class="line">            mTimer = <span class="keyword">new</span> Timer();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        mTimer.schedule(<span class="keyword">new</span> TimerTask() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                showNotification();</div><div class="line">            &#125;</div><div class="line">        &#125;,<span class="number">1000</span>,<span class="number">1000</span> * <span class="number">60</span> * <span class="number">1</span>);   <span class="comment">//1s之后 每隔5分钟运行一次</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDestroy();</div><div class="line">        stopForeground(<span class="keyword">true</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showNotification</span><span class="params">()</span></span>&#123;</div><div class="line">    	<span class="comment">//点击通知进行跳转</span></div><div class="line">        Intent toMain = <span class="keyword">new</span> Intent(<span class="keyword">this</span>,MainActivity.class);</div><div class="line">        PendingIntent pi = PendingIntent.getActivity(<span class="keyword">this</span>,<span class="number">0</span>,toMain, PendingIntent.FLAG_UPDATE_CURRENT);</div><div class="line">        Notification notification = <span class="keyword">new</span> Notification.Builder(<span class="keyword">this</span>)</div><div class="line">                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))</div><div class="line">                .setSmallIcon(R.drawable.ic_cached_black_24dp)</div><div class="line">                .setContentIntent(pi)</div><div class="line">                .setContentTitle(<span class="string">"Hello:"</span>)</div><div class="line">                .setContentText(<span class="string">"快起来走动走动，不然对身体不好..."</span>)</div><div class="line">                .setDefaults(Notification.DEFAULT_VIBRATE)</div><div class="line">                .build();</div><div class="line"></div><div class="line">        startForeground(ONGOING_ID,notification);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果：<br><img src="/images/notification.png" alt="运行结果"><br>主要是调用了<code>startForeground()</code>，会让service变成一个前台服务，并在状态栏显示出来。调用<code>stopForeground(true);</code>停止前台服务，会让状态栏的显示取消掉。<br><strong>但会发现一个问题，连接USB进行调试，按下电源键锁屏状态下运行正常，当拔掉USB线，锁屏下会出现没有按时进行通知的情况</strong></p>
+<h3 id="AlarmManager"><a href="#AlarmManager" class="headerlink" title="AlarmManager"></a>AlarmManager</h3><blockquote>
+<p>Android中的一种系统级别的提示服务，在特定的时间广播一个指定的Intent，可以实现从指定时间开始，以一个固定的时间间隔去执行某项操作。同样可以当做一个定时器去使用。<br>（1）可以在指定时长后去执行某项操作<br>（2）可以周期性的执行某项操作</p>
+</blockquote>
+<p> <strong>AlarmManager 使用</strong></p>
+<p>指定时长后执行某项操作：5分钟之后去开启另一个服务<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startAlarm</span><span class="params">()</span></span>&#123;</div><div class="line">        AlarmManager manager = (AlarmManager)getSystemService(ALARM_SERVICE);</div><div class="line">        <span class="keyword">int</span> minutes = <span class="number">1000</span> * <span class="number">60</span> * <span class="number">5</span>;  <span class="comment">// 5minutes</span></div><div class="line">        Intent toReceiver = <span class="keyword">new</span> Intent(<span class="keyword">this</span>,MyService.class);</div><div class="line">        PendingIntent pi = PendingIntent.getService(<span class="keyword">this</span>,<span class="number">0</span>,toReceiver,<span class="number">0</span>);</div><div class="line">        <span class="keyword">long</span> firstTime = SystemClock.elapsedRealtime() + minutes;</div><div class="line">        manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,firstTime,pi);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>周期性的执行某项操作：每隔5分钟开启另一个服务<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startAlarm</span><span class="params">()</span></span>&#123;</div><div class="line">        AlarmManager manager = (AlarmManager)getSystemService(ALARM_SERVICE);</div><div class="line">        <span class="keyword">int</span> minutes = <span class="number">1000</span> * <span class="number">60</span> * <span class="number">5</span>;  <span class="comment">// 5minutes</span></div><div class="line">        Intent toService = <span class="keyword">new</span> Intent(<span class="keyword">this</span>,NoticeService.class);</div><div class="line">        PendingIntent pi = PendingIntent.getService(<span class="keyword">this</span>,<span class="number">0</span>,toService,<span class="number">0</span>);</div><div class="line">        <span class="keyword">long</span> firstTime = SystemClock.elapsedRealtime();</div><div class="line">        manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,firstTime,minutes,pi);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>通过这样的方式，在新的服务NoticeService中，执行通知的代码，拔掉USB线并锁屏，会发现每隔5分钟会按时进行通知。AlarmManager的setRepeating()方法和Timer的Schedule(task,delay,peroid)类似。<br>也可以定时进行广播，这种用的比较多，在广播接收器中执行操作：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> Intent toReceiver = <span class="keyword">new</span> Intent(<span class="keyword">this</span>,MyBroadcast.class);</div><div class="line">PendingIntent pi = PendingIntent.getBroadcast(<span class="keyword">this</span>,<span class="number">0</span>,toReceiver,<span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p> <strong>AlarmManager取消</strong><br>需要注意的是取消的Intent必须与启动Intent保持绝对一致才能取消AlarmManager<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);</div><div class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>,NoticeService.class);</div><div class="line">PendingIntent pi = PendingIntent.getService(<span class="keyword">this</span>,<span class="number">0</span>,intent,<span class="number">0</span>);</div><div class="line">manager.cancel(pi);</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/09/Android后台定时任务分析/" class="archive-article-date">
+  	<time datetime="2016-11-09T15:02:11.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-09</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/study/">学习总结</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/11/02/Android-Studio中的一些快捷键/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android Studio中的一些快捷键</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android后台定时任务分析" data-title="Android后台定时任务分析" data-url="http://www.forecheng.com/2016/11/09/Android后台定时任务分析/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"forecheng"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = '/lpc_embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 forecheng
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+		
+		<div align="center">本站访问次数：<a href="http://www.amazingcounters.com"><img border="0" src="					         						http://cc.amazingcounters.com/counter.php?i=3208359&c=9625390" alt="AmazingCounters.com"></a>
+		</div>
+    </div>
+  </div>
+  
+
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/"
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1f6199cbd2aac445ac86938aa7f24b3c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Cache/" style="font-size: 10px;">Cache</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/Retrofit/" style="font-size: 15px;">Retrofit</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/图片加载库/" style="font-size: 10px;">图片加载库</a> <a href="/tags/流媒体/" style="font-size: 10px;">流媒体</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.androidweekly.cn/">Android开发技术周报</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">Github</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yuebinyun.github.io/">Ban大神</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://about.me/lpctjut/">About me</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://cn.bing.com/">Bing</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://open.163.com/">网易公开课</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.iplaysoft.com/">异次元软件世界</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.devstore.cn/">Dev Store</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.lagou.com/">拉勾网</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.android-studio.org/">Android studio中文社区</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.w3school.com.cn/">w3School</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com">简书</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Android应用开发者&lt;br&gt;浙江-杭州&lt;br&gt;&lt;br&gt;&lt;br&gt;我们虽平凡，&lt;br&gt;但不平庸，&lt;br&gt;做一个能不停告诉自己前进的人，&lt;br&gt;一步一个脚印。&lt;br&gt;&lt;br&gt;&lt;br&gt;Keep on Learning</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
