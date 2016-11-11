@@ -167,7 +167,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>说到后台定时任务，首先想到的是用service + Timer来实现，在service中启动定时器，在定时器中执行任务，但这种方式存在一个问题，就是定时任务间隔时间较长时，后台service很容易被Android 系统kill掉，主要是因为Android自带的内存清理，内存不足时就会被kill，这样我们的任务肯定不能定时执行，达不到想要的结果。<br>
+        <p>实现在后台能够稳定的周期性的发送通知，在锁屏状态下收到通知后亮屏。<br>说到后台定时任务，首先想到的是用<code>Service + Timer</code>组合来实现，在Service中启动定时器，在定时器中执行任务，但这种方式存在一个问题，就是定时任务间隔时间较长时，后台Service很容易被Android 系统kill掉，主要是因为Android自带的内存清理，内存不足时就会被kill，这样任务肯定不能定时执行，达不到想要的结果。<br>
         <p class="article-more-link">
           <a  href="/2016/11/09/Android后台定时任务分析/#more">more >></a>
         </p>
