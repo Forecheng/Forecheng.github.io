@@ -1,181 +1,402 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+<!doctype html>
+
+
+
   
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>图片加载库Glide学习总结 | Forecheng&#39;s Site</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近的项目需要加载图片，小白就上网寻找这方面的资料，项目的架构为MVP+Retrofit，典型的网络数据请求,看了比较多的资料，于是决定使用Glide,因为数据的呈现方式都是使用ListView,用了才知道该库很牛,于是对接触到的知识点稍微">
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,Glide,图片加载库," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="最近的项目需要加载图片，小白就上网寻找这方面的资料，项目的架构为MVP+Retrofit，典型的网络数据请求,看了比较多的资料，于是决定使用Glide,因为数据的呈现方式都是使用ListView,用了才知道该库很牛,于是对接触到的知识点稍微">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图片加载库Glide学习总结">
 <meta property="og:url" content="http://www.forecheng.com/2016/10/08/图片加载库Glide学习总结/index.html">
 <meta property="og:site_name" content="Forecheng's Site">
 <meta property="og:description" content="最近的项目需要加载图片，小白就上网寻找这方面的资料，项目的架构为MVP+Retrofit，典型的网络数据请求,看了比较多的资料，于是决定使用Glide,因为数据的呈现方式都是使用ListView,用了才知道该库很牛,于是对接触到的知识点稍微">
-<meta property="og:updated_time" content="2016-10-11T13:36:59.220Z">
+<meta property="og:updated_time" content="2016-11-13T00:39:52.928Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图片加载库Glide学习总结">
 <meta name="twitter:description" content="最近的项目需要加载图片，小白就上网寻找这方面的资料，项目的架构为MVP+Retrofit，典型的网络数据请求,看了比较多的资料，于是决定使用Glide,因为数据的呈现方式都是使用ListView,用了才知道该库很牛,于是对接触到的知识点稍微">
-  
-    <link rel="alternative" href="/atom.xml" title="Forecheng&#39;s Site" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/site_f.png">
-  
-  <script src="/style.js"></script>
-  
 
 
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6329360835302917000',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.forecheng.com/2016/10/08/图片加载库Glide学习总结/"/>
+
+
+
+
+
+  <title> 图片加载库Glide学习总结 | Forecheng's Site </title>
 </head>
 
-<body>
-  <div id="container">
-    <div class="left-col">
-      <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img src="/superAndroid.jpg" class="js-avatar">
-			
-		</a>
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">forecheng</a></h1>
-		</hgroup>
+  
 
-		
-		<p class="header-subtitle">一步一个脚印</p>
-		
 
-		<nav class="header-menu">
-			<ul>
-			
-				<li><a href="/archives">所有文章</a></li>
-	        
-				<li><a href="/categories/study">学习总结</a></li>
-	        
-				<li><a href="/categories/record">生活记录</a></li>
-	        
-			</ul>
-		</nav>
-		<nav class="header-smart-menu">
-	        
-    		
-    			
-    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
-    			
-    			
-            
-    			
-    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
-    			
-    			
-            
-    			
-    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
-    			
-    			
-            
-    			
-    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
-    			
-    			
-            
-		</nav>
-		<nav class="header-nav">
-			<div class="social">
-				
-					<a class="github" target="_blank" href="https://github.com/Forecheng" title="github">github</a>
-		        
-					<a class="weibo" target="_blank" href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
-		        
-					<a class="mail" target="_blank" href="mailto:lpctjut@163.com" title="mail">mail</a>
-		        
-					<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
-		        
-			</div>
-		</nav>
-	</header>		
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?1f6199cbd2aac445ac86938aa7f24b3c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Forecheng's Site</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">学习总结，思考感悟</p>
 </div>
 
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
     </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"><i class="icon-list"></i></div>
-  		<h1 class="header-author js-mobile-header hide">forecheng</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				
-					<img src="/superAndroid.jpg" class="js-avatar">
-				
-			</div>
-			<hgroup>
-			  <h1 class="header-author">forecheng</h1>
-			</hgroup>
-			
-			<p class="header-subtitle">一步一个脚印</p>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/archives">所有文章</a></li>
-		        
-					<li><a href="/categories/study">学习总结</a></li>
-		        
-					<li><a href="/categories/record">生活记录</a></li>
-		        
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="github" target="_blank" href="https://github.com/Forecheng" title="github">github</a>
-			        
-						<a class="weibo" target="_blank" href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
-			        
-						<a class="mail" target="_blank" href="mailto:lpctjut@163.com" title="mail">mail</a>
-			        
-						<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%B9%8F%E7%A8%8B-%E5%88%98-73a786124?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
+  
 </nav>
 
-      <div class="body-wrap">
-        <article id="post-图片加载库Glide学习总结" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      图片加载库Glide学习总结
-    </h1>
+
   
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.forecheng.com/2016/10/08/图片加载库Glide学习总结/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="forecheng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Forecheng's Site">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Forecheng's Site" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                图片加载库Glide学习总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-08T11:13:31+08:00">
+              2016-10-08
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-13T08:39:52+08:00">
+              2016-11-13
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习总结/" itemprop="url" rel="index">
+                    <span itemprop="name">学习总结</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/08/图片加载库Glide学习总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/08/图片加载库Glide学习总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+          
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
-	  
-	<div id="toc" class="toc-article">
-		<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-几个库的简单比较"><span class="toc-text">1. 几个库的简单比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-配置Glide"><span class="toc-text">2. 配置Glide</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-使用Glide"><span class="toc-text">3. 使用Glide</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-设置占位图片"><span class="toc-text">3.1 设置占位图片</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-placehold"><span class="toc-text">1. placehold</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-error"><span class="toc-text">2. error</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-图片的调整"><span class="toc-text">3.2 图片的调整</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-加载的动画"><span class="toc-text">3.3 加载的动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-加载Gif动态图"><span class="toc-text">3.4 加载Gif动态图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-加载优先级"><span class="toc-text">3.5 加载优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-加载目标Target"><span class="toc-text">3.6 加载目标Target</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-缓存策略"><span class="toc-text">3.7 缓存策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-缓存的动态清理"><span class="toc-text">3.8 缓存的动态清理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-结合列表视图的使用"><span class="toc-text">4. 结合列表视图的使用</span></a></li></ol>
-	</div>
-	
-	
+      
+
+      
         <p>最近的项目需要加载图片，小白就上网寻找这方面的资料，项目的架构为<code>MVP+Retrofit</code>，典型的网络数据请求,看了比较多的资料，于是决定使用Glide,因为数据的呈现方式都是使用ListView,用了才知道该库很牛,于是对接触到的知识点稍微<a id="more"></a>归纳一下，整理学习。</p>
 <p>图片加载一直是一个比较棘手的事情，俗话说就是<code>“坑”</code>比较多，于是就google了一下这方面的库，有很多图片库，例如Picasso, Universal-Image-Loader,Fresco,Glide等，这些库都是很火的，使用量很大的图片库， 他们各有优点，不能评说那一个不好，根据项目的需求适当选择。</p>
-<h2 id="1-几个库的简单比较"><a href="#1-几个库的简单比较" class="headerlink" title="1. 几个库的简单比较"></a>1. 几个库的简单比较</h2><ul>
+<h2 id="几个库的简单比较"><a href="#几个库的简单比较" class="headerlink" title="几个库的简单比较"></a>几个库的简单比较</h2><ul>
 <li><strong>Picasso：</strong>是Square出品的图片库，当然是很厉害的，该公司还有响当当的<code>Okhttp</code>和<code>Retrofit</code>，都是很牛逼的网络请求库,搭配使用效果可能更好一些，之所以这么说是因为Picasso可以将网络请求到的数据缓存交给Okhttp来处理。</li>
 <li><strong>Universal-Image-Loader：</strong>一个强大的图片加载库，包含的配置比较多，使用很广泛，很老牌。</li>
 <li><strong>Fresco：</strong>是Facebook出品的，也超强大。从知乎问答下看到该库最大的优点是5.0以下（最低2.3）的bitmap加载，在5.0以下，会将图片放到一个特别的内存存储区，称为：<code>Ashmem区</code>，在图片不显示的时候也会自动清除内存（这个是必须的），使得App更加流畅，减少图片内存占用引发的内存不足（OOM）。</li>
@@ -184,10 +405,10 @@
 </ul>
 <p>网上关于<code>Picasso</code>和<code>Glide</code>性能进行比较的文章挺多，不过遗憾的是，大多数都是抄来抄去的，比较清晰的是这篇：<a href="http://blog.csdn.net/sam_zhang1984/article/details/48524893" target="_blank" rel="external">Google推荐的图片加载库Glide介绍</a>，<code>Picasso</code>和<code>Glide</code>的使用极其相似，但也有不少细节上的区别，看了这篇文章可以大致了解一二。</p>
 <p>现在整理一下<code>Glide</code>的使用：</p>
-<h2 id="2-配置Glide"><a href="#2-配置Glide" class="headerlink" title="2. 配置Glide"></a>2. 配置Glide</h2><p>在Module根目录下的build.gradle中进行库依赖：</p>
+<h2 id="配置Glide"><a href="#配置Glide" class="headerlink" title="配置Glide"></a>配置Glide</h2><p>在Module根目录下的build.gradle中进行库依赖：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">def def latestVersion = <span class="string">'3.7.0'</span></div><div class="line">dependencies &#123;</div><div class="line">	compile <span class="string">'com.github.bumptech.glide:glide:$latestVersion'</span></div><div class="line">    compile <span class="string">'com.android.support:support-v4:19.1.0'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Glide需要依赖Support Library v4。<br>然后同步一下代码build successful,就可以使用Glide了。</p>
-<h2 id="3-使用Glide"><a href="#3-使用Glide" class="headerlink" title="3. 使用Glide"></a>3. 使用Glide</h2><p>使用下面一段代码就能实现图片加载，看起来极其简单方便：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//图片的url</span></div><div class="line"><span class="keyword">private</span> String image_url = <span class="string">"https://www.image.com/myimage?id=1"</span>;</div><div class="line"><span class="keyword">private</span> ImageView imageView = (ImageView)<span class="keyword">super</span>.findViewById(R.id.image);</div><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure></p>
+<h2 id="使用Glide"><a href="#使用Glide" class="headerlink" title="使用Glide"></a>使用Glide</h2><p>使用下面一段代码就能实现图片加载，看起来极其简单方便：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//图片的url</span></div><div class="line"><span class="keyword">private</span> String image_url = <span class="string">"https://www.image.com/myimage?id=1"</span>;</div><div class="line"><span class="keyword">private</span> ImageView imageView = (ImageView)<span class="keyword">super</span>.findViewById(R.id.image);</div><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure></p>
 <p>用这段代码就可以将url所表示的图片装到ImageView显示出来，是不是很爽呢？<br>with里面的参数相比Picasso不仅仅接受上下文Context对象，还可以是<code>Activity</code>，<code>Fragment</code>，<code>FragmentActivity</code>等，这样可以更好的让加载图片的请求与生命周期动态管理起来。Glide不仅仅支持加载网络图片，还支持以下几种加载方式：</p>
 <ul>
 <li>加载资源文件：<code>DrawableTypeRequest&lt;Integer&gt; load(Integer resourceId)</code></li>
@@ -204,13 +425,13 @@
 <ul>
 <li>String加载：<code>DrawableTypeRequest&lt;String&gt; load(String string)</code></li>
 </ul>
-<h3 id="3-1-设置占位图片"><a href="#3-1-设置占位图片" class="headerlink" title="3.1 设置占位图片"></a>3.1 设置占位图片</h3><h4 id="1-placehold"><a href="#1-placehold" class="headerlink" title="1. placehold"></a>1. placehold</h4><p>图片加载并不是很实时的，加载成功的时间是不确定的，在加载时，可以设置一个图片显示在ImageView上进行一些<code>正在加载...</code>提示等等。</p>
+<h3 id="设置占位图片"><a href="#设置占位图片" class="headerlink" title="设置占位图片"></a>设置占位图片</h3><h4 id="placehold"><a href="#placehold" class="headerlink" title="placehold"></a>placehold</h4><p>图片加载并不是很实时的，加载成功的时间是不确定的，在加载时，可以设置一个图片显示在ImageView上进行一些<code>正在加载...</code>提示等等。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .placehold(R.drawable.loading)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
-<h4 id="2-error"><a href="#2-error" class="headerlink" title="2. error"></a>2. error</h4><p>在加载网络图片时，如果突然网络断掉，肯定加载不到正确的图片，这时可以设置一个错误图片到ImageView,提示用户加载失败。</p>
+<h4 id="error"><a href="#error" class="headerlink" title="error"></a>error</h4><p>在加载网络图片时，如果突然网络断掉，肯定加载不到正确的图片，这时可以设置一个错误图片到ImageView,提示用户加载失败。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .error(R.drawable.loaderror)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
 <p>当然，也可以给Glide设置监听，当图片加载失败时，可以知道为什么加载失败了。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置加载图片错误时的监听</span></div><div class="line">RequestListener&lt;String,GlideDrawable&gt; loadErrorListener = <span class="keyword">new</span> RequestListener&lt;String,GlideDrawable&gt;()&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onException</span><span class="params">(Exception e,String model,Target&lt;GlideDrawable&gt; target,<span class="keyword">boolean</span> isFirstResource)</span></span>&#123;</div><div class="line">    	<span class="comment">//加载异常时回调</span></div><div class="line">        Log.e(TAG,<span class="string">"exception:"</span> + e.toString);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onResourceReady</span><span class="params">(GlideDrawable resource,String model,Target&lt;GlideDrawable&gt; target,<span class="keyword">boolean</span> isFromMemoryCache,<span class="keyword">boolean</span> isFirstResource)</span></span>&#123;</div><div class="line">    	<span class="comment">//加载成功时的回调</span></div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .listener(loadErrorListener)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
-<h3 id="3-2-图片的调整"><a href="#3-2-图片的调整" class="headerlink" title="3.2 图片的调整"></a>3.2 图片的调整</h3><p>Glide加载图片大小根据ImageView尺寸自动调整的，在缓存的时候也是按照图片大小进行缓存，每一种尺寸都会保留一份缓存。<br>并且可以调用override(int width,int height)在图片显示到ImageView之前改变图片大小，width和height的单位都是<code>px</code>。</p>
+<h3 id="图片的调整"><a href="#图片的调整" class="headerlink" title="图片的调整"></a>图片的调整</h3><p>Glide加载图片大小根据ImageView尺寸自动调整的，在缓存的时候也是按照图片大小进行缓存，每一种尺寸都会保留一份缓存。<br>并且可以调用override(int width,int height)在图片显示到ImageView之前改变图片大小，width和height的单位都是<code>px</code>。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .override(<span class="number">64</span>,<span class="number">64</span>)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
 <p><strong>缩放</strong>：Glide提供了两种图形转换的标准选项：<code>centerCrop()</code>和<code>fitCenter</code>；</p>
 <ul>
@@ -228,19 +449,19 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlideRoundTransform</span> <span class="keyword">extends</span> <span class="title">BitmapTransformation</span></span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> Bitmap <span class="title">transform</span><span class="params">(BitmapPool pool,Bitmap toTransform,<span class="keyword">int</span> outWidth,<span class="keyword">int</span> outHeight)</span></span>&#123;</div><div class="line">    	<span class="comment">//转换处理</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span></span>&#123;</div><div class="line">    	<span class="keyword">return</span> getClass().getName + Math.random();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .transform(<span class="keyword">new</span> GlideRoundTransform())</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
 <p>当图片需要多个转换时，将每种的转换类对象传入到transform()即可。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .transform(<span class="keyword">new</span> GlideRoundTransform(<span class="keyword">this</span>),<span class="keyword">new</span> GlideOtherTransform(<span class="keyword">this</span>))</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
-<h3 id="3-3-加载的动画"><a href="#3-3-加载的动画" class="headerlink" title="3.3 加载的动画"></a>3.3 加载的动画</h3><p>为了使图片平滑的加载到ImageView，可以设置加载的动画效果，最新的api已经默认实现了一个渐入渐出的动画效果，默认时间300ms，也可以使用<code>crossFade</code>，它接受无参或者一个int型的参数，用来指定动画执行的时间。</p>
+<h3 id="加载的动画"><a href="#加载的动画" class="headerlink" title="加载的动画"></a>加载的动画</h3><p>为了使图片平滑的加载到ImageView，可以设置加载的动画效果，最新的api已经默认实现了一个渐入渐出的动画效果，默认时间300ms，也可以使用<code>crossFade</code>，它接受无参或者一个int型的参数，用来指定动画执行的时间。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .crossFade(<span class="number">2000</span>)    <span class="comment">//2s</span></div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
 <p>如果渐入渐出的动画效果不满意，可以自定义动画，使用<code>animate()</code>即可，它接受动画的资源id和动画类对象。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">	.animate(R.anim.myAnim)</div><div class="line">    <span class="comment">//.animate(new MyAnimation())</span></div><div class="line">	.into(imageView);</div></pre></td></tr></table></figure>
 <p>如果不想使用任何动画，直接将图片显示出来，则使用<code>dontAnimate()</code>方法。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .dontAnimate()    </div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
-<h3 id="3-4-加载Gif动态图"><a href="#3-4-加载Gif动态图" class="headerlink" title="3.4 加载Gif动态图"></a>3.4 加载Gif动态图</h3><p>加载Gif动态图是Glide的一个亮点，也是将gif动态图的url传入load即可加载，Glide还提供了Gif相关的两个方法：<code>asBitmap()</code>和<code>asGif()</code>;</p>
+<h3 id="加载Gif动态图"><a href="#加载Gif动态图" class="headerlink" title="加载Gif动态图"></a>加载Gif动态图</h3><p>加载Gif动态图是Glide的一个亮点，也是将gif动态图的url传入load即可加载，Glide还提供了Gif相关的两个方法：<code>asBitmap()</code>和<code>asGif()</code>;</p>
 <ul>
 <li>asBitmap()：将gif图的第一帧显示出来</li>
 <li>asGif()：严格显示成gif，当传入的Url不是gif的url时，则按错误处理，可以检查load参数是否为gif。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(imageUrl)</div><div class="line">    .asBitmap()</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
-<h3 id="3-5-加载优先级"><a href="#3-5-加载优先级" class="headerlink" title="3.5 加载优先级"></a>3.5 加载优先级</h3><p>设置图片加载的顺序，有以下几种优先级：</p>
+<h3 id="加载优先级"><a href="#加载优先级" class="headerlink" title="加载优先级"></a>加载优先级</h3><p>设置图片加载的顺序，有以下几种优先级：</p>
 <ul>
 <li>Priority.LOW</li>
 <li>Priority.NORMAL</li>
@@ -248,10 +469,10 @@
 <li>Priority.IMMEDIATE</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">.load(image_url)</div><div class="line">   .priority(Priority.NORMAL)    </div><div class="line">   .into(imageView);</div></pre></td></tr></table></figure>
-<h3 id="3-6-加载目标Target"><a href="#3-6-加载目标Target" class="headerlink" title="3.6 加载目标Target"></a>3.6 加载目标Target</h3><p>Target就是Glide获取资源后作用的目标，一般的ImageView就是目标。</p>
+<h3 id="加载目标Target"><a href="#加载目标Target" class="headerlink" title="加载目标Target"></a>加载目标Target</h3><p>Target就是Glide获取资源后作用的目标，一般的ImageView就是目标。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">SimpleTarget target = <span class="keyword">new</span> SimpleTarget&lt;Drawable&gt;()&#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResourceReady</span><span class="params">(Drawable resource, GlideAnimation&lt;? <span class="keyword">super</span> Drawable&gt; glideAnimation)</span> </span>&#123;</div><div class="line">                textView.setBackground(resource);</div><div class="line">            &#125;</div><div class="line">&#125;;</div><div class="line"> Glide.with(context)</div><div class="line">	.load(image_url)</div><div class="line">    .priority(Priority.NORMAL)    </div><div class="line">    .into(target);</div></pre></td></tr></table></figure>
 <p>这段代码是将TextView作为Target，并将加载到的图片设置为TextView的背景，SimpleTarget接收泛型数据，可以将其更改为其他想要的类型。也可以指定加载的宽度和高度，单位也是<code>px</code>。</p>
-<h3 id="3-7-缓存策略"><a href="#3-7-缓存策略" class="headerlink" title="3.7 缓存策略"></a>3.7 缓存策略</h3><p>几种缓存策略：</p>
+<h3 id="缓存策略"><a href="#缓存策略" class="headerlink" title="缓存策略"></a>缓存策略</h3><p>几种缓存策略：</p>
 <ul>
 <li>DiskCacheStrategy.ALL：缓存源资源和转换后的资源</li>
 <li>DiskCacheStrategy.NONE：什么都不缓存</li>
@@ -261,8 +482,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">	.load(imageUrl)</div><div class="line">    .diskCacheStrategy(DiskCacheStrategy.ALL)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
 <p>跳过内存缓存：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(<span class="keyword">this</span>)</div><div class="line">	.load(imageUrl)</div><div class="line">    .skipMemory(<span class="keyword">true</span>)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
-<h3 id="3-8-缓存的动态清理"><a href="#3-8-缓存的动态清理" class="headerlink" title="3.8 缓存的动态清理"></a>3.8 缓存的动态清理</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Glide.get(<span class="keyword">this</span>).clearDiskCache();      <span class="comment">//清理磁盘缓存，需要在子线程中执行</span></div><div class="line">Glide.get(<span class="keyword">this</span>).clearMemory();			<span class="comment">//清理内存缓存，可以在UI线程中执行</span></div></pre></td></tr></table></figure>
-<h2 id="4-结合列表视图的使用"><a href="#4-结合列表视图的使用" class="headerlink" title="4. 结合列表视图的使用"></a>4. 结合列表视图的使用</h2><p>Glide在滑动加载图片时表现突出，这也是Glide的优势之一，在项目中很可能是在ListView或者RecyclerView中显示加载的图片：</p>
+<h3 id="缓存的动态清理"><a href="#缓存的动态清理" class="headerlink" title="缓存的动态清理"></a>缓存的动态清理</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Glide.get(<span class="keyword">this</span>).clearDiskCache();      <span class="comment">//清理磁盘缓存，需要在子线程中执行</span></div><div class="line">Glide.get(<span class="keyword">this</span>).clearMemory();			<span class="comment">//清理内存缓存，可以在UI线程中执行</span></div></pre></td></tr></table></figure>
+<h2 id="结合列表视图的使用"><a href="#结合列表视图的使用" class="headerlink" title="结合列表视图的使用"></a>结合列表视图的使用</h2><p>Glide在滑动加载图片时表现突出，这也是Glide的优势之一，在项目中很可能是在ListView或者RecyclerView中显示加载的图片：</p>
 <ol>
 <li>在使用ListView进行加载时，可以在Adapter的getView中进行使用</li>
 </ol>
@@ -276,321 +497,592 @@
 
       
     </div>
-    <div class="article-info article-info-index">
+
+    <div>
       
-      <a href="/2016/10/08/图片加载库Glide学习总结/" class="archive-article-date">
-  	<time datetime="2016-10-08T03:13:31.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-08</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Glide/">Glide</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图片加载库/">图片加载库</a></li></ul>
-	</div>
+        
 
       
-	<div class="article-category tagcloud">
-	<i class="icon-price-tags"></i>
-	<a class="article-category-link" href="/categories/study/">学习总结</a>
-	</div>
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
 
 
-      <div class="clearfix"></div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Glide/" rel="tag"># Glide</a>
+          
+            <a href="/tags/图片加载库/" rel="tag"># 图片加载库</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/30/Retrofit入门介绍-1/" rel="next" title="Retrofit入门介绍">
+                <i class="fa fa-chevron-left"></i> Retrofit入门介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/10/Github文件夹为灰色解决办法/" rel="prev" title="Github文件夹为灰色解决办法">
+                Github文件夹为灰色解决办法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
     </div>
   </div>
-</article>
 
-  
-<nav id="article-nav">
-  
-    <a href="/2016/10/10/Github文件夹为灰色解决办法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/08/图片加载库Glide学习总结/"
+           data-title="图片加载库Glide学习总结" data-url="http://www.forecheng.com/2016/10/08/图片加载库Glide学习总结/">
+      </div>
+    
+  </div>
+
+
+        </div>
         
-          Github文件夹为灰色解决办法
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar.jpg"
+               alt="forecheng" />
+          <p class="site-author-name" itemprop="name">forecheng</p>
+          <p class="site-description motion-element" itemprop="description">Keep Learning,Keep Action</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Forecheng" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:lpctjut@163.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-envelope-o"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.androidweekly.cn/" title="androidweekly" target="_blank">androidweekly</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.android-studio.org/" title="Android Studio中文社区" target="_blank">Android Studio中文社区</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://yuebinyun.github.io/" title="Ban Site" target="_blank">Ban Site</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.devstore.cn/" title="Dev Store" target="_blank">Dev Store</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#几个库的简单比较"><span class="nav-number">1.</span> <span class="nav-text">几个库的简单比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Glide"><span class="nav-number">2.</span> <span class="nav-text">配置Glide</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Glide"><span class="nav-number">3.</span> <span class="nav-text">使用Glide</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置占位图片"><span class="nav-number">3.1.</span> <span class="nav-text">设置占位图片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#placehold"><span class="nav-number">3.1.1.</span> <span class="nav-text">placehold</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#error"><span class="nav-number">3.1.2.</span> <span class="nav-text">error</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片的调整"><span class="nav-number">3.2.</span> <span class="nav-text">图片的调整</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载的动画"><span class="nav-number">3.3.</span> <span class="nav-text">加载的动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载Gif动态图"><span class="nav-number">3.4.</span> <span class="nav-text">加载Gif动态图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载优先级"><span class="nav-number">3.5.</span> <span class="nav-text">加载优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载目标Target"><span class="nav-number">3.6.</span> <span class="nav-text">加载目标Target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存策略"><span class="nav-number">3.7.</span> <span class="nav-text">缓存策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存的动态清理"><span class="nav-number">3.8.</span> <span class="nav-text">缓存的动态清理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结合列表视图的使用"><span class="nav-number">4.</span> <span class="nav-text">结合列表视图的使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
-    </a>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">forecheng</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">本站总访问量：<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
   
   
-    <a href="/2016/09/30/Retrofit入门介绍-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Retrofit入门介绍</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-<div class="share_jia">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">Share to: &nbsp; </span>
-		<a class="jiathis_button_facebook"></a> 
-	    <a class="jiathis_button_twitter"></a>
-	    <a class="jiathis_button_plus"></a> 
-	    <a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
 </div>
 
 
 
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="图片加载库Glide学习总结" data-title="图片加载库Glide学习总结" data-url="http://www.forecheng.com/2016/10/08/图片加载库Glide学习总结/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"forecheng"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = '/lpc_embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-
+        
       </div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2016 forecheng
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
-		
-		<div align="center">本站访问次数：<a href="http://www.amazingcounters.com"><img border="0" src="					         						http://cc.amazingcounters.com/counter.php?i=3208359&c=9625390" alt="AmazingCounters.com"></a>
-		</div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
     </div>
   </div>
+
   
 
-</footer>
-    </div>
-    <script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false,
-		root: "/"
-	}
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
-<script src="/./main.js"></script>
 
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"forecheng"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
     }
-});
+    var path = "/" + search_path;
+    // monitor main search box;
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
 
-<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
 
 
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
 
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
 <script>
 (function(){
     var bp = document.createElement('script');
-    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
 
 
-<script type="text/javascript">
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?1f6199cbd2aac445ac86938aa7f24b3c";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-
-
-
-
-    
-<div class="tools-col">
-  <ul class="btn-wrap">
-    
-      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
-    
-    
-      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
-    
-    
-      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
-    
-    
-      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
-    
-  </ul>
-  <div class="tools-wrap">
-    
-    	<section class="tools-section tools-section-all chose">
-    	</section>
-    
-
-    
-    	<section class="tools-section tools-section-tag">
-    			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Cache/" style="font-size: 10px;">Cache</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/Retrofit/" style="font-size: 15px;">Retrofit</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/图片加载库/" style="font-size: 10px;">图片加载库</a> <a href="/tags/流媒体/" style="font-size: 10px;">流媒体</a>
-    			</div>
-    	</section>
-    
-
-    
-    	<section class="tools-section tools-section-friends">
-  		
-  			<div class="friends-wrap" id="js-friends">
-  			
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.androidweekly.cn/">Android开发技术周报</a>
-  	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">Github</a>
-  	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yuebinyun.github.io/">Ban大神</a>
-  	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://about.me/lpctjut/">About me</a>
-  	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://cn.bing.com/">Bing</a>
-  	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://open.163.com/">网易公开课</a>
-  	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.iplaysoft.com/">异次元软件世界</a>
-  	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.devstore.cn/">Dev Store</a>
-  	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.lagou.com/">拉勾网</a>
-  	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.android-studio.org/">Android studio中文社区</a>
-  	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.w3school.com.cn/">w3School</a>
-  	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com">简书</a>
-  	        
-  	        </div>
-  		
-    	</section>
-    
-
-    
-    	<section class="tools-section tools-section-me">
-  	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">Android应用开发者&lt;br&gt;浙江-杭州&lt;br&gt;&lt;br&gt;&lt;br&gt;我们虽平凡，&lt;br&gt;但不平庸，&lt;br&gt;做一个能不停告诉自己前进的人，&lt;br&gt;一步一个脚印。&lt;br&gt;&lt;br&gt;&lt;br&gt;Keep on Learning</div>
-  	  	
-    	</section>
-    
-  </div>
   
-</div>
-    <!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
 
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                <!--  Controls are self-explanatory. Order can be changed. -->
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-  </div>
 </body>
 </html>
