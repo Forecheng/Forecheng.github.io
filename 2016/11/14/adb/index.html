@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Retrofit,Cache," />
+  <meta name="keywords" content="Android,adb," />
 
 
 
@@ -84,16 +84,19 @@
 
 
 
-<meta name="description" content="Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。Okhttp的版本不同，其缓存方式也不同。">
+<meta name="description" content="概述
+Android Debug Bridge（ADB）是android sdk中的一个工具，用这个工具可以直接操作管理Android模拟器或者连接到计算机的Android设备。ADB是一个客户端-服务器端程序，客户端是操作的电脑，服务端是Android设备">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Retrofit+OkHttp缓存数据">
-<meta property="og:url" content="http://www.forecheng.com/2016/10/12/Retrofit-OkHttp缓存数据/index.html">
+<meta property="og:title" content="一些Android Debug Bridge命令">
+<meta property="og:url" content="http://www.forecheng.com/2016/11/14/adb/index.html">
 <meta property="og:site_name" content="Forecheng's Site">
-<meta property="og:description" content="Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。Okhttp的版本不同，其缓存方式也不同。">
-<meta property="og:updated_time" content="2016-11-13T00:42:17.440Z">
+<meta property="og:description" content="概述
+Android Debug Bridge（ADB）是android sdk中的一个工具，用这个工具可以直接操作管理Android模拟器或者连接到计算机的Android设备。ADB是一个客户端-服务器端程序，客户端是操作的电脑，服务端是Android设备">
+<meta property="og:updated_time" content="2016-11-14T14:05:05.502Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Retrofit+OkHttp缓存数据">
-<meta name="twitter:description" content="Retrofit本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于Okhttp ，因此数据缓存也需要在Okhttp上处理。Okhttp的版本不同，其缓存方式也不同。">
+<meta name="twitter:title" content="一些Android Debug Bridge命令">
+<meta name="twitter:description" content="概述
+Android Debug Bridge（ADB）是android sdk中的一个工具，用这个工具可以直接操作管理Android模拟器或者连接到计算机的Android设备。ADB是一个客户端-服务器端程序，客户端是操作的电脑，服务端是Android设备">
 
 
 
@@ -121,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://www.forecheng.com/2016/10/12/Retrofit-OkHttp缓存数据/"/>
+  <link rel="canonical" href="http://www.forecheng.com/2016/11/14/adb/"/>
 
 
 
 
 
-  <title> Retrofit+OkHttp缓存数据 | Forecheng's Site </title>
+  <title> 一些Android Debug Bridge命令 | Forecheng's Site </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -291,7 +294,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.forecheng.com/2016/10/12/Retrofit-OkHttp缓存数据/">
+  <link itemprop="mainEntityOfPage" href="http://www.forecheng.com/2016/11/14/adb/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="forecheng">
@@ -315,7 +318,7 @@
             
             
               
-                Retrofit+OkHttp缓存数据
+                一些Android Debug Bridge命令
               
             
           </h1>
@@ -327,8 +330,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-12T21:21:43+08:00">
-              2016-10-12
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-14T21:50:10+08:00">
+              2016-11-14
             </time>
 
             &nbsp;|&nbsp;
@@ -336,8 +339,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-13T08:42:17+08:00">
-              2016-11-13
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-14T22:05:05+08:00">
+              2016-11-14
             </time>
             
           </span>
@@ -367,8 +370,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/12/Retrofit-OkHttp缓存数据/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/12/Retrofit-OkHttp缓存数据/" itemprop="commentCount"></span>
+                <a href="/2016/11/14/adb/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/14/adb/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -394,35 +397,50 @@
       
 
       
-        <p><code>Retrofit</code>本身并不能缓存，从版本2.0开始默认支持缓存，底层的网络连接都依赖于<code>Okhttp</code> ，因此数据缓存也需要在<code>Okhttp</code>上处理。<code>Okhttp</code>的版本不同，其缓存方式也不同。<br><a id="more"></a></p>
-<h3 id="为什么使用缓存？"><a href="#为什么使用缓存？" class="headerlink" title="为什么使用缓存？"></a>为什么使用缓存？</h3><p>减少服务器负荷，降低网络延迟提升用户体验，复杂的缓存处理会根据用户当前的网络情况采取不同的策略，在网络好的时候缓存时间短，数据更新快，在网络差的时候，提高缓存使用的时间，缓存策略不仅仅与网络好坏有关，也与应用本身的用途、业务需求、接口有关，比如应用的数据变更不多，则对缓存使用就比较多，有的应用要保证数据的实时性，比如股票信息，这时就不考虑缓存，如果是天气信息，则可以根据情况设定短的缓存时间，因此应用是否需要缓存，要根据不同的情况作分析，给出不同的方案。<br>在开发App时，在有网络时调用MobileApi接口，请求新的数据，在断网情况下，可以给用户进行断网提示，但有些需求需要在断网时也显示数据，这时就可以使用缓存。由于<code>Retrofit</code> 本身没有缓存处理，则需要自定义拦截器来实现缓存功能。</p>
-<h3 id="定义拦截器"><a href="#定义拦截器" class="headerlink" title="定义拦截器"></a>定义拦截器</h3><p>版本：<code>Retrofit: 2.1.0</code> +<code>Okhttp 3.3.0</code>：<br>首先，判断是否有网，有网时请求数据，并保存到缓存中，无网时读取缓存。要使用到CacheControl类，该类主要负责缓存策略的控制，主要有以下策略：</p>
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><blockquote>
+<p>Android Debug Bridge（ADB）是android sdk中的一个工具，用这个工具可以直接操作管理Android模拟器或者连接到计算机的Android设备。<br>ADB是一个客户端-服务器端程序，客户端是操作的电脑，服务端是Android设备</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><p>它的主要功能有：</p>
 <ul>
-<li>FORCE_CACHE ：只走缓存</li>
-<li>FORCE_NETWORK ：只走网路</li>
+<li>运行设备的Shell</li>
+<li>管理模拟器或设备的端口映射</li>
+<li>计算和设备之间上传/下载文件</li>
+<li>将本地apk安装到模拟器/真实的Android设备</li>
 </ul>
-<p><strong>定义拦截器：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//拦截器：</span></div><div class="line">   Interceptor interceptor = <span class="keyword">new</span> Interceptor() &#123;</div><div class="line">       <span class="meta">@Override</span></div><div class="line">       <span class="keyword">public</span> okhttp3.<span class="function">Response <span class="title">intercept</span><span class="params">(Chain chain)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">       	<span class="comment">// 对请求进行拦截：无网络是强制读取缓存</span></div><div class="line">           Request request = chain.request();</div><div class="line">           <span class="keyword">if</span> (!NetworkUtil.hasNetwork(getApplicationContext()))&#123;</div><div class="line">               request = request.newBuilder().cacheControl(CacheControl.FORCE_CACHE)</div><div class="line">                       .build();</div><div class="line">           &#125;</div><div class="line">		<span class="comment">//对响应进行拦截</span></div><div class="line">           <span class="comment">//有网络时，移除header，设置缓存超时时间为1小时</span></div><div class="line">           okhttp3.Response response = chain.proceed(request);</div><div class="line">           <span class="keyword">if</span> (NetworkUtil.hasNetwork(getApplicationContext()))&#123;</div><div class="line">               <span class="keyword">int</span> maxAge = <span class="number">60</span> * <span class="number">60</span>;  			 <span class="comment">//1小时</span></div><div class="line">               response.newBuilder()</div><div class="line">                       .removeHeader(<span class="string">"Pragma"</span>)</div><div class="line">                       .header(<span class="string">"Cache-Control"</span>,<span class="string">"public,max-age="</span>+maxAge)</div><div class="line">                       .build();</div><div class="line">           &#125;<span class="keyword">else</span> &#123;</div><div class="line">           	<span class="comment">//无网络时，缓存时间为1周</span></div><div class="line">               <span class="keyword">int</span> maxScale = <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">7</span>;  <span class="comment">// 1周</span></div><div class="line">               response.newBuilder().removeHeader(<span class="string">"Pragma"</span>)</div><div class="line">                       .header(<span class="string">"Cache-Control"</span>,<span class="string">"public, only-if-cached, max-stale="</span>+maxScale)</div><div class="line">                       .build();</div><div class="line">           &#125;</div><div class="line"></div><div class="line">           <span class="keyword">return</span> response;</div><div class="line">       &#125;</div><div class="line">   &#125;; </div><div class="line">   </div><div class="line">   <span class="comment">//判断是否连接网络</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">hasNetwork</span><span class="params">(Context context)</span></span>&#123;</div><div class="line">   	<span class="keyword">if</span>(context != <span class="keyword">null</span>)&#123;</div><div class="line">           ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);</div><div class="line">           <span class="keyword">if</span> (cm != <span class="keyword">null</span>)&#123;</div><div class="line">               NetworkInfo info = cm.getActiveNetworkInfo();</div><div class="line">               <span class="keyword">if</span> (info != <span class="keyword">null</span>)&#123;</div><div class="line">                   <span class="keyword">return</span> info.isAvailable();</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
-<p><strong>给Okhttp设置拦截器：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//缓存目录</span></div><div class="line">   File cacheFile = <span class="keyword">new</span> File(context.getExternalCacheDir(),<span class="string">"mycache"</span>);</div><div class="line">   <span class="comment">//缓存大小为20M</span></div><div class="line">   Cache cache = <span class="keyword">new</span> Cache(cacheFile, <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">20</span>);</div><div class="line">   <span class="comment">//创建OkhttpClient，添加拦截器和缓存</span></div><div class="line">   OkHttpClient client = <span class="keyword">new</span> OkHttpClient().newBuilder()</div><div class="line">               .addInterceptor(interceptor).cache(cache).build();</div><div class="line">   <span class="comment">//生成Retrofit，并将OkHttpClient对象写入</span></div><div class="line">   Retrofit mRetrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">   				.baseUrl(BaseUrl)</div><div class="line">                   .addConverterFactory(GsonConverterFactory.create())</div><div class="line">                   .client(client)</div><div class="line">                   .build();</div></pre></td></tr></table></figure></p>
-<p>缓存基本实现，运行程序后，会在SdCard中的<code>/Android/data/应用包名/cache/mycache</code>目录下看到缓存文件，当应用卸载后，<code>/Android/data/应用包名/</code>这个目录所有文件被删除，不会留下垃圾信息。在<code>设置----&gt;应用 ----&gt;应用详情里面</code>进行<code>清除缓存</code>也会清理缓存文件，对应上面所说目录。<br>在拦截器中的两个字段<code>max-age</code>和<code>max-stale</code>不是很理解，资料较少，有以下比较：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">介绍</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">max-age</td>
-<td style="text-align:center">强制响应缓存者，根据该值，校验新鲜性。即使用自身的Age值，与请求时间做比较，如果超出max-age，则强制去服务端校验，以确保返回一个新鲜的响应</td>
-</tr>
-<tr>
-<td style="text-align:center">max-stale</td>
-<td style="text-align:center">允许缓存者，发送一个过期不超过指定时间的旧缓存</td>
-</tr>
-</tbody>
-</table>
-<p>即使看了这个比较，对此理解也不是很深刻，如果有那位看到，可以留言讨论下。</p>
+<h3 id="一些常用命令"><a href="#一些常用命令" class="headerlink" title="一些常用命令"></a>一些常用命令</h3><h4 id="ADB启动-停止-查看版本"><a href="#ADB启动-停止-查看版本" class="headerlink" title="ADB启动/停止/查看版本"></a>ADB启动/停止/查看版本</h4><p>adb启动：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb start-server</div></pre></td></tr></table></figure></p>
+<p>adb停止：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb kill-server</div></pre></td></tr></table></figure></p>
+<p>查看版本：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb version</div><div class="line">Android Debug Bridge version <span class="number">1.0</span>.36</div><div class="line">Revision af05c7354fe1-android</div></pre></td></tr></table></figure></p>
+<h4 id="查看设备"><a href="#查看设备" class="headerlink" title="查看设备"></a>查看设备</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb devices</div></pre></td></tr></table></figure>
+<p> 查看当前连接的设备，以列表的形式显示出来。eg：<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> D:\AndroidStudioProjects\KeepAction&gt;adb devices</div><div class="line">List of devices attached</div><div class="line"><span class="number">3</span>c4711c84670    device</div></pre></td></tr></table></figure></p>
+<h4 id="安装apk"><a href="#安装apk" class="headerlink" title="安装apk"></a>安装apk</h4><p>apk在当前目录：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb install &lt;apk名称&gt;</div></pre></td></tr></table></figure></p>
+<p>apk不在当前目录：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb install &lt;apk的路径&gt;</div></pre></td></tr></table></figure></p>
+<p>eg：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb install C:\Users\DELL\Desktop\版本\<span class="number">3322</span>\运维\com.maintain.apk</div><div class="line">[<span class="number">100</span>%] /data/local/tmp/com.mainta</div><div class="line">        pkg: /data/local/tmp/com.mainta</div><div class="line">Success</div></pre></td></tr></table></figure></p>
+<p>保留数据和缓存文件，reinstall apk：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb install -r com.maintain.apk</div></pre></td></tr></table></figure></p>
+<p>安装apk到SD卡：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb install -s com.maintain.apk</div></pre></td></tr></table></figure></p>
+<h4 id="卸载apk"><a href="#卸载apk" class="headerlink" title="卸载apk"></a>卸载apk</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">adb uninstall &lt;packagename&gt;</div><div class="line">adb uninstall -k &lt;packagename&gt;</div></pre></td></tr></table></figure>
+<p>eg：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb uninstall com.maintain</div><div class="line">Success</div></pre></td></tr></table></figure></p>
+<p>加<code>-k</code>参数的话，卸载后会保留app的配置和缓存文件</p>
+<h4 id="登录设备shell"><a href="#登录设备shell" class="headerlink" title="登录设备shell"></a>登录设备shell</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">adb shell</div><div class="line">adb shell &lt;command&gt;</div></pre></td></tr></table></figure>
+<p>这个命令将登录设备的shell。<br>后面加command将直接运行设备命令，相当于执行远程命令</p>
+<h4 id="从电脑上发送文件到设备"><a href="#从电脑上发送文件到设备" class="headerlink" title="从电脑上发送文件到设备"></a>从电脑上发送文件到设备</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb push &lt;本地路径&gt; &lt;远程路径&gt;</div></pre></td></tr></table></figure>
+<p>本地路径：文件在电脑上的路径<br>远程路径：文件保存到Android设备上的路径<br>使用push把电脑上的文件或者文件夹复制到手机上</p>
+<h4 id="从设备上下载文件到电脑"><a href="#从设备上下载文件到电脑" class="headerlink" title="从设备上下载文件到电脑"></a>从设备上下载文件到电脑</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb pull &lt;远程路径&gt; &lt;本地路径&gt;</div></pre></td></tr></table></figure>
+<p>使用pull把手机上的文件或者文件夹复制到电脑上</p>
+<h4 id="重启手机"><a href="#重启手机" class="headerlink" title="重启手机"></a>重启手机</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb reboot</div></pre></td></tr></table></figure>
+<p>对手机进行重启</p>
+<h4 id="获取序列号"><a href="#获取序列号" class="headerlink" title="获取序列号"></a>获取序列号</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb get-serialno</div><div class="line"><span class="number">3</span>c4711c84670</div></pre></td></tr></table></figure>
+<h4 id="获取MAC地址"><a href="#获取MAC地址" class="headerlink" title="获取MAC地址"></a>获取MAC地址</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb shell  cat /sys/class/net/wlan0/address</div><div class="line">3c:47:11:c8:34:db</div></pre></td></tr></table></figure>
+<h4 id="查看设备型号"><a href="#查看设备型号" class="headerlink" title="查看设备型号"></a>查看设备型号</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb shell getprop ro.product.model</div><div class="line">HUAWEI Y635-CL00</div></pre></td></tr></table></figure>
+<h4 id="显示包信息"><a href="#显示包信息" class="headerlink" title="显示包信息"></a>显示包信息</h4><p>(1)列出系统应用的所有包名：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb shell pm list packages -s</div><div class="line"><span class="keyword">package</span>:com.qualcomm.timeservice</div><div class="line"><span class="keyword">package</span>:com.android.defcontainer</div><div class="line"><span class="keyword">package</span>:com.example.android.notepad</div><div class="line"><span class="keyword">package</span>:com.android.contacts</div><div class="line"><span class="keyword">package</span>:com.huawei.hwid</div><div class="line"><span class="keyword">package</span>:com.huawei.mmitest2</div><div class="line"><span class="keyword">package</span>:com.android.phone</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>(2)列出除了系统应用的第三方应用包名：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb shell pm list packages -<span class="number">3</span></div><div class="line"><span class="keyword">package</span>:com.tencent.lightalk</div><div class="line"><span class="keyword">package</span>:com.uniview.airimos.mle</div><div class="line"><span class="keyword">package</span>:com.uniview.retrofitdemo_git</div><div class="line"><span class="keyword">package</span>:com.uniview.keepaction</div><div class="line"><span class="keyword">package</span>:com.uniview.imos.sdk</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>(3)使用<code>find</code>或者<code>findstr</code>列出要找的包名：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb shell pm list packages | find <span class="string">"qq"</span></div><div class="line"><span class="keyword">package</span>:com.tencent.mobileqq</div></pre></td></tr></table></figure></p>
+<h4 id="清除应用数据与缓存"><a href="#清除应用数据与缓存" class="headerlink" title="清除应用数据与缓存"></a>清除应用数据与缓存</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell pm clear &lt;packagename&gt;</div></pre></td></tr></table></figure>
+<h4 id="强行停止应用"><a href="#强行停止应用" class="headerlink" title="强行停止应用"></a>强行停止应用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell am force-stop &lt;packagename&gt;</div></pre></td></tr></table></figure>
+<h4 id="查看手机Android系统版本"><a href="#查看手机Android系统版本" class="headerlink" title="查看手机Android系统版本"></a>查看手机Android系统版本</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell getprop ro.build.version.release</div></pre></td></tr></table></figure>
+<h4 id="查看屏幕分辨率"><a href="#查看屏幕分辨率" class="headerlink" title="查看屏幕分辨率"></a>查看屏幕分辨率</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb shell wm size</div><div class="line">Physical size: <span class="number">1080</span>x1920</div></pre></td></tr></table></figure>
+<h4 id="查看屏幕密度"><a href="#查看屏幕密度" class="headerlink" title="查看屏幕密度"></a>查看屏幕密度</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb shell wm density</div><div class="line">Physical density: <span class="number">480</span></div></pre></td></tr></table></figure>
+<h4 id="显示帮助信息"><a href="#显示帮助信息" class="headerlink" title="显示帮助信息"></a>显示帮助信息</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb help</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -446,9 +464,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Retrofit/" rel="tag"># Retrofit</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
-            <a href="/tags/Cache/" rel="tag"># Cache</a>
+            <a href="/tags/adb/" rel="tag"># adb</a>
           
         </div>
       
@@ -457,8 +475,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/10/Github文件夹为灰色解决办法/" rel="next" title="Github文件夹为灰色解决办法">
-                <i class="fa fa-chevron-left"></i> Github文件夹为灰色解决办法
+              <a href="/2016/11/09/Android后台定时任务分析/" rel="next" title="Android后台定时任务分析">
+                <i class="fa fa-chevron-left"></i> Android后台定时任务分析
               </a>
             
           </div>
@@ -466,10 +484,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/18/Retrofit上传图片/" rel="prev" title="使用Retrofit进行图片的上传">
-                使用Retrofit进行图片的上传 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -518,8 +532,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/12/Retrofit-OkHttp缓存数据/"
-           data-title="Retrofit+OkHttp缓存数据" data-url="http://www.forecheng.com/2016/10/12/Retrofit-OkHttp缓存数据/">
+      <div class="ds-thread" data-thread-key="2016/11/14/adb/"
+           data-title="一些Android Debug Bridge命令" data-url="http://www.forecheng.com/2016/11/14/adb/">
       </div>
     
   </div>
@@ -671,7 +685,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么使用缓存？"><span class="nav-number">1.</span> <span class="nav-text">为什么使用缓存？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义拦截器"><span class="nav-number">2.</span> <span class="nav-text">定义拦截器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主要功能"><span class="nav-number">2.</span> <span class="nav-text">主要功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些常用命令"><span class="nav-number">3.</span> <span class="nav-text">一些常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ADB启动-停止-查看版本"><span class="nav-number">3.1.</span> <span class="nav-text">ADB启动/停止/查看版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看设备"><span class="nav-number">3.2.</span> <span class="nav-text">查看设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装apk"><span class="nav-number">3.3.</span> <span class="nav-text">安装apk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#卸载apk"><span class="nav-number">3.4.</span> <span class="nav-text">卸载apk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录设备shell"><span class="nav-number">3.5.</span> <span class="nav-text">登录设备shell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从电脑上发送文件到设备"><span class="nav-number">3.6.</span> <span class="nav-text">从电脑上发送文件到设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从设备上下载文件到电脑"><span class="nav-number">3.7.</span> <span class="nav-text">从设备上下载文件到电脑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重启手机"><span class="nav-number">3.8.</span> <span class="nav-text">重启手机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取序列号"><span class="nav-number">3.9.</span> <span class="nav-text">获取序列号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取MAC地址"><span class="nav-number">3.10.</span> <span class="nav-text">获取MAC地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看设备型号"><span class="nav-number">3.11.</span> <span class="nav-text">查看设备型号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示包信息"><span class="nav-number">3.12.</span> <span class="nav-text">显示包信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#清除应用数据与缓存"><span class="nav-number">3.13.</span> <span class="nav-text">清除应用数据与缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#强行停止应用"><span class="nav-number">3.14.</span> <span class="nav-text">强行停止应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看手机Android系统版本"><span class="nav-number">3.15.</span> <span class="nav-text">查看手机Android系统版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看屏幕分辨率"><span class="nav-number">3.16.</span> <span class="nav-text">查看屏幕分辨率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看屏幕密度"><span class="nav-number">3.17.</span> <span class="nav-text">查看屏幕密度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示帮助信息"><span class="nav-number">3.18.</span> <span class="nav-text">显示帮助信息</span></a></li></ol></li></ol></div>
             
 
           </div>
