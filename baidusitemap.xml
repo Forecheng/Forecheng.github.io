@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://www.forecheng.com/2016/11/27/%E8%AF%BB%E3%80%8A%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E3%80%8B/</loc>
+    <lastmod>2016-11-27T04:49:30.103Z</lastmod>
+    <data>
+        <display>
+        <title>读《富爸爸穷爸爸》摘录</title>
+        <pubTime>2016-11-27T03:42:12.000Z</pubTime>
+        
+        <tag>理财</tag>
+         
+        <tag>财商</tag>
+         
+         
+           
+             
+              <breadCrumb title="读书记录" url="http://www.forecheng.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.forecheng.com/2016/11/02/Android-Studio%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
     <lastmod>2016-11-25T13:19:18.973Z</lastmod>
     <data>
@@ -139,9 +161,9 @@
         <title>Retrofit入门介绍</title>
         <pubTime>2016-09-30T06:13:59.000Z</pubTime>
         
-        <tag>Retrofit</tag>
-         
         <tag>Android</tag>
+         
+        <tag>Retrofit</tag>
          
         <tag>Http</tag>
          
@@ -229,9 +251,9 @@
         <title>使用Retrofit进行图片的上传</title>
         <pubTime>2016-10-18T14:31:37.000Z</pubTime>
         
-        <tag>Retrofit</tag>
-         
         <tag>Android</tag>
+         
+        <tag>Retrofit</tag>
          
          
            
