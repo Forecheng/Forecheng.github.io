@@ -1,0 +1,1001 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="蓝牙打印机,ESC/POS指令," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="蓝牙打印机作为一款蓝牙设备，使用手机连接到打印机之后，可以向其发送指令控制其进行打印数据，这里的指令指的是ESC/POS指令，这套指令集兼容市面上大多数蓝牙打印机设备，但对于一些比较旧的蓝牙打印机，会存在指令不兼容的情况，这些旧的设备，它们的程序版本没有升级更新，因此打印的时候会出现乱码、格式不对等问题。使用蓝牙打印机可以打印文字、图片、二维码、条形码等信息。通过这篇Android蓝牙：发现、配对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蓝牙打印机ESC/POS指令学习">
+<meta property="og:url" content="http://www.forecheng.com/2017/01/17/蓝牙打印机ESC-POS指令学习/index.html">
+<meta property="og:site_name" content="Forecheng's Site">
+<meta property="og:description" content="蓝牙打印机作为一款蓝牙设备，使用手机连接到打印机之后，可以向其发送指令控制其进行打印数据，这里的指令指的是ESC/POS指令，这套指令集兼容市面上大多数蓝牙打印机设备，但对于一些比较旧的蓝牙打印机，会存在指令不兼容的情况，这些旧的设备，它们的程序版本没有升级更新，因此打印的时候会出现乱码、格式不对等问题。使用蓝牙打印机可以打印文字、图片、二维码、条形码等信息。通过这篇Android蓝牙：发现、配对">
+<meta property="og:image" content="http://www.forecheng.com/images/ESCPOS截图.PNG">
+<meta property="og:image" content="http://www.forecheng.com/images/打印图片指令.png">
+<meta property="og:updated_time" content="2017-01-17T15:32:05.310Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="蓝牙打印机ESC/POS指令学习">
+<meta name="twitter:description" content="蓝牙打印机作为一款蓝牙设备，使用手机连接到打印机之后，可以向其发送指令控制其进行打印数据，这里的指令指的是ESC/POS指令，这套指令集兼容市面上大多数蓝牙打印机设备，但对于一些比较旧的蓝牙打印机，会存在指令不兼容的情况，这些旧的设备，它们的程序版本没有升级更新，因此打印的时候会出现乱码、格式不对等问题。使用蓝牙打印机可以打印文字、图片、二维码、条形码等信息。通过这篇Android蓝牙：发现、配对">
+<meta name="twitter:image" content="http://www.forecheng.com/images/ESCPOS截图.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6329360835302917000',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.forecheng.com/2017/01/17/蓝牙打印机ESC-POS指令学习/"/>
+
+
+
+
+
+  <title> 蓝牙打印机ESC/POS指令学习 | Forecheng's Site </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?1f6199cbd2aac445ac86938aa7f24b3c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Forecheng's Site</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">学习总结，思考感悟</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.forecheng.com/2017/01/17/蓝牙打印机ESC-POS指令学习/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="forecheng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Forecheng's Site">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Forecheng's Site" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                蓝牙打印机ESC/POS指令学习
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-17T23:12:34+08:00">
+              2017-01-17
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-01-17T23:32:05+08:00">
+              2017-01-17
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习总结/" itemprop="url" rel="index">
+                    <span itemprop="name">学习总结</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/17/蓝牙打印机ESC-POS指令学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/17/蓝牙打印机ESC-POS指令学习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>蓝牙打印机作为一款蓝牙设备，使用手机连接到打印机之后，可以向其发送指令控制其进行打印数据，这里的指令指的是<code>ESC/POS</code>指令，这套指令集兼容市面上大多数蓝牙打印机设备，但对于一些比较旧的蓝牙打印机，会存在指令不兼容的情况，这些旧的设备，它们的程序版本没有升级更新，因此打印的时候会出现乱码、格式不对等问题。<br>使用蓝牙打印机可以打印文字、图片、二维码、条形码等信息。<br>通过这篇<a href="http://www.forecheng.com/2017/01/14/Android%E8%93%9D%E7%89%99%EF%BC%9A%E6%89%AB%E6%8F%8F%E3%80%81%E9%85%8D%E5%AF%B9%E3%80%81%E8%BF%9E%E6%8E%A5/">Android蓝牙：发现、配对、连接</a>，成功连接打印机之后，可以拿到<code>BluetoothSocket</code>对象，通过这个socket可以得到<code>OutputStream</code>，然后调用<code>write(byte[] data)</code>向这个输出流中写入指令数据即可。</p>
+<a id="more"></a>
+<h3 id="获取输出流、写数据"><a href="#获取输出流、写数据" class="headerlink" title="获取输出流、写数据"></a>获取输出流、写数据</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> OutputStream mOutputStream;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getOutStream</span><span class="params">(BluetoothSocket socket)</span></span>&#123;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">if</span> (socket != <span class="keyword">null</span>)&#123;</div><div class="line">            mOutputStream = socket.getOutputStream();</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            Log.e(<span class="string">"eee"</span>, <span class="string">"传入的socket为空"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//向连接流中写数据</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">byte</span>[] data)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span> (mOutputStream != <span class="keyword">null</span>)&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            mOutputStream.write(data);</div><div class="line">            mOutputStream.flush();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="常用的ESC-POS指令"><a href="#常用的ESC-POS指令" class="headerlink" title="常用的ESC/POS指令"></a>常用的ESC/POS指令</h3><p>在网上有很多的指令文档，但要注意的是，并不是每个打印文档上的指令都适用你所用的打印机，因此最好的方式是：购买打印机时请商家提供相应的指令集文档和demo程序，这可以让我们避免一些坑，否则出现乱码或者打印格式不对，很可能就是指令造成的。打印指令描述如下图所示：</p>
+<div align="center"><br><img src="/images/ESCPOS截图.PNG" alt="指令截图"><br></div>
+
+<p>下面列举一些常用的指令：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">/**</span></div><div class="line">   * 初始化打印机：清除打印缓存，各参数恢复默认值</div><div class="line">   * */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initPrinter</span><span class="params">()</span></span>&#123;</div><div class="line">   	write(<span class="keyword">new</span> <span class="keyword">byte</span>[]&#123;<span class="number">0x1B</span>, <span class="number">0x40</span>&#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">    * 进行换行</div><div class="line">    * */</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLF</span><span class="params">()</span></span>&#123;</div><div class="line">       write(<span class="string">"\n"</span>.getBytes());</div><div class="line">   &#125;</div><div class="line"> </div><div class="line"><span class="comment">/**</span></div><div class="line">    * 设置行间距为n点</div><div class="line">    *</div><div class="line">    * 范围：0-255，默认值为：33</div><div class="line">    *</div><div class="line">    * <span class="doctag">@param</span> n 间距点数</div><div class="line">    * */</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLineSpace</span><span class="params">(<span class="keyword">byte</span> n)</span></span>&#123;</div><div class="line">       </div><div class="line">       write(<span class="keyword">new</span> <span class="keyword">byte</span>[]&#123;<span class="number">0x1B</span>,<span class="number">0x33</span>,n&#125;);</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   <span class="comment">/**</span></div><div class="line">    * 设置左边距</div><div class="line">    *</div><div class="line">    * 纸宽 58mm：0 ≤ n ≤ 47，且 0 ≤ （左边距 + 右边距） ≤ 47</div><div class="line">    * 纸宽 80mm：0 ≤ n ≤ 71，且 0 ≤ （左边距 + 右边距） ≤ 71</div><div class="line">    *</div><div class="line">    * <span class="doctag">@param</span> n 间距点数</div><div class="line">    *</div><div class="line">    * */</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLeftMargin</span><span class="params">(<span class="keyword">byte</span> n)</span></span>&#123;</div><div class="line">       write(<span class="keyword">new</span> <span class="keyword">byte</span>[]&#123;<span class="number">0x1B</span>,<span class="number">0x6C</span>,n&#125;);</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   <span class="comment">/**</span></div><div class="line">    * 设置右边距</div><div class="line">    *</div><div class="line">    * 纸宽 58mm：0 ≤ n ≤ 47，且 0 ≤ （左边距 + 右边距） ≤ 47</div><div class="line">    * 纸宽 80mm：0 ≤ n ≤ 71，且 0 ≤ （左边距 + 右边距） ≤ 71</div><div class="line">    * */</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRightMargin</span><span class="params">(<span class="keyword">byte</span> n)</span></span>&#123;</div><div class="line">       write(<span class="keyword">new</span> <span class="keyword">byte</span>[]&#123;<span class="number">0x1B</span>, <span class="number">0x51</span>,n&#125;);</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   <span class="comment">/**</span></div><div class="line">    * 设置打印字体</div><div class="line">    *</div><div class="line">    * 须明确打印机是否支持多字体</div><div class="line">    *</div><div class="line">    * 参数 n 意义如下：</div><div class="line">    * n   类型</div><div class="line">    * 0 中文：24×24，外文：12×24</div><div class="line">    * 1 中文：16×16，外文：8×16</div><div class="line">    * 2 中文：12×12，外文：6×12</div><div class="line">    * */</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPrintFont</span><span class="params">(<span class="keyword">byte</span> n)</span></span>&#123;</div><div class="line">       write(<span class="keyword">new</span> <span class="keyword">byte</span>[]&#123;<span class="number">0x1B</span>, <span class="number">0x4D</span>, n&#125;);</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   <span class="comment">/**</span></div><div class="line">    * 设置对其方式</div><div class="line">    *</div><div class="line">    * 0, 48  居左  1, 49  居中  2, 50  居右</div><div class="line">    * */</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAlignMethod</span><span class="params">(<span class="keyword">byte</span> n)</span></span>&#123;</div><div class="line">       write(<span class="keyword">new</span> <span class="keyword">byte</span>[]&#123;<span class="number">0x1B</span>, <span class="number">0x61</span>,n);</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>更多打印所需的指令都可以在指令文档中找到。</p>
+<h3 id="打印文字"><a href="#打印文字" class="headerlink" title="打印文字"></a>打印文字</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* 打印文本</div><div class="line">* */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printText</span><span class="params">(String text)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span> (text.length() &gt; <span class="number">0</span>) &#123;</div><div class="line">		<span class="comment">// Get the message bytes and tell the BluetoothService to write</span></div><div class="line">		<span class="keyword">byte</span>[] send;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			send = text.getBytes(<span class="string">"GB2312"</span>);</div><div class="line"></div><div class="line">			Log.d(<span class="string">"dy"</span>, <span class="string">"send.length:"</span> + send.length);</div><div class="line">		&#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</div><div class="line">			send = text.getBytes();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		write(send);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="打印图片"><a href="#打印图片" class="headerlink" title="打印图片"></a>打印图片</h3><p>在打印图片时，需要对图片做一些特殊处理，主要有对图片大小进行调整，然后对图片色彩进行转换，因为打印机打印出的内容只有黑白两种颜色。<br><strong>彩色图片—-&gt; 灰度图片—–&gt; 二值图</strong></p>
+<h4 id="调整图片大小"><a href="#调整图片大小" class="headerlink" title="调整图片大小"></a>调整图片大小</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Bitmap <span class="title">resizeImage</span><span class="params">(Bitmap bitmap, <span class="keyword">int</span> w, <span class="keyword">int</span> h)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// load the origial Bitmap</span></div><div class="line">    Bitmap BitmapOrg = bitmap;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> width = BitmapOrg.getWidth();</div><div class="line">    <span class="keyword">int</span> height = BitmapOrg.getHeight();</div><div class="line">    <span class="keyword">int</span> newWidth = w;</div><div class="line">    <span class="keyword">int</span> newHeight = h;</div><div class="line"></div><div class="line">    <span class="comment">// calculate the scale</span></div><div class="line">    <span class="keyword">float</span> scaleWidth = ((<span class="keyword">float</span>) newWidth) / width;</div><div class="line">    <span class="keyword">float</span> scaleHeight = ((<span class="keyword">float</span>) newHeight) / height;</div><div class="line"></div><div class="line">    <span class="comment">// create a matrix for the manipulation</span></div><div class="line">    Matrix matrix = <span class="keyword">new</span> Matrix();</div><div class="line">    <span class="comment">// resize the Bitmap</span></div><div class="line">    matrix.postScale(scaleWidth, scaleHeight);</div><div class="line">    <span class="comment">// if you want to rotate the Bitmap</span></div><div class="line">    <span class="comment">// matrix.postRotate(45);</span></div><div class="line"></div><div class="line">    <span class="comment">// recreate the new Bitmap</span></div><div class="line">    Bitmap resizedBitmap = Bitmap.createBitmap(BitmapOrg, <span class="number">0</span>, <span class="number">0</span>, width,</div><div class="line">    height, matrix, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">// make a Drawable from Bitmap to allow to set the Bitmap</span></div><div class="line">    <span class="comment">// to the ImageView, ImageButton or what ever</span></div><div class="line">    <span class="keyword">return</span> resizedBitmap;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="转为灰度图"><a href="#转为灰度图" class="headerlink" title="转为灰度图"></a>转为灰度图</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 转成灰度图</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Bitmap <span class="title">toGrayscale</span><span class="params">(Bitmap bmpOriginal)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> width, height;</div><div class="line">    height = bmpOriginal.getHeight();</div><div class="line">    width = bmpOriginal.getWidth();</div><div class="line">    Bitmap bmpGrayscale = Bitmap.createBitmap(width, height,</div><div class="line">    Bitmap.Config.ARGB_8888);</div><div class="line">    Canvas c = <span class="keyword">new</span> Canvas(bmpGrayscale);</div><div class="line">    Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">    ColorMatrix cm = <span class="keyword">new</span> ColorMatrix();</div><div class="line">    cm.setSaturation(<span class="number">0</span>);</div><div class="line">    ColorMatrixColorFilter f = <span class="keyword">new</span> ColorMatrixColorFilter(cm);</div><div class="line">    paint.setColorFilter(f);</div><div class="line">    c.drawBitmap(bmpOriginal, <span class="number">0</span>, <span class="number">0</span>, paint);</div><div class="line">    <span class="keyword">return</span> bmpGrayscale;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h4 id="转为二值图"><a href="#转为二值图" class="headerlink" title="转为二值图"></a>转为二值图</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 将ARGB图转换为二值图，0代表黑，1代表白</div><div class="line"> * </div><div class="line"> * <span class="doctag">@param</span> mBitmap</div><div class="line"> * <span class="doctag">@return</span></div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] bitmapToBWPix(Bitmap mBitmap) &#123;</div><div class="line"></div><div class="line">	<span class="keyword">int</span>[] pixels = <span class="keyword">new</span> <span class="keyword">int</span>[mBitmap.getWidth() * mBitmap.getHeight()];</div><div class="line">	<span class="keyword">byte</span>[] data = <span class="keyword">new</span> <span class="keyword">byte</span>[mBitmap.getWidth() * mBitmap.getHeight()];</div><div class="line"></div><div class="line">	mBitmap.getPixels(pixels, <span class="number">0</span>, mBitmap.getWidth(), <span class="number">0</span>, <span class="number">0</span>,</div><div class="line">			mBitmap.getWidth(), mBitmap.getHeight());</div><div class="line"></div><div class="line">	<span class="comment">// for the toGrayscale, we need to select a red or green or blue color</span></div><div class="line">	<span class="comment">//进行二值化</span></div><div class="line">	format_K_threshold(pixels, mBitmap.getWidth(),</div><div class="line">			mBitmap.getHeight(), data);</div><div class="line"></div><div class="line">	<span class="keyword">return</span> data;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">format_K_threshold</span><span class="params">(<span class="keyword">int</span>[] orgpixels, <span class="keyword">int</span> xsize,<span class="keyword">int</span> ysize, <span class="keyword">byte</span>[] despixels)</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">int</span> graytotal = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> grayave = <span class="number">128</span>;</div><div class="line">	<span class="keyword">int</span> i, j;</div><div class="line">	<span class="keyword">int</span> gray;</div><div class="line"></div><div class="line">	<span class="keyword">int</span> k = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; ysize; i++) &#123;</div><div class="line"></div><div class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; xsize; j++) &#123;</div><div class="line"></div><div class="line">			gray = orgpixels[k] &amp; <span class="number">0xff</span>;</div><div class="line">			graytotal += gray;</div><div class="line">			k++;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	grayave = graytotal / ysize / xsize;</div><div class="line"></div><div class="line">	<span class="comment">// 二值化</span></div><div class="line">	k = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; ysize; i++) &#123;</div><div class="line"></div><div class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; xsize; j++) &#123;</div><div class="line"></div><div class="line">			gray = orgpixels[k] &amp; <span class="number">0xff</span>;</div><div class="line"></div><div class="line">			<span class="keyword">if</span> (gray &gt; grayave)&#123;</div><div class="line">				despixels[k] = <span class="number">0</span>;<span class="comment">// white</span></div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				despixels[k] = <span class="number">1</span>;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			k++;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="逐行打印图片"><a href="#逐行打印图片" class="headerlink" title="逐行打印图片"></a>逐行打印图片</h4><p>打印图片指令如下图：</p>
+<div align="center"><br><img src="/images/打印图片指令.png" alt="打印图片指令"><br></div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 之所以弄成一维数组，是因为一维数组速度会快一点</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] p0 = &#123; <span class="number">0</span>, <span class="number">0x80</span> &#125;;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] p1 = &#123; <span class="number">0</span>, <span class="number">0x40</span> &#125;;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] p2 = &#123; <span class="number">0</span>, <span class="number">0x20</span> &#125;;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] p3 = &#123; <span class="number">0</span>, <span class="number">0x10</span> &#125;;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] p4 = &#123; <span class="number">0</span>, <span class="number">0x08</span> &#125;;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] p5 = &#123; <span class="number">0</span>, <span class="number">0x04</span> &#125;;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] p6 = &#123; <span class="number">0</span>, <span class="number">0x02</span> &#125;;</div><div class="line">   </div><div class="line"><span class="comment">// nWidth必须为8的倍数,这个只需在上层控制即可, nMode = 0 或者 1</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] eachLinePixToCmd(<span class="keyword">byte</span>[] src, <span class="keyword">int</span> nWidth, <span class="keyword">int</span> nMode) &#123;</div><div class="line">	<span class="keyword">int</span> nHeight = src.length / nWidth;</div><div class="line">	<span class="keyword">int</span> nBytesPerLine = nWidth / <span class="number">8</span>;</div><div class="line">	<span class="keyword">byte</span>[] data = <span class="keyword">new</span> <span class="keyword">byte</span>[nHeight * (<span class="number">8</span> + nBytesPerLine)];</div><div class="line">	<span class="keyword">int</span> offset = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> k = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nHeight; i++) &#123;</div><div class="line">		offset = i * (<span class="number">8</span> + nBytesPerLine);</div><div class="line">		data[offset + <span class="number">0</span>] = <span class="number">0x1d</span>;</div><div class="line">		data[offset + <span class="number">1</span>] = <span class="number">0x76</span>;</div><div class="line">		data[offset + <span class="number">2</span>] = <span class="number">0x30</span>;</div><div class="line">		data[offset + <span class="number">3</span>] = (<span class="keyword">byte</span>) (nMode &amp; <span class="number">0x01</span>);</div><div class="line">		data[offset + <span class="number">4</span>] = (<span class="keyword">byte</span>) (nBytesPerLine % <span class="number">0x100</span>);</div><div class="line">		data[offset + <span class="number">5</span>] = (<span class="keyword">byte</span>) (nBytesPerLine / <span class="number">0x100</span>);</div><div class="line">		data[offset + <span class="number">6</span>] = <span class="number">0x01</span>;</div><div class="line">		data[offset + <span class="number">7</span>] = <span class="number">0x00</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nBytesPerLine; j++) &#123;</div><div class="line">			data[offset + <span class="number">8</span> + j] = (<span class="keyword">byte</span>) (p0[src[k]] + p1[src[k + <span class="number">1</span>]]</div><div class="line">					+ p2[src[k + <span class="number">2</span>]] + p3[src[k + <span class="number">3</span>]] + p4[src[k + <span class="number">4</span>]]</div><div class="line">					+ p5[src[k + <span class="number">5</span>]] + p6[src[k + <span class="number">6</span>]] + src[k + <span class="number">7</span>]);</div><div class="line">			k = k + <span class="number">8</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> data;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//整合以上所有方法，直接将此方法返回的byte[]数据写进流中</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] bitmapToByte(Bitmap mBitmap, <span class="keyword">int</span> nWidth, <span class="keyword">int</span> nMode)&#123;</div><div class="line"></div><div class="line">	Log.e(<span class="string">"eee"</span>, <span class="string">"图片宽度："</span> + nWidth);</div><div class="line">	</div><div class="line">	<span class="keyword">int</span> width = ((nWidth + <span class="number">7</span>) / <span class="number">8</span>) * <span class="number">8</span>;</div><div class="line">	<span class="keyword">int</span> height = mBitmap.getHeight() * width / mBitmap.getWidth();</div><div class="line">	height = ((height + <span class="number">7</span>) / <span class="number">8</span>) * <span class="number">8</span>;</div><div class="line">	<span class="comment">//调整大小</span></div><div class="line">	Bitmap rszBitmap = resizeImage(mBitmap, width, height);</div><div class="line">	<span class="comment">//灰度化</span></div><div class="line">	Bitmap grayBitmap = toGrayscale(rszBitmap);</div><div class="line">	<span class="comment">//转为二值图</span></div><div class="line">	<span class="keyword">byte</span>[] dithered = bitmapToBWPix(grayBitmap);</div><div class="line">	<span class="comment">//进行每行打印</span></div><div class="line">	<span class="keyword">byte</span>[] data = eachLinePixToCmd(dithered, nWidth, nMode);</div><div class="line"></div><div class="line">	<span class="keyword">return</span> data;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用指令去控制蓝牙打印机，是挺严格的，每个指令都要正确，不然打印出来的东西不是乱码就是格式错误，这部分也比较偏，与硬件有一定的联系，希望可以帮助到项目中有使用到蓝牙打印机的开发者。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/蓝牙打印机/" rel="tag"># 蓝牙打印机</a>
+          
+            <a href="/tags/ESC-POS指令/" rel="tag"># ESC/POS指令</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/14/Android蓝牙：扫描、配对、连接/" rel="next" title="Android蓝牙：发现、配对、连接">
+                <i class="fa fa-chevron-left"></i> Android蓝牙：发现、配对、连接
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/17/蓝牙打印机ESC-POS指令学习/"
+           data-title="蓝牙打印机ESC/POS指令学习" data-url="http://www.forecheng.com/2017/01/17/蓝牙打印机ESC-POS指令学习/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar.jpg"
+               alt="forecheng" />
+          <p class="site-author-name" itemprop="name">forecheng</p>
+          <p class="site-description motion-element" itemprop="description">Keep Learning,Keep Action</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Forecheng" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:lpctjut@163.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-envelope-o"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://developers.google.cn/" title="Google Developers中文网站" target="_blank">Google Developers中文网站</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://developers.googleblog.cn/" title="Google Developers中文博客" target="_blank">Google Developers中文博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.androidweekly.cn/" title="androidweekly" target="_blank">androidweekly</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.android-studio.org/" title="Android Studio中文社区" target="_blank">Android Studio中文社区</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://yuebinyun.github.io/" title="Ban Site" target="_blank">Ban Site</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.devstore.cn/" title="Dev Store" target="_blank">Dev Store</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取输出流、写数据"><span class="nav-number">1.</span> <span class="nav-text">获取输出流、写数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的ESC-POS指令"><span class="nav-number">2.</span> <span class="nav-text">常用的ESC/POS指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印文字"><span class="nav-number">3.</span> <span class="nav-text">打印文字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印图片"><span class="nav-number">4.</span> <span class="nav-text">打印图片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#调整图片大小"><span class="nav-number">4.1.</span> <span class="nav-text">调整图片大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#转为灰度图"><span class="nav-number">4.2.</span> <span class="nav-text">转为灰度图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#转为二值图"><span class="nav-number">4.3.</span> <span class="nav-text">转为二值图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逐行打印图片"><span class="nav-number">4.4.</span> <span class="nav-text">逐行打印图片</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">forecheng</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">页面访问量：<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"forecheng"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>
