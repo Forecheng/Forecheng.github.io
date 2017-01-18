@@ -16,13 +16,13 @@ toc: true
 
 ---
 
-## 1.0 Restful
+## Restful
 百度百科：Restful
 
 > 一种软件架构风格，是一种设计风格而不是标准，只是提供了一组设计原则和约束条件，主要用于客户端和服务器交互的软件或系统。基于这个风格设计的软件可以更加简洁，更有层次，更易于实现缓存等机制。
 
 
-## 2.0 Retrofit
+## Retrofit
 
 > **Type-safe HTTP client for Android and Java by Square**
 Retrofit官网地址:[http://square.github.io/retrofit/][2]                                          
@@ -30,7 +30,7 @@ Retrofit github地址:[https://github.com/square/retrofit][3]
 
 
 
-### 2.0.1 创建Retrofit对象
+### 创建Retrofit对象
 在项目中使用需要在模块下面的`build.gradle`中添加如下依赖：
 
 > compile 'com.squareup.retrofit2:retrofit:2.1.0'<br>
@@ -58,7 +58,7 @@ public class RetrofitClient{
 server_addr和port：是要请求的服务器地址和端口。在编写请求接口时，是相对base_url而言的。
 Retrofit2必须要以`/`结束，不然会抛出`非法参数异常`。
 
-### 2.0.2 请求接口定义
+### 请求接口定义
 
 ``` java
 public interface LoginApi{
@@ -107,7 +107,7 @@ public class TokenBean{
     //TODO:toString()
 }
 ```
-### 2.0.3 接口调用
+### 接口调用
 
 ``` java
 	public class LoginService{
@@ -153,9 +153,9 @@ public class TokenBean{
 ```
 一般的Retrofit使用就是这样的流程，在大型项目中，可以根据项目需要，进行自定义。
 
-## 3.0 Retrofit注解详情
+## Retrofit注解详情
 
-### 3.0.1 请求方法
+### 请求方法
 
 
 |  请求方法   |  方法简单描述 | 
@@ -169,7 +169,7 @@ public class TokenBean{
 |  OPTIONS  |   | 
 |  HTTP  | @HTTP(method="get",path="login/",hasBody=true)   | 
 
-### 3.0.2 标记
+### 标记
 
 |          | 标记           | 简单描述                                                                 |
 | :--------: | :--------------: | :------------------------------------------------------------------------: |
@@ -177,7 +177,7 @@ public class TokenBean{
 | 表单请求 | Multipart      | 请求体是一个支持文件上传的form表单，Content-Type:multipart/form-data     |
 |          | Streaming      |   表示响应体的数据用流的形式返回，如果没有使用该注解，默认会把数据全部载入内存，之后通过流获取数据也不过是读取内存中的数据，所以如果返回的数据比较大，就需要使用这个注解                                                                     |
 
-### 3.0.3 参数注解
+### 参数注解
 |位置|参数注解|描述|
 |:-----:|:--------:|:--------------------------:|
 |作用于方法|Headers|用于添加请求头|
@@ -203,7 +203,7 @@ public class TokenBean{
 ```
 
 
-### 3.0.4 数据类型转换器
+### 数据类型转换器
 
 Retrofit支持的数据类型转换器
  - Gson: com.squareup.retrofit2:converter-gson:2.1.0

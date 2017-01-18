@@ -13,7 +13,7 @@ toc: true
 
 图片加载一直是一个比较棘手的事情，俗话说就是`“坑”`比较多，于是就google了一下这方面的库，有很多图片库，例如Picasso, Universal-Image-Loader,Fresco,Glide等，这些库都是很火的，使用量很大的图片库， 他们各有优点，不能评说那一个不好，根据项目的需求适当选择。
 
-## 1. 几个库的简单比较
+## 几个库的简单比较
 
  - **Picasso：**是Square出品的图片库，当然是很厉害的，该公司还有响当当的`Okhttp`和`Retrofit`，都是很牛逼的网络请求库,搭配使用效果可能更好一些，之所以这么说是因为Picasso可以将网络请求到的数据缓存交给Okhttp来处理。
  - **Universal-Image-Loader：**一个强大的图片加载库，包含的配置比较多，使用很广泛，很老牌。
@@ -25,7 +25,7 @@ toc: true
 
 现在整理一下`Glide`的使用：
 
-## 2. 配置Glide
+## 配置Glide
 在Module根目录下的build.gradle中进行库依赖：
 
 ``` java
@@ -37,7 +37,7 @@ dependencies {
 ```
 Glide需要依赖Support Library v4。
 然后同步一下代码build successful,就可以使用Glide了。
-## 3. 使用Glide
+## 使用Glide
 使用下面一段代码就能实现图片加载，看起来极其简单方便：
 ``` java
 //图片的url
@@ -74,8 +74,8 @@ Glide.with(context).load(uri).into(imageView);
 
  - String加载：`DrawableTypeRequest<String> load(String string)`
 
-### 3.1 设置占位图片
-#### 1. placehold
+### 设置占位图片
+#### placehold
 图片加载并不是很实时的，加载成功的时间是不确定的，在加载时，可以设置一个图片显示在ImageView上进行一些`正在加载...`提示等等。
 
 ``` java
@@ -84,7 +84,7 @@ Glide.with(context)
     .placehold(R.drawable.loading)
     .into(imageView);
 ```
-#### 2. error
+#### error
 在加载网络图片时，如果突然网络断掉，肯定加载不到正确的图片，这时可以设置一个错误图片到ImageView,提示用户加载失败。
 
 ``` stylus
@@ -115,7 +115,7 @@ Glide.with(context)
     .listener(loadErrorListener)
     .into(imageView);
 ```
-### 3.2 图片的调整
+### 图片的调整
 Glide加载图片大小根据ImageView尺寸自动调整的，在缓存的时候也是按照图片大小进行缓存，每一种尺寸都会保留一份缓存。
 并且可以调用override(int width,int height)在图片显示到ImageView之前改变图片大小，width和height的单位都是`px`。
 
@@ -180,7 +180,7 @@ Glide.with(context)
     .into(imageView);
 ```
 
-### 3.3 加载的动画
+### 加载的动画
 为了使图片平滑的加载到ImageView，可以设置加载的动画效果，最新的api已经默认实现了一个渐入渐出的动画效果，默认时间300ms，也可以使用`crossFade`，它接受无参或者一个int型的参数，用来指定动画执行的时间。
 
 ``` java
@@ -207,7 +207,7 @@ Glide.with(context)
     .into(imageView);
 
 ```
-### 3.4 加载Gif动态图
+### 加载Gif动态图
 加载Gif动态图是Glide的一个亮点，也是将gif动态图的url传入load即可加载，Glide还提供了Gif相关的两个方法：`asBitmap()`和`asGif()`;
 
  - asBitmap()：将gif图的第一帧显示出来
@@ -221,7 +221,7 @@ Glide.with(context)
 ```
 
 
-### 3.5 加载优先级
+### 加载优先级
 设置图片加载的顺序，有以下几种优先级：
 
  - Priority.LOW
@@ -235,7 +235,7 @@ Glide.with(context)
     .priority(Priority.NORMAL)    
     .into(imageView);
 ```
-### 3.6 加载目标Target
+### 加载目标Target
 Target就是Glide获取资源后作用的目标，一般的ImageView就是目标。
 
 ``` java
@@ -252,7 +252,7 @@ SimpleTarget target = new SimpleTarget<Drawable>(){
 ```
 这段代码是将TextView作为Target，并将加载到的图片设置为TextView的背景，SimpleTarget接收泛型数据，可以将其更改为其他想要的类型。也可以指定加载的宽度和高度，单位也是`px`。
 
-### 3.7 缓存策略
+### 缓存策略
 几种缓存策略：
 
  - DiskCacheStrategy.ALL：缓存源资源和转换后的资源
@@ -274,7 +274,7 @@ Glide.with(this)
     .skipMemory(true)
     .into(imageView);
 ```
-### 3.8 缓存的动态清理
+### 缓存的动态清理
 
 ``` java
 
@@ -283,7 +283,7 @@ Glide.get(this).clearMemory();			//清理内存缓存，可以在UI线程中执�
 ```
 
 
-## 4. 结合列表视图的使用
+## 结合列表视图的使用
 Glide在滑动加载图片时表现突出，这也是Glide的优势之一，在项目中很可能是在ListView或者RecyclerView中显示加载的图片：
 1. 在使用ListView进行加载时，可以在Adapter的getView中进行使用
 

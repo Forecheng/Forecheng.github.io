@@ -1,0 +1,1031 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,adb," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="概述
+Android Debug Bridge（ADB）是android sdk中的一个工具，用这个工具可以直接操作管理Android模拟器或者连接到计算机的Android设备。ADB是一个客户端-服务器端程序，客户端是操作的电脑，服务端是Android设备">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些Android Debug Bridge命令">
+<meta property="og:url" content="http://www.forecheng.com/2016/11/14/adb/index.html">
+<meta property="og:site_name" content="Forecheng's Site">
+<meta property="og:description" content="概述
+Android Debug Bridge（ADB）是android sdk中的一个工具，用这个工具可以直接操作管理Android模拟器或者连接到计算机的Android设备。ADB是一个客户端-服务器端程序，客户端是操作的电脑，服务端是Android设备">
+<meta property="og:updated_time" content="2016-11-14T14:05:05.502Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一些Android Debug Bridge命令">
+<meta name="twitter:description" content="概述
+Android Debug Bridge（ADB）是android sdk中的一个工具，用这个工具可以直接操作管理Android模拟器或者连接到计算机的Android设备。ADB是一个客户端-服务器端程序，客户端是操作的电脑，服务端是Android设备">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6329360835302917000',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.forecheng.com/2016/11/14/adb/"/>
+
+
+
+
+
+  <title> 一些Android Debug Bridge命令 | Forecheng's Site </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?1f6199cbd2aac445ac86938aa7f24b3c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Forecheng's Site</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">学习总结，思考感悟</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.forecheng.com/2016/11/14/adb/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="forecheng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Forecheng's Site">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Forecheng's Site" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                一些Android Debug Bridge命令
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-14T21:50:10+08:00">
+              2016-11-14
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-14T22:05:05+08:00">
+              2016-11-14
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习总结/" itemprop="url" rel="index">
+                    <span itemprop="name">学习总结</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/14/adb/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/14/adb/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><blockquote>
+<p>Android Debug Bridge（ADB）是android sdk中的一个工具，用这个工具可以直接操作管理Android模拟器或者连接到计算机的Android设备。<br>ADB是一个客户端-服务器端程序，客户端是操作的电脑，服务端是Android设备</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><p>它的主要功能有：</p>
+<ul>
+<li>运行设备的Shell</li>
+<li>管理模拟器或设备的端口映射</li>
+<li>计算和设备之间上传/下载文件</li>
+<li>将本地apk安装到模拟器/真实的Android设备</li>
+</ul>
+<h3 id="一些常用命令"><a href="#一些常用命令" class="headerlink" title="一些常用命令"></a>一些常用命令</h3><h4 id="ADB启动-停止-查看版本"><a href="#ADB启动-停止-查看版本" class="headerlink" title="ADB启动/停止/查看版本"></a>ADB启动/停止/查看版本</h4><p>adb启动：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb start-server</div></pre></td></tr></table></figure></p>
+<p>adb停止：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb kill-server</div></pre></td></tr></table></figure></p>
+<p>查看版本：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb version</div><div class="line">Android Debug Bridge version <span class="number">1.0</span>.36</div><div class="line">Revision af05c7354fe1-android</div></pre></td></tr></table></figure></p>
+<h4 id="查看设备"><a href="#查看设备" class="headerlink" title="查看设备"></a>查看设备</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb devices</div></pre></td></tr></table></figure>
+<p> 查看当前连接的设备，以列表的形式显示出来。eg：<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> D:\AndroidStudioProjects\KeepAction&gt;adb devices</div><div class="line">List of devices attached</div><div class="line"><span class="number">3</span>c4711c84670    device</div></pre></td></tr></table></figure></p>
+<h4 id="安装apk"><a href="#安装apk" class="headerlink" title="安装apk"></a>安装apk</h4><p>apk在当前目录：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb install &lt;apk名称&gt;</div></pre></td></tr></table></figure></p>
+<p>apk不在当前目录：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb install &lt;apk的路径&gt;</div></pre></td></tr></table></figure></p>
+<p>eg：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb install C:\Users\DELL\Desktop\版本\<span class="number">3322</span>\运维\com.maintain.apk</div><div class="line">[<span class="number">100</span>%] /data/local/tmp/com.mainta</div><div class="line">        pkg: /data/local/tmp/com.mainta</div><div class="line">Success</div></pre></td></tr></table></figure></p>
+<p>保留数据和缓存文件，reinstall apk：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb install -r com.maintain.apk</div></pre></td></tr></table></figure></p>
+<p>安装apk到SD卡：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb install -s com.maintain.apk</div></pre></td></tr></table></figure></p>
+<h4 id="卸载apk"><a href="#卸载apk" class="headerlink" title="卸载apk"></a>卸载apk</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">adb uninstall &lt;packagename&gt;</div><div class="line">adb uninstall -k &lt;packagename&gt;</div></pre></td></tr></table></figure>
+<p>eg：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb uninstall com.maintain</div><div class="line">Success</div></pre></td></tr></table></figure></p>
+<p>加<code>-k</code>参数的话，卸载后会保留app的配置和缓存文件</p>
+<h4 id="登录设备shell"><a href="#登录设备shell" class="headerlink" title="登录设备shell"></a>登录设备shell</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">adb shell</div><div class="line">adb shell &lt;command&gt;</div></pre></td></tr></table></figure>
+<p>这个命令将登录设备的shell。<br>后面加command将直接运行设备命令，相当于执行远程命令</p>
+<h4 id="从电脑上发送文件到设备"><a href="#从电脑上发送文件到设备" class="headerlink" title="从电脑上发送文件到设备"></a>从电脑上发送文件到设备</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb push &lt;本地路径&gt; &lt;远程路径&gt;</div></pre></td></tr></table></figure>
+<p>本地路径：文件在电脑上的路径<br>远程路径：文件保存到Android设备上的路径<br>使用push把电脑上的文件或者文件夹复制到手机上</p>
+<h4 id="从设备上下载文件到电脑"><a href="#从设备上下载文件到电脑" class="headerlink" title="从设备上下载文件到电脑"></a>从设备上下载文件到电脑</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb pull &lt;远程路径&gt; &lt;本地路径&gt;</div></pre></td></tr></table></figure>
+<p>使用pull把手机上的文件或者文件夹复制到电脑上</p>
+<h4 id="重启手机"><a href="#重启手机" class="headerlink" title="重启手机"></a>重启手机</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb reboot</div></pre></td></tr></table></figure>
+<p>对手机进行重启</p>
+<h4 id="获取序列号"><a href="#获取序列号" class="headerlink" title="获取序列号"></a>获取序列号</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb get-serialno</div><div class="line"><span class="number">3</span>c4711c84670</div></pre></td></tr></table></figure>
+<h4 id="获取MAC地址"><a href="#获取MAC地址" class="headerlink" title="获取MAC地址"></a>获取MAC地址</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb shell  cat /sys/class/net/wlan0/address</div><div class="line">3c:47:11:c8:34:db</div></pre></td></tr></table></figure>
+<h4 id="查看设备型号"><a href="#查看设备型号" class="headerlink" title="查看设备型号"></a>查看设备型号</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb shell getprop ro.product.model</div><div class="line">HUAWEI Y635-CL00</div></pre></td></tr></table></figure>
+<h4 id="显示包信息"><a href="#显示包信息" class="headerlink" title="显示包信息"></a>显示包信息</h4><p>(1)列出系统应用的所有包名：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb shell pm list packages -s</div><div class="line"><span class="keyword">package</span>:com.qualcomm.timeservice</div><div class="line"><span class="keyword">package</span>:com.android.defcontainer</div><div class="line"><span class="keyword">package</span>:com.example.android.notepad</div><div class="line"><span class="keyword">package</span>:com.android.contacts</div><div class="line"><span class="keyword">package</span>:com.huawei.hwid</div><div class="line"><span class="keyword">package</span>:com.huawei.mmitest2</div><div class="line"><span class="keyword">package</span>:com.android.phone</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>(2)列出除了系统应用的第三方应用包名：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb shell pm list packages -<span class="number">3</span></div><div class="line"><span class="keyword">package</span>:com.tencent.lightalk</div><div class="line"><span class="keyword">package</span>:com.uniview.airimos.mle</div><div class="line"><span class="keyword">package</span>:com.uniview.retrofitdemo_git</div><div class="line"><span class="keyword">package</span>:com.uniview.keepaction</div><div class="line"><span class="keyword">package</span>:com.uniview.imos.sdk</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>(3)使用<code>find</code>或者<code>findstr</code>列出要找的包名：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb shell pm list packages | find <span class="string">"qq"</span></div><div class="line"><span class="keyword">package</span>:com.tencent.mobileqq</div></pre></td></tr></table></figure></p>
+<h4 id="清除应用数据与缓存"><a href="#清除应用数据与缓存" class="headerlink" title="清除应用数据与缓存"></a>清除应用数据与缓存</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell pm clear &lt;packagename&gt;</div></pre></td></tr></table></figure>
+<h4 id="强行停止应用"><a href="#强行停止应用" class="headerlink" title="强行停止应用"></a>强行停止应用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell am force-stop &lt;packagename&gt;</div></pre></td></tr></table></figure>
+<h4 id="查看手机Android系统版本"><a href="#查看手机Android系统版本" class="headerlink" title="查看手机Android系统版本"></a>查看手机Android系统版本</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell getprop ro.build.version.release</div></pre></td></tr></table></figure>
+<h4 id="查看屏幕分辨率"><a href="#查看屏幕分辨率" class="headerlink" title="查看屏幕分辨率"></a>查看屏幕分辨率</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb shell wm size</div><div class="line">Physical size: <span class="number">1080</span>x1920</div></pre></td></tr></table></figure>
+<h4 id="查看屏幕密度"><a href="#查看屏幕密度" class="headerlink" title="查看屏幕密度"></a>查看屏幕密度</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\DELL&gt;adb shell wm density</div><div class="line">Physical density: <span class="number">480</span></div></pre></td></tr></table></figure>
+<h4 id="显示帮助信息"><a href="#显示帮助信息" class="headerlink" title="显示帮助信息"></a>显示帮助信息</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb help</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/adb/" rel="tag"># adb</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/09/Android后台定时任务分析/" rel="next" title="Android后台定时任务分析">
+                <i class="fa fa-chevron-left"></i> Android后台定时任务分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/17/阅读书单Reading-Lists/" rel="prev" title="阅读书单Reading Lists -1">
+                阅读书单Reading Lists -1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/14/adb/"
+           data-title="一些Android Debug Bridge命令" data-url="http://www.forecheng.com/2016/11/14/adb/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar.jpg"
+               alt="forecheng" />
+          <p class="site-author-name" itemprop="name">forecheng</p>
+          <p class="site-description motion-element" itemprop="description">Keep Learning,Keep Action</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Forecheng" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2620293601/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:lpctjut@163.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-envelope-o"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://developers.google.cn/" title="Google Developers中文网站" target="_blank">Google Developers中文网站</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://developers.googleblog.cn/" title="Google Developers中文博客" target="_blank">Google Developers中文博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.androidweekly.cn/" title="androidweekly" target="_blank">androidweekly</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.android-studio.org/" title="Android Studio中文社区" target="_blank">Android Studio中文社区</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://yuebinyun.github.io/" title="Ban Site" target="_blank">Ban Site</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.devstore.cn/" title="Dev Store" target="_blank">Dev Store</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主要功能"><span class="nav-number">2.</span> <span class="nav-text">主要功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些常用命令"><span class="nav-number">3.</span> <span class="nav-text">一些常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ADB启动-停止-查看版本"><span class="nav-number">3.1.</span> <span class="nav-text">ADB启动/停止/查看版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看设备"><span class="nav-number">3.2.</span> <span class="nav-text">查看设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装apk"><span class="nav-number">3.3.</span> <span class="nav-text">安装apk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#卸载apk"><span class="nav-number">3.4.</span> <span class="nav-text">卸载apk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录设备shell"><span class="nav-number">3.5.</span> <span class="nav-text">登录设备shell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从电脑上发送文件到设备"><span class="nav-number">3.6.</span> <span class="nav-text">从电脑上发送文件到设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从设备上下载文件到电脑"><span class="nav-number">3.7.</span> <span class="nav-text">从设备上下载文件到电脑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重启手机"><span class="nav-number">3.8.</span> <span class="nav-text">重启手机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取序列号"><span class="nav-number">3.9.</span> <span class="nav-text">获取序列号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取MAC地址"><span class="nav-number">3.10.</span> <span class="nav-text">获取MAC地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看设备型号"><span class="nav-number">3.11.</span> <span class="nav-text">查看设备型号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示包信息"><span class="nav-number">3.12.</span> <span class="nav-text">显示包信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#清除应用数据与缓存"><span class="nav-number">3.13.</span> <span class="nav-text">清除应用数据与缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#强行停止应用"><span class="nav-number">3.14.</span> <span class="nav-text">强行停止应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看手机Android系统版本"><span class="nav-number">3.15.</span> <span class="nav-text">查看手机Android系统版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看屏幕分辨率"><span class="nav-number">3.16.</span> <span class="nav-text">查看屏幕分辨率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看屏幕密度"><span class="nav-number">3.17.</span> <span class="nav-text">查看屏幕密度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示帮助信息"><span class="nav-number">3.18.</span> <span class="nav-text">显示帮助信息</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">forecheng</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">页面访问量：<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"forecheng"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

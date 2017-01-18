@@ -20,7 +20,7 @@ Log.d(TAG, "onCreate: ");
 ```java
 Log.d(TAG, "onCreate() called with: " + "savedInstanceState = [" + savedInstanceState + "]");
 ```
-
+还有`loge`、`logi`、`logr`、`logw`。
 ### 代码的移动 ###
 代码提示：**` ctrl + alt + 空格 `**
 代码行上移/下移：**`ctrl + shift + up/down`**
@@ -47,6 +47,62 @@ Log.d(TAG, "onCreate() called with: " + "savedInstanceState = [" + savedInstance
 打开最近的模板：**`ctrl + E`**
 
 根据自身使用习惯，也可以在*Android Studio*的 **`File --> Settings ---> keymap`** 中改变默认的快捷键，来提高开发效率。
+
+### 快捷代码块
+
+1. **`fori`** 和 **`foreach`**
+```java
+ for (int i = 0; i < ; i++) {
+            
+   }
+```
+2. **`.null`** 和 **`.nn`**：在变量名后面使用，快捷检测是否为null。
+```java
+ Bundle bundle = getIntent().getExtras();
+ if (bundle == null) {
+            
+  }
+
+  if (bundle != null) {
+            
+  }
+```
+3. **`const`** 随机生成一个符合android style的final int，
+```java
+private static final int  = 181;
+```
+4. **`key`** 生成一个以**KEY_** 开头的final String
+```java
+private static final String KEY_ = "";  
+```
+5. **`fbc`** 快捷生成**findViewById**
+```java
+() findViewById(R.id.);
+```
+6. **`visible`** 和 **`gone`** :
+```java
+Button myBut =  new Button(this);
+.setVisibility(View.GONE);
+.setVisibility(View.VISIBLE);
+```
+7. **`starter`** 和 **`newInstance`** :
+```java
+public static void start(Context context) {
+        Intent starter = new Intent(context, Main2Activity.class);
+        starter.putExtra();
+        context.startActivity(starter);
+    }
+    
+    //------------------------------//
+    public static Fragment newInstance() {
+        
+        Bundle args = new Bundle();
+        
+        Fragment fragment = new Fragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+```
 
 
 

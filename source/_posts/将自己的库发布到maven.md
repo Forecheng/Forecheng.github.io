@@ -38,7 +38,7 @@ Contained in groups:
 </distributionManagement>
 ```
 
- 1. 使用Android studio，在自己库的src同级目录下的`build.gradle`中进行一些配置：
+ 1.使用Android studio，在自己库的src同级目录下的`build.gradle`中进行一些配置，添加以下代码：
 
 ```groovy
 apply plugin: 'com.android.library'
@@ -133,7 +133,9 @@ afterEvaluate { project ->
 }
 ```
 
- 2. 配置项目根目录下的`local.properties`文件
+特别地，在开头处要添加`apply plugin: 'maven'`，否则在进行同步时报错。
+
+ 2.配置项目根目录下的`local.properties`文件
 
 ```groovy
 sdk.dir=D\:\\Android\\Sdk
